@@ -162,11 +162,19 @@ struct ScannerView: View {
                 Spacer()
             }
 
-            if let perceived = confusionWarning {
-                Label("Con tu visión podría parecer \(perceived.lowercased())", systemImage: "exclamationmark.triangle.fill")
-                    .font(.footnote.weight(.medium))
-                    .foregroundStyle(.orange)
-                    .frame(maxWidth: .infinity, alignment: .leading)
+            // La fila del aviso reserva siempre su hueco (si el perfil tiene
+            // daltonismo) para que el panel no dé saltos al aparecer.
+            if profiles.first?.visionType != .normal {
+                Label(
+                    confusionWarning.map { "Con tu visión podría parecer \($0.lowercased())" } ?? " ",
+                    systemImage: "exclamationmark.triangle.fill"
+                )
+                .singleLineFitted()
+                .font(.footnote.weight(.medium))
+                .foregroundStyle(.orange)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .opacity(confusionWarning == nil ? 0 : 1)
+                .animation(.easeInOut(duration: 0.25), value: confusionWarning == nil)
             }
 
             HStack(spacing: 10) {
