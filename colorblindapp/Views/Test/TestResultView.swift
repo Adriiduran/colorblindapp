@@ -76,6 +76,7 @@ struct TestResultView: View {
         if outcome.isConclusive {
             Button(action: onSave) {
                 Text("Guardar mi perfil")
+                    .singleLineFitted()
                     .frame(maxWidth: .infinity)
             }
             .buttonStyle(.borderedProminent)
@@ -84,6 +85,7 @@ struct TestResultView: View {
 
         Button(action: onRetry) {
             Text("Repetir el test")
+                .singleLineFitted()
                 .frame(maxWidth: .infinity)
         }
         .buttonStyle(.bordered)
@@ -94,6 +96,7 @@ struct TestResultView: View {
                 ManualTypeSelectionView()
             } label: {
                 Text("Prefiero elegir mi tipo manualmente")
+                    .singleLineFitted()
                     .frame(maxWidth: .infinity)
             }
             .buttonStyle(.borderless)

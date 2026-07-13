@@ -51,6 +51,7 @@ private struct WelcomeStepView: View {
                 }
             } label: {
                 Text("Hacer el test")
+                    .singleLineFitted()
                     .frame(maxWidth: .infinity)
             }
             .buttonStyle(.borderedProminent)
@@ -60,6 +61,7 @@ private struct WelcomeStepView: View {
                 ManualTypeSelectionView()
             } label: {
                 Text("Ya sé mi tipo, elegirlo manualmente")
+                    .singleLineFitted()
                     .frame(maxWidth: .infinity)
             }
             .buttonStyle(.bordered)
@@ -105,6 +107,7 @@ struct ManualTypeSelectionView: View {
                 completeOnboarding()
             } label: {
                 Text("Continuar")
+                    .singleLineFitted()
                     .frame(maxWidth: .infinity)
             }
             .buttonStyle(.borderedProminent)

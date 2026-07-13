@@ -73,6 +73,7 @@ struct ColorVisionTestView: View {
                 answer(nil, for: plate)
             } label: {
                 Text("No veo ningún número")
+                    .singleLineFitted()
                     .frame(maxWidth: .infinity, minHeight: 44)
             }
             .buttonStyle(.bordered)

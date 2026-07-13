@@ -141,6 +141,7 @@ struct ScannerView: View {
                         model.isFrozen ? "Reanudar" : "Congelar",
                         systemImage: model.isFrozen ? "play.fill" : "pause.fill"
                     )
+                    .singleLineFitted()
                     .frame(maxWidth: .infinity)
                 }
                 .buttonStyle(.bordered)
@@ -150,6 +151,7 @@ struct ScannerView: View {
                     saveCurrentColor()
                 } label: {
                     Label(justSaved ? "Guardado" : "Guardar", systemImage: justSaved ? "checkmark" : "square.and.arrow.down")
+                        .singleLineFitted()
                         .frame(maxWidth: .infinity)
                 }
                 .buttonStyle(.borderedProminent)
@@ -227,6 +229,7 @@ struct ScannerView: View {
                 }
             } label: {
                 Text("Permitir cámara")
+                    .singleLineFitted()
                     .frame(maxWidth: .infinity)
             }
             .buttonStyle(.borderedProminent)
@@ -251,6 +254,7 @@ struct ScannerView: View {
             if let url = URL(string: UIApplication.openSettingsURLString) {
                 Link(destination: url) {
                     Text("Abrir Ajustes")
+                        .singleLineFitted()
                         .frame(maxWidth: .infinity)
                 }
                 .buttonStyle(.borderedProminent)
