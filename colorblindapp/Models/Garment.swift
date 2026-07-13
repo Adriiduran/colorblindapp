@@ -112,4 +112,15 @@ final class Garment {
         basicName = ColorNamer.basicName(for: color)
         descriptiveName = ColorNamer.descriptiveName(for: color)
     }
+
+    /// Intercambia el color dominante con el secundario (corrección manual:
+    /// el análisis eligió el tono equivocado de una prenda bicolor).
+    func swapWithSecondary() {
+        guard let secondary = secondaryColor else { return }
+        let previous = dominantColor
+        setDominant(secondary)
+        secondaryRed = previous.red
+        secondaryGreen = previous.green
+        secondaryBlue = previous.blue
+    }
 }
