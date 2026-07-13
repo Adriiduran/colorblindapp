@@ -3,12 +3,18 @@
 //  colorblindapp
 //
 
+import SwiftData
 import SwiftUI
 
 /// Escáner de color: apunta la cámara y muestra el color del centro en
-/// tres formas (hex, básico y descriptivo — este último llega en el hito 4).
+/// tres formas (hex, básico y descriptivo), con aviso de confusión según
+/// el perfil del usuario y guardado en el historial.
 struct ScannerView: View {
     @State private var model = ScannerModel()
+    @State private var showHistory = false
+    @State private var justSaved = false
+    @Environment(\.modelContext) private var modelContext
+    @Query private var profiles: [UserProfile]
 
     var body: some View {
         NavigationStack {
@@ -22,6 +28,9 @@ struct ScannerView: View {
         }
         .onDisappear {
             model.stop()
+        }
+        .sheet(isPresented: $showHistory) {
+            ColorHistoryView()
         }
     }
 
@@ -104,30 +113,59 @@ struct ScannerView: View {
                     .frame(width: 64, height: 64)
 
                 VStack(alignment: .leading, spacing: 3) {
-                    Text(basicName)
+                    Text(descriptiveName)
                         .font(.title2.bold())
+                    Text(basicName)
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
                     Text(model.color?.hexString ?? "—")
                         .font(.body.monospaced())
                         .foregroundStyle(.secondary)
-                    Text("Nombre detallado: próximamente")
-                        .font(.footnote)
-                        .foregroundStyle(.tertiary)
                 }
 
                 Spacer()
             }
 
-            Button {
-                model.isFrozen.toggle()
-            } label: {
-                Label(
-                    model.isFrozen ? "Reanudar" : "Congelar",
-                    systemImage: model.isFrozen ? "play.fill" : "pause.fill"
-                )
-                .frame(maxWidth: .infinity)
+            if let perceived = confusionWarning {
+                Label("Con tu visión podría parecer \(perceived.lowercased())", systemImage: "exclamationmark.triangle.fill")
+                    .font(.footnote.weight(.medium))
+                    .foregroundStyle(.orange)
+                    .frame(maxWidth: .infinity, alignment: .leading)
             }
-            .buttonStyle(.borderedProminent)
-            .controlSize(.large)
+
+            HStack(spacing: 10) {
+                Button {
+                    model.isFrozen.toggle()
+                } label: {
+                    Label(
+                        model.isFrozen ? "Reanudar" : "Congelar",
+                        systemImage: model.isFrozen ? "play.fill" : "pause.fill"
+                    )
+                    .frame(maxWidth: .infinity)
+                }
+                .buttonStyle(.bordered)
+                .controlSize(.large)
+
+                Button {
+                    saveCurrentColor()
+                } label: {
+                    Label(justSaved ? "Guardado" : "Guardar", systemImage: justSaved ? "checkmark" : "square.and.arrow.down")
+                        .frame(maxWidth: .infinity)
+                }
+                .buttonStyle(.borderedProminent)
+                .controlSize(.large)
+                .disabled(model.color == nil || justSaved)
+
+                Button {
+                    showHistory = true
+                } label: {
+                    Image(systemName: "clock")
+                        .frame(minHeight: 24)
+                }
+                .buttonStyle(.bordered)
+                .controlSize(.large)
+                .accessibilityLabel("Historial")
+            }
         }
         .padding(16)
         .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 24))
@@ -138,6 +176,33 @@ struct ScannerView: View {
     private var basicName: String {
         guard let color = model.color else { return "…" }
         return ColorNamer.basicName(for: color)
+    }
+
+    private var descriptiveName: String {
+        guard let color = model.color else { return "…" }
+        return ColorNamer.descriptiveName(for: color)
+    }
+
+    private var confusionWarning: String? {
+        guard let color = model.color, let profile = profiles.first else { return nil }
+        return ColorNamer.perceivedName(for: color, visionType: profile.visionType)
+    }
+
+    private func saveCurrentColor() {
+        guard let color = model.color else { return }
+        let saved = SavedColor(
+            red: color.red,
+            green: color.green,
+            blue: color.blue,
+            basicName: ColorNamer.basicName(for: color),
+            descriptiveName: ColorNamer.descriptiveName(for: color)
+        )
+        modelContext.insert(saved)
+        justSaved = true
+        Task {
+            try? await Task.sleep(for: .seconds(1.2))
+            justSaved = false
+        }
     }
 
     // MARK: - Permisos

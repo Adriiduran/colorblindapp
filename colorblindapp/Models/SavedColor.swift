@@ -10,7 +10,7 @@ import SwiftUI
 /// Un color escaneado con la cámara, guardado en el historial.
 @Model
 final class SavedColor {
-    /// Componentes RGB en rango 0...1, fuente de verdad del color.
+    /// Componentes RGB **lineales** en rango 0...1, fuente de verdad del color.
     var red: Double
     var green: Double
     var blue: Double
@@ -39,17 +39,16 @@ final class SavedColor {
         self.scannedAt = .now
     }
 
+    var linearRGB: LinearRGB {
+        LinearRGB(red: red, green: green, blue: blue)
+    }
+
     /// Representación hexadecimal, p. ej. "#6B8E23".
     var hexString: String {
-        String(
-            format: "#%02X%02X%02X",
-            Int((red * 255).rounded()),
-            Int((green * 255).rounded()),
-            Int((blue * 255).rounded())
-        )
+        linearRGB.hexString
     }
 
     var color: Color {
-        Color(red: red, green: green, blue: blue)
+        linearRGB.color
     }
 }

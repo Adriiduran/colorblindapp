@@ -9,6 +9,23 @@ import Foundation
 /// de tono, saturación y luminosidad. El nombre descriptivo fino ("Verde
 /// oliva") llegará en el hito 4 con el diccionario de colores y ΔE.
 enum ColorNamer {
+    /// Nombre descriptivo fino ("Verde oliva"): el más cercano del catálogo
+    /// curado por distancia en Lab.
+    static func descriptiveName(for color: LinearRGB) -> String {
+        ColorCatalog.closestName(to: color)
+    }
+
+    /// Aviso de confusión: si al simular el color con el daltonismo del
+    /// usuario la categoría básica cambia, devuelve la categoría que el
+    /// usuario probablemente percibe. nil si no hay confusión esperable.
+    static func perceivedName(for color: LinearRGB, visionType: ColorVisionType) -> String? {
+        guard visionType != .normal else { return nil }
+        let simulated = CVDSimulator.simulate(color, type: visionType)
+        let original = basicName(for: color)
+        let perceived = basicName(for: simulated)
+        return perceived == original ? nil : perceived
+    }
+
     static func basicName(for color: LinearRGB) -> String {
         let (r, g, b) = color.srgbComponents
         let maxC = max(r, g, b)

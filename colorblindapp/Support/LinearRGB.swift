@@ -63,6 +63,29 @@ nonisolated struct LinearRGB {
         return (srgb(red), srgb(green), srgb(blue))
     }
 
+    /// Coordenadas CIELAB (D65). Es el espacio perceptualmente uniforme
+    /// donde tiene sentido medir distancias entre colores.
+    var lab: (l: Double, a: Double, b: Double) {
+        // RGB lineal -> XYZ (sRGB, D65)
+        let x = 0.4124564 * red + 0.3575761 * green + 0.1804375 * blue
+        let y = 0.2126729 * red + 0.7151522 * green + 0.0721750 * blue
+        let z = 0.0193339 * red + 0.1191920 * green + 0.9503041 * blue
+
+        func f(_ t: Double) -> Double {
+            t > 0.008856 ? pow(t, 1.0 / 3.0) : (7.787 * t + 16.0 / 116.0)
+        }
+        // Blanco de referencia D65
+        let fx = f(x / 0.95047), fy = f(y), fz = f(z / 1.08883)
+        return (116 * fy - 16, 500 * (fx - fy), 200 * (fy - fz))
+    }
+
+    /// Distancia perceptual ΔE (CIE76) respecto a otro color.
+    func deltaE(to other: LinearRGB) -> Double {
+        let a = lab, b = other.lab
+        let dl = a.l - b.l, da = a.a - b.a, db = a.b - b.b
+        return (dl * dl + da * da + db * db).squareRoot()
+    }
+
     /// Representación hexadecimal sRGB, p. ej. "#6B8E23".
     var hexString: String {
         let (r, g, b) = srgbComponents
