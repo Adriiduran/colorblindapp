@@ -14,6 +14,6 @@ struct colorblindappApp: App {
         WindowGroup {
             RootView()
         }
-        .modelContainer(for: [UserProfile.self, SavedColor.self])
+        .modelContainer(for: [UserProfile.self, SavedColor.self, Garment.self])
     }
 }
