@@ -22,7 +22,12 @@ final class ScannerModel {
     private(set) var color: LinearRGB?
     var isFrozen = false
 
+    /// Diámetro de la mirilla en puntos. También determina el área real
+    /// muestreada del frame (ver CameraColorSampler.regionFraction).
+    var reticleSize: Double = 24
+
     private var sampler: CameraColorSampler?
+    private var viewLongSide: Double = 0
 
     var isDemoMode: Bool {
         #if targetEnvironment(simulator)
@@ -67,6 +72,19 @@ final class ScannerModel {
             }
         }
         sampler?.start()
+        applySamplingRegion()
+    }
+
+    /// El visor mide `longSide` puntos en su dimensión larga; necesario para
+    /// convertir el diámetro de la mirilla a fracción del frame.
+    func updateViewLongSide(_ longSide: Double) {
+        viewLongSide = longSide
+        applySamplingRegion()
+    }
+
+    func applySamplingRegion() {
+        guard viewLongSide > 0 else { return }
+        sampler?.setRegionFraction(reticleSize / viewLongSide)
     }
 
     func stop() {

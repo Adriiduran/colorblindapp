@@ -49,15 +49,44 @@ struct ScannerView: View {
     // MARK: - Escáner
 
     private var scanner: some View {
-        ZStack {
-            viewfinder
-                .ignoresSafeArea(edges: .top)
+        GeometryReader { geometry in
+            // Alto total de la pantalla: el visor la cubre entera (aspectFill),
+            // así que mirilla-en-puntos / lado-largo = región-en-píxeles / frame.
+            let viewLongSide = geometry.size.height
+                + geometry.safeAreaInsets.top + geometry.safeAreaInsets.bottom
 
-            reticle
+            ZStack(alignment: .bottom) {
+                // El visor y la mirilla ignoran las zonas seguras: el vídeo
+                // llega hasta detrás del tab bar y la mirilla queda clavada en
+                // el centro real del frame muestreado.
+                ZStack {
+                    viewfinder
+                    reticle
+                }
+                .ignoresSafeArea()
 
-            VStack {
-                Spacer()
                 readoutPanel
+            }
+            .overlay(alignment: .topTrailing) {
+                historyButton
+            }
+            .overlay(alignment: .topLeading) {
+                if model.isDemoMode {
+                    Text("MODO DEMO")
+                        .font(.caption2.bold())
+                        .padding(6)
+                        .background(.ultraThinMaterial, in: Capsule())
+                        .padding()
+                }
+            }
+            .onAppear {
+                model.updateViewLongSide(viewLongSide)
+            }
+            .onChange(of: viewLongSide) {
+                model.updateViewLongSide(viewLongSide)
+            }
+            .onChange(of: model.reticleSize) {
+                model.applySamplingRegion()
             }
         }
     }
@@ -68,14 +97,6 @@ struct ScannerView: View {
             // En el simulador no hay cámara: el "mundo" es el propio color demo.
             Rectangle()
                 .fill(model.color?.color ?? .black)
-                .overlay(alignment: .topTrailing) {
-                    Text("MODO DEMO")
-                        .font(.caption2.bold())
-                        .padding(6)
-                        .background(.ultraThinMaterial, in: Capsule())
-                        .padding()
-                        .padding(.top, 44) // bajo la barra de estado
-                }
                 .animation(.easeInOut(duration: 0.5), value: model.color?.hexString)
         } else if let session = model.captureSession {
             CameraPreviewView(session: session)
@@ -91,17 +112,32 @@ struct ScannerView: View {
     private var reticle: some View {
         ZStack {
             Circle()
+                .stroke(.black.opacity(0.4), lineWidth: 4)
+                .frame(width: model.reticleSize + 2, height: model.reticleSize + 2)
+            Circle()
                 .stroke(.white, lineWidth: 2)
-                .frame(width: 34, height: 34)
-            Circle()
-                .stroke(.black.opacity(0.4), lineWidth: 1)
-                .frame(width: 37, height: 37)
-            Circle()
-                .fill(.white)
-                .frame(width: 3, height: 3)
+                .frame(width: model.reticleSize, height: model.reticleSize)
+            if model.reticleSize >= 20 {
+                Circle()
+                    .fill(.white)
+                    .frame(width: 3, height: 3)
+            }
         }
         .shadow(radius: 2)
         .accessibilityHidden(true)
+    }
+
+    private var historyButton: some View {
+        Button {
+            showHistory = true
+        } label: {
+            Image(systemName: "clock")
+                .font(.title3)
+                .padding(12)
+                .background(.regularMaterial, in: Circle())
+        }
+        .padding(.trailing, 16)
+        .accessibilityLabel("Historial")
     }
 
     private var readoutPanel: some View {
@@ -134,6 +170,17 @@ struct ScannerView: View {
             }
 
             HStack(spacing: 10) {
+                Image(systemName: "smallcircle.filled.circle")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+                Slider(value: $model.reticleSize, in: 12...60, step: 2)
+                    .accessibilityLabel("Tamaño de la mirilla")
+                Image(systemName: "smallcircle.filled.circle")
+                    .font(.title3)
+                    .foregroundStyle(.secondary)
+            }
+
+            HStack(spacing: 10) {
                 Button {
                     model.isFrozen.toggle()
                 } label: {
@@ -157,16 +204,6 @@ struct ScannerView: View {
                 .buttonStyle(.borderedProminent)
                 .controlSize(.large)
                 .disabled(model.color == nil || justSaved)
-
-                Button {
-                    showHistory = true
-                } label: {
-                    Image(systemName: "clock")
-                        .frame(minHeight: 24)
-                }
-                .buttonStyle(.bordered)
-                .controlSize(.large)
-                .accessibilityLabel("Historial")
             }
         }
         .padding(16)

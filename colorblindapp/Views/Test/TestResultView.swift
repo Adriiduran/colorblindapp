@@ -95,7 +95,7 @@ struct TestResultView: View {
             NavigationLink {
                 ManualTypeSelectionView()
             } label: {
-                Text("Prefiero elegir mi tipo manualmente")
+                Text("Elegir mi tipo manualmente")
                     .singleLineFitted()
                     .frame(maxWidth: .infinity)
             }

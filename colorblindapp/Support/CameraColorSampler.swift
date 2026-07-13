@@ -5,6 +5,7 @@
 
 import AVFoundation
 import Foundation
+import os
 
 /// Captura vídeo de la cámara trasera y muestrea el color medio de una
 /// región pequeña en el centro de cada frame. El delegate de AVFoundation
@@ -15,8 +16,15 @@ final class CameraColorSampler: NSObject, AVCaptureVideoDataOutputSampleBufferDe
     private let sampleQueue = DispatchQueue(label: "com.admist.colorblindapp.camera")
     private let onSample: @Sendable (LinearRGB) -> Void
 
-    /// Lado (en píxeles) de la región central que se promedia.
-    private nonisolated static let regionSide = 12
+    /// Lado de la región muestreada como fracción del lado largo del frame.
+    /// Coincide con el diámetro de la mirilla en pantalla (visor a pantalla
+    /// completa con aspectFill: puntos/lado-largo-de-la-vista equivale a
+    /// píxeles/lado-largo-del-frame). Se lee desde la cola de captura.
+    private nonisolated let regionFraction = OSAllocatedUnfairLock(initialState: 0.028)
+
+    nonisolated func setRegionFraction(_ fraction: Double) {
+        regionFraction.withLock { $0 = min(max(fraction, 0.005), 0.4) }
+    }
 
     init(onSample: @escaping @Sendable (LinearRGB) -> Void) {
         self.onSample = onSample
@@ -76,7 +84,8 @@ final class CameraColorSampler: NSObject, AVCaptureVideoDataOutputSampleBufferDe
         let height = CVPixelBufferGetHeight(pixelBuffer)
         let bytesPerRow = CVPixelBufferGetBytesPerRow(pixelBuffer)
 
-        let side = min(Self.regionSide, width, height)
+        let fraction = regionFraction.withLock { $0 }
+        let side = min(max(Int(fraction * Double(max(width, height))), 2), width, height)
         let originX = (width - side) / 2
         let originY = (height - side) / 2
 

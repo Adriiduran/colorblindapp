@@ -60,7 +60,7 @@ private struct WelcomeStepView: View {
             NavigationLink {
                 ManualTypeSelectionView()
             } label: {
-                Text("Ya sé mi tipo, elegirlo manualmente")
+                Text("Elegir mi tipo manualmente")
                     .singleLineFitted()
                     .frame(maxWidth: .infinity)
             }
