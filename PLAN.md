@@ -61,7 +61,7 @@ Una "navaja suiza" para personas con daltonismo: la app identifica el tipo de da
 
 ### 1.4 Criterios para dar la Fase 1 por cerrada
 
-- [ ] Onboarding completo con test, resultado y opción de saltar.
+- [x] Onboarding completo con test, resultado y opción de saltar.
 - [ ] Escáner estable en tiempo real con los 3 formatos de color.
 - [ ] Historial + favoritos persistidos.
 - [ ] Avisos de confusión según perfil.

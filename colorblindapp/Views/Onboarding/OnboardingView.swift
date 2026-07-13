@@ -18,6 +18,8 @@ struct OnboardingView: View {
 }
 
 private struct WelcomeStepView: View {
+    @Environment(\.modelContext) private var modelContext
+
     var body: some View {
         VStack(spacing: 24) {
             Spacer()
@@ -37,20 +39,22 @@ private struct WelcomeStepView: View {
 
             Spacer()
 
-            // El test de láminas se implementará en el hito 2.
             NavigationLink {
-                ManualTypeSelectionView()
+                ColorVisionTestView(showsManualOption: true) { outcome in
+                    let profile = UserProfile(
+                        visionType: outcome.visionType,
+                        severity: outcome.severity,
+                        testDate: .now
+                    )
+                    modelContext.insert(profile)
+                    // RootView detecta el nuevo perfil y muestra la app principal.
+                }
             } label: {
                 Text("Hacer el test")
                     .frame(maxWidth: .infinity)
             }
             .buttonStyle(.borderedProminent)
             .controlSize(.large)
-            .disabled(true)
-
-            Text("Test disponible próximamente")
-                .font(.footnote)
-                .foregroundStyle(.secondary)
 
             NavigationLink {
                 ManualTypeSelectionView()
@@ -65,9 +69,9 @@ private struct WelcomeStepView: View {
     }
 }
 
-/// Selección manual del tipo de daltonismo, para quien ya conoce su diagnóstico
-/// (o mientras el test no está implementado).
-private struct ManualTypeSelectionView: View {
+/// Selección manual del tipo de daltonismo, para quien ya conoce su
+/// diagnóstico. Se llega desde la bienvenida o desde un test no concluyente.
+struct ManualTypeSelectionView: View {
     @Environment(\.modelContext) private var modelContext
     @State private var selectedType: ColorVisionType?
 

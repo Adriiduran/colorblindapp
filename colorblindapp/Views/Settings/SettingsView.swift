@@ -10,6 +10,7 @@ struct SettingsView: View {
     @Bindable var profile: UserProfile
     @Environment(\.modelContext) private var modelContext
     @State private var showResetConfirmation = false
+    @State private var showTest = false
 
     var body: some View {
         NavigationStack {
@@ -37,9 +38,9 @@ struct SettingsView: View {
                 }
 
                 Section {
-                    // Se habilitará cuando exista el test (hito 2).
-                    Button("Repetir el test") {}
-                        .disabled(true)
+                    Button("Repetir el test") {
+                        showTest = true
+                    }
 
                     Button("Reiniciar onboarding", role: .destructive) {
                         showResetConfirmation = true
@@ -55,6 +56,24 @@ struct SettingsView: View {
                 }
             }
             .navigationTitle("Ajustes")
+            .fullScreenCover(isPresented: $showTest) {
+                NavigationStack {
+                    ColorVisionTestView { outcome in
+                        profile.visionType = outcome.visionType
+                        profile.severity = outcome.severity
+                        profile.testDate = .now
+                        profile.wasSetManually = false
+                        showTest = false
+                    }
+                    .toolbar {
+                        ToolbarItem(placement: .cancellationAction) {
+                            Button("Cancelar") {
+                                showTest = false
+                            }
+                        }
+                    }
+                }
+            }
             .confirmationDialog(
                 "¿Borrar tu perfil y reiniciar?",
                 isPresented: $showResetConfirmation,
