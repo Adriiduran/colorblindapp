@@ -74,6 +74,8 @@ nonisolated enum ColorCatalog {
         Entry(name: "Oliva", hex: "#808000", family: .verdes),
         Entry(name: "Verde oliva", hex: "#6B8E23", family: .verdes),
         Entry(name: "Verde caqui", hex: "#78866B", family: .verdes),
+        Entry(name: "Caqui oscuro", hex: "#5B5A47", family: .verdes),
+        Entry(name: "Verde militar", hex: "#4B5320", family: .verdes),
         Entry(name: "Verde lima", hex: "#BFFF00", family: .verdes),
         Entry(name: "Lima", hex: "#32CD32", family: .verdes),
         Entry(name: "Verde manzana", hex: "#8DB600", family: .verdes),

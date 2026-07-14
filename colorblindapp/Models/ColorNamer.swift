@@ -30,10 +30,14 @@ nonisolated enum ColorNamer {
     static func basicName(for color: LinearRGB) -> String {
         let (hue, saturation, lightness) = color.hsl
 
-        // Acromáticos primero: el tono no es fiable con saturación baja.
+        // Acromáticos primero, decididos por croma de Lab: la saturación
+        // HSL engaña en colores oscuros apagados (un caqui oscuro baja del
+        // 10% de saturación pero su croma perceptual sigue siendo verdoso).
+        let lab = color.lab
+        let chroma = (lab.a * lab.a + lab.b * lab.b).squareRoot()
         if lightness < 0.09 { return String(localized: "Negro") }
-        if lightness > 0.93 && saturation < 0.25 { return String(localized: "Blanco") }
-        if saturation < 0.10 { return String(localized: "Gris") }
+        if lightness > 0.93 && chroma < 12 { return String(localized: "Blanco") }
+        if chroma < 8 { return String(localized: "Gris") }
 
         switch hue {
         case ..<12, 347...:
@@ -43,7 +47,11 @@ nonisolated enum ColorNamer {
             if lightness > 0.68 && saturation < 0.55 { return String(localized: "Beige") }
             return String(localized: "Naranja")
         case ..<68:
-            return lightness < 0.28 ? String(localized: "Marrón") : String(localized: "Amarillo")
+            if lightness < 0.28 { return String(localized: "Marrón") }
+            // Banda oliva: amarillo verdoso apagado y medio-oscuro es lo
+            // que la gente llama caqui o verde militar.
+            if hue >= 52 && saturation < 0.5 && lightness < 0.5 { return String(localized: "Verde") }
+            return String(localized: "Amarillo")
         case ..<165:
             return String(localized: "Verde")
         case ..<200:
