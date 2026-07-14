@@ -66,8 +66,6 @@ final class Garment {
     var secondaryGreen: Double?
     var secondaryBlue: Double?
 
-    var basicName: String
-    var descriptiveName: String
     private var categoryRaw: String
     var createdAt: Date
 
@@ -87,8 +85,6 @@ final class Garment {
         self.secondaryRed = secondary?.red
         self.secondaryGreen = secondary?.green
         self.secondaryBlue = secondary?.blue
-        self.basicName = ColorNamer.basicName(for: dominant)
-        self.descriptiveName = ColorNamer.descriptiveName(for: dominant)
         self.categoryRaw = category.rawValue
         self.createdAt = .now
     }
@@ -96,6 +92,17 @@ final class Garment {
     var category: GarmentCategory {
         get { GarmentCategory(rawValue: categoryRaw) ?? .otro }
         set { categoryRaw = newValue.rawValue }
+    }
+
+    /// Nombres básico ("Azul") y descriptivo ("Azul marino"), derivados
+    /// siempre del color dominante actual: las mejoras del catálogo de
+    /// nombres corrigen también las prendas ya guardadas.
+    var basicName: String {
+        ColorNamer.basicName(for: dominantColor)
+    }
+
+    var descriptiveName: String {
+        ColorNamer.descriptiveName(for: dominantColor)
     }
 
     var dominantColor: LinearRGB {
@@ -112,8 +119,6 @@ final class Garment {
         red = color.red
         green = color.green
         blue = color.blue
-        basicName = ColorNamer.basicName(for: color)
-        descriptiveName = ColorNamer.descriptiveName(for: color)
     }
 
     /// Intercambia el color dominante con el secundario (corrección manual:

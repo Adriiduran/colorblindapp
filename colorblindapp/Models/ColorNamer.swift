@@ -6,9 +6,10 @@
 import Foundation
 
 /// Clasifica un color en una categoría básica ("Verde", "Marrón"…) a partir
-/// de tono, saturación y luminosidad. El nombre descriptivo fino ("Verde
-/// oliva") llegará en el hito 4 con el diccionario de colores y ΔE.
-enum ColorNamer {
+/// de tono, saturación y luminosidad, y en un nombre descriptivo fino
+/// ("Verde oliva") vía el catálogo y ΔE.
+/// `nonisolated`: matemática pura, se usa también desde contextos no aislados.
+nonisolated enum ColorNamer {
     /// Nombre descriptivo fino ("Verde oliva"): el más cercano del catálogo
     /// curado por distancia en Lab.
     static func descriptiveName(for color: LinearRGB) -> String {

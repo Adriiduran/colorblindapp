@@ -41,10 +41,18 @@ struct SavedOutfitsView: View {
 struct SavedOutfitRow: View {
     let outfit: Outfit
 
+    /// Nota y explicación recalculadas con las prendas actuales: si el
+    /// usuario corrige el color de una prenda (o mejora el catálogo de
+    /// nombres), el outfit guardado no se queda con el texto antiguo.
+    /// Lo almacenado queda de respaldo para outfits sin prendas.
+    private var current: OutfitEngine.Proposal? {
+        outfit.garments.isEmpty ? nil : OutfitEngine.evaluate(outfit.sortedGarments)
+    }
+
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
             HStack {
-                ScoreBadge(score: outfit.score)
+                ScoreBadge(score: current?.score ?? outfit.score)
                 Spacer()
                 if outfit.wornToday {
                     Label("Usado hoy", systemImage: "checkmark.circle.fill")
@@ -66,7 +74,7 @@ struct SavedOutfitRow: View {
                 }
             }
 
-            Text(outfit.explanation)
+            Text(current?.explanation ?? outfit.explanation)
                 .font(.footnote)
                 .foregroundStyle(.secondary)
                 .fixedSize(horizontal: false, vertical: true)

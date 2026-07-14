@@ -15,10 +15,6 @@ final class SavedColor {
     var green: Double
     var blue: Double
 
-    /// Nombre básico ("Verde") y descriptivo ("Verde oliva"), calculados al guardar.
-    var basicName: String
-    var descriptiveName: String
-
     var isFavorite: Bool
     var scannedAt: Date
 
@@ -26,21 +22,28 @@ final class SavedColor {
         red: Double,
         green: Double,
         blue: Double,
-        basicName: String,
-        descriptiveName: String,
         isFavorite: Bool = false
     ) {
         self.red = red
         self.green = green
         self.blue = blue
-        self.basicName = basicName
-        self.descriptiveName = descriptiveName
         self.isFavorite = isFavorite
         self.scannedAt = .now
     }
 
     var linearRGB: LinearRGB {
         LinearRGB(red: red, green: green, blue: blue)
+    }
+
+    /// Nombres básico ("Verde") y descriptivo ("Verde oliva"), derivados
+    /// siempre del color guardado: las mejoras del catálogo de nombres
+    /// corrigen también el historial existente.
+    var basicName: String {
+        ColorNamer.basicName(for: linearRGB)
+    }
+
+    var descriptiveName: String {
+        ColorNamer.descriptiveName(for: linearRGB)
     }
 
     /// Representación hexadecimal, p. ej. "#6B8E23".

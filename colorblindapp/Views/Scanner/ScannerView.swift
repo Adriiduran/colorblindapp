@@ -237,13 +237,7 @@ struct ScannerView: View {
 
     private func saveCurrentColor() {
         guard let color = model.color else { return }
-        let saved = SavedColor(
-            red: color.red,
-            green: color.green,
-            blue: color.blue,
-            basicName: ColorNamer.basicName(for: color),
-            descriptiveName: ColorNamer.descriptiveName(for: color)
-        )
+        let saved = SavedColor(red: color.red, green: color.green, blue: color.blue)
         modelContext.insert(saved)
         justSaved = true
         Task {

@@ -129,7 +129,7 @@ struct OutfitsView: View {
     }
 
     private var actionButtons: some View {
-        HStack(spacing: 10) {
+        VStack(spacing: 10) {
             Button {
                 generate()
             } label: {
@@ -146,6 +146,7 @@ struct OutfitsView: View {
             } label: {
                 Label("Sorpréndeme", systemImage: "dice")
                     .singleLineFitted()
+                    .frame(maxWidth: .infinity)
             }
             .buttonStyle(.bordered)
             .controlSize(.large)
