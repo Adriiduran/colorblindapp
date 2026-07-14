@@ -99,7 +99,8 @@ nonisolated enum GarmentAnalyzer {
     // MARK: - Color dominante (k-means)
 
     private static func dominantColors(in cgImage: CGImage) -> [(color: LinearRGB, weight: Double)] {
-        guard let samples = colorSamples(from: cgImage), !samples.isEmpty else { return [] }
+        guard let allSamples = colorSamples(from: cgImage), !allSamples.isEmpty else { return [] }
+        let samples = discardingShadows(from: allSamples)
 
         // k-means con k=4 e inicialización determinista (percentiles por luminancia).
         let k = min(4, samples.count)
@@ -143,6 +144,32 @@ nonisolated enum GarmentAnalyzer {
             }
             .filter { $0.weight > 0.02 }
             .sorted { $0.weight > $1.weight }
+    }
+
+    /// Descarta los píxeles en sombra cuando la prenda tiene color real.
+    ///
+    /// En una prenda arrugada u oscura las sombras del propio tejido son
+    /// píxeles oscuros y sin croma que pueden ser mayoría, y entonces el
+    /// k-means los elige como dominante: un pantalón caqui saldría "gris".
+    /// Si al menos un cuarto de los píxeles conserva croma (el tinte es
+    /// visible en la foto), los píxeles oscuros y acromáticos se tratan
+    /// como sombra y no participan en el análisis. Si nada tiene croma
+    /// (prenda negra, gris o blanca de verdad), se dejan todos.
+    private static func discardingShadows(from samples: [LinearRGB]) -> [LinearRGB] {
+        // Mismo umbral de croma que separa "Gris" del resto en ColorNamer.
+        let chromaThreshold = 8.0
+        let labs = samples.map(\.lab)
+        func chroma(_ lab: (l: Double, a: Double, b: Double)) -> Double {
+            (lab.a * lab.a + lab.b * lab.b).squareRoot()
+        }
+
+        let chromaticCount = labs.count(where: { chroma($0) >= chromaThreshold })
+        guard Double(chromaticCount) >= 0.25 * Double(samples.count) else { return samples }
+
+        let lit = zip(samples, labs)
+            .filter { !(chroma($0.1) < chromaThreshold && $0.1.l < 35) }
+            .map(\.0)
+        return lit.isEmpty ? samples : lit
     }
 
     /// Reduce la imagen a 64x64 y devuelve los píxeles útiles: descarta
