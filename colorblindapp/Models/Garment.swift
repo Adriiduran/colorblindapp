@@ -71,6 +71,9 @@ final class Garment {
     private var categoryRaw: String
     var createdAt: Date
 
+    /// Outfits guardados que incluyen esta prenda (inversa de `Outfit.garments`).
+    var outfits: [Outfit] = []
+
     init(
         imageData: Data,
         dominant: LinearRGB,

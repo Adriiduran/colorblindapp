@@ -79,6 +79,30 @@ nonisolated struct LinearRGB {
         return (116 * fy - 16, 500 * (fx - fy), 200 * (fy - fz))
     }
 
+    /// Tono (0-360°), saturación y luminosidad HSL sobre sRGB. Es la base de
+    /// la clasificación en categorías básicas y de las reglas de combinación
+    /// del generador de outfits.
+    var hsl: (hue: Double, saturation: Double, lightness: Double) {
+        let (r, g, b) = srgbComponents
+        let maxC = max(r, g, b)
+        let minC = min(r, g, b)
+        let delta = maxC - minC
+        let lightness = (maxC + minC) / 2
+        let saturation = delta == 0 ? 0 : delta / (1 - abs(2 * lightness - 1))
+
+        var hue = 0.0
+        if delta > 0 {
+            switch maxC {
+            case r: hue = ((g - b) / delta).truncatingRemainder(dividingBy: 6)
+            case g: hue = (b - r) / delta + 2
+            default: hue = (r - g) / delta + 4
+            }
+            hue *= 60
+            if hue < 0 { hue += 360 }
+        }
+        return (hue, saturation, lightness)
+    }
+
     /// Distancia perceptual ΔE (CIE76) respecto a otro color.
     func deltaE(to other: LinearRGB) -> Double {
         let a = lab, b = other.lab

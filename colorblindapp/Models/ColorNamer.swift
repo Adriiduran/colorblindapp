@@ -27,23 +27,7 @@ enum ColorNamer {
     }
 
     static func basicName(for color: LinearRGB) -> String {
-        let (r, g, b) = color.srgbComponents
-        let maxC = max(r, g, b)
-        let minC = min(r, g, b)
-        let delta = maxC - minC
-        let lightness = (maxC + minC) / 2
-        let saturation = delta == 0 ? 0 : delta / (1 - abs(2 * lightness - 1))
-
-        var hue = 0.0
-        if delta > 0 {
-            switch maxC {
-            case r: hue = ((g - b) / delta).truncatingRemainder(dividingBy: 6)
-            case g: hue = (b - r) / delta + 2
-            default: hue = (r - g) / delta + 4
-            }
-            hue *= 60
-            if hue < 0 { hue += 360 }
-        }
+        let (hue, saturation, lightness) = color.hsl
 
         // Acromáticos primero: el tono no es fiable con saturación baja.
         if lightness < 0.09 { return String(localized: "Negro") }

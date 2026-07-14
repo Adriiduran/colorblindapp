@@ -104,9 +104,9 @@ Una "navaja suiza" para personas con daltonismo: la app identifica el tipo de da
 
 ### 2.3 Criterios para cerrar la Fase 2
 
-- [ ] Alta de prendas con recorte y color automático + edición manual.
-- [ ] Armario filtrable y persistente.
-- [ ] Generador con explicaciones y guardado de outfits.
+- [x] Alta de prendas con recorte y color automático + edición manual.
+- [x] Armario filtrable y persistente.
+- [x] Generador con explicaciones y guardado de outfits.
 - [ ] Probado con un armario real de 30+ prendas.
 
 ---
