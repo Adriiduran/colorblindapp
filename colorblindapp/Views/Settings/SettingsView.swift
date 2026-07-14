@@ -3,18 +3,25 @@
 //  colorblindapp
 //
 
+import StoreKit
 import SwiftData
 import SwiftUI
 
 struct SettingsView: View {
     @Bindable var profile: UserProfile
     @Environment(\.modelContext) private var modelContext
+    @Environment(PurchaseManager.self) private var purchaseManager
     @State private var showResetConfirmation = false
     @State private var showTest = false
+    @State private var showPaywall = false
+    @State private var showManageSubscriptions = false
+    @State private var isRestoring = false
 
     var body: some View {
         NavigationStack {
             Form {
+                premiumSection
+
                 Section("Tu perfil de visión") {
                     Picker("Tipo", selection: $profile.visionType) {
                         ForEach(ColorVisionType.allCases) { type in
@@ -84,6 +91,51 @@ struct SettingsView: View {
                 }
                 Button("Cancelar", role: .cancel) {}
             }
+            .sheet(isPresented: $showPaywall) {
+                PaywallView()
+            }
+            .manageSubscriptionsSheet(isPresented: $showManageSubscriptions)
+        }
+    }
+
+    // MARK: - Premium
+
+    @ViewBuilder
+    private var premiumSection: some View {
+        Section("Premium") {
+            if purchaseManager.isPremium {
+                Label("Suscripción activa", systemImage: "checkmark.seal.fill")
+                    .foregroundStyle(.green)
+
+                Button("Gestionar suscripción") {
+                    showManageSubscriptions = true
+                }
+            } else {
+                Button {
+                    showPaywall = true
+                } label: {
+                    Label("Hazte premium", systemImage: "sparkles")
+                }
+
+                Text("Armario ilimitado, generador de outfits e historial sin límite.")
+                    .font(.footnote)
+                    .foregroundStyle(.secondary)
+            }
+
+            Button {
+                Task {
+                    isRestoring = true
+                    await purchaseManager.restorePurchases()
+                    isRestoring = false
+                }
+            } label: {
+                if isRestoring {
+                    ProgressView()
+                } else {
+                    Text("Restaurar compras")
+                }
+            }
+            .disabled(isRestoring)
         }
     }
 
@@ -94,5 +146,6 @@ struct SettingsView: View {
 
 #Preview {
     SettingsView(profile: UserProfile(visionType: .deutan, wasSetManually: true))
+        .environment(PurchaseManager())
         .modelContainer(for: [UserProfile.self, SavedColor.self], inMemory: true)
 }

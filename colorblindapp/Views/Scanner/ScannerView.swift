@@ -14,7 +14,9 @@ struct ScannerView: View {
     @State private var showHistory = false
     @State private var justSaved = false
     @Environment(\.modelContext) private var modelContext
+    @Environment(PurchaseManager.self) private var purchaseManager
     @Query private var profiles: [UserProfile]
+    @Query(sort: \SavedColor.scannedAt, order: .forward) private var savedColors: [SavedColor]
 
     var body: some View {
         NavigationStack {
@@ -239,10 +241,22 @@ struct ScannerView: View {
         guard let color = model.color else { return }
         let saved = SavedColor(red: color.red, green: color.green, blue: color.blue)
         modelContext.insert(saved)
+        pruneHistoryIfNeeded()
         justSaved = true
         Task {
             try? await Task.sleep(for: .seconds(1.2))
             justSaved = false
+        }
+    }
+
+    /// El historial gratis se queda en los últimos `freeHistoryLimit`
+    /// colores: al superar el límite se borran los más antiguos.
+    private func pruneHistoryIfNeeded() {
+        guard !purchaseManager.isPremium else { return }
+        let overflow = savedColors.count - PurchaseManager.freeHistoryLimit
+        guard overflow > 0 else { return }
+        for saved in savedColors.prefix(overflow) {
+            modelContext.delete(saved)
         }
     }
 
@@ -306,4 +320,5 @@ struct ScannerView: View {
 
 #Preview {
     ScannerView()
+        .environment(PurchaseManager())
 }

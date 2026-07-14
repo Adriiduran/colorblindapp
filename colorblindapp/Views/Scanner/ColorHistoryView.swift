@@ -10,9 +10,11 @@ import SwiftUI
 struct ColorHistoryView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var modelContext
+    @Environment(PurchaseManager.self) private var purchaseManager
     @Query(sort: \SavedColor.scannedAt, order: .reverse) private var colors: [SavedColor]
 
     @State private var showOnlyFavorites = false
+    @State private var showPaywall = false
 
     private var visibleColors: [SavedColor] {
         showOnlyFavorites ? colors.filter(\.isFavorite) : colors
@@ -20,20 +22,23 @@ struct ColorHistoryView: View {
 
     var body: some View {
         NavigationStack {
-            Group {
-                if visibleColors.isEmpty {
-                    ContentUnavailableView(
-                        showOnlyFavorites ? "Sin favoritos" : "Historial vacío",
-                        systemImage: showOnlyFavorites ? "star" : "clock",
-                        description: Text(
-                            showOnlyFavorites
-                                ? "Marca colores con la estrella para verlos aquí."
-                                : "Los colores que guardes desde el escáner aparecerán aquí."
+            VStack(spacing: 0) {
+                Group {
+                    if visibleColors.isEmpty {
+                        ContentUnavailableView(
+                            showOnlyFavorites ? "Sin favoritos" : "Historial vacío",
+                            systemImage: showOnlyFavorites ? "star" : "clock",
+                            description: Text(
+                                showOnlyFavorites
+                                    ? "Marca colores con la estrella para verlos aquí."
+                                    : "Los colores que guardes desde el escáner aparecerán aquí."
+                            )
                         )
-                    )
-                } else {
-                    list
+                    } else {
+                        list
+                    }
                 }
+                freeLimitBanner
             }
             .navigationTitle("Historial")
             .navigationBarTitleDisplayMode(.inline)
@@ -52,6 +57,31 @@ struct ColorHistoryView: View {
                     .frame(maxWidth: 220)
                 }
             }
+            .sheet(isPresented: $showPaywall) {
+                PaywallView(reason: "El historial gratis guarda tus últimos \(PurchaseManager.freeHistoryLimit) colores.")
+            }
+        }
+    }
+
+    /// Recuerda el límite gratuito del historial, salvo que ya sea premium.
+    @ViewBuilder
+    private var freeLimitBanner: some View {
+        if !purchaseManager.isPremium {
+            Button {
+                showPaywall = true
+            } label: {
+                Label(
+                    "Historial gratis: últimos \(PurchaseManager.freeHistoryLimit) colores · Hazte premium",
+                    systemImage: "lock.fill"
+                )
+                .singleLineFitted()
+                .font(.footnote.weight(.medium))
+                .frame(maxWidth: .infinity)
+                .padding(.vertical, 10)
+            }
+            .buttonStyle(.bordered)
+            .padding(.horizontal)
+            .padding(.bottom, 8)
         }
     }
 
@@ -98,5 +128,6 @@ struct ColorHistoryView: View {
 
 #Preview {
     ColorHistoryView()
+        .environment(PurchaseManager())
         .modelContainer(for: [UserProfile.self, SavedColor.self], inMemory: true)
 }

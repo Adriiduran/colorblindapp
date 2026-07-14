@@ -1,0 +1,116 @@
+{
+  "identifier" : "5F91076A-B402-4D53-8AE6-F2FBE35309D5",
+  "nonRenewingSubscriptions" : [],
+  "products" : [],
+  "settings" : {
+    "_billingIssuesEnabled" : false,
+    "_disableDialogs" : false,
+    "_failTransactionsEnabled" : false,
+    "_locale" : "es_ES",
+    "_storefront" : "ESP",
+    "_storeKitErrors" : [
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Load Products"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Purchase"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Verification"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "App Store Sync"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Subscription Status"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "App Transaction"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Manage Subscriptions Sheet"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Refund Request Sheet"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Offer Code Redeem Sheet"
+      }
+    ]
+  },
+  "subscriptionGroups" : [
+    {
+      "id" : "CF58780E-3E24-4631-880E-7D38D5792566",
+      "localizations" : [],
+      "name" : "Premium",
+      "subscriptions" : [
+        {
+          "adHocOffers" : [],
+          "codeOffers" : [],
+          "displayPrice" : "2.99",
+          "familyShareable" : false,
+          "groupNumber" : 1,
+          "internalID" : "28C62212-6DF8-4F4A-9688-5FAD270048D5",
+          "introductoryOffer" : null,
+          "localizations" : [
+            {
+              "description" : "Armario ilimitado, generador de outfits e historial de color sin límite.",
+              "displayName" : "Premium mensual",
+              "locale" : "es_ES"
+            }
+          ],
+          "productID" : "com.admist.colorblindapp.premium.monthly",
+          "recurringSubscriptionPeriod" : "P1M",
+          "referenceName" : "Premium mensual",
+          "subscriptionGroupID" : "CF58780E-3E24-4631-880E-7D38D5792566",
+          "type" : "RecurringSubscription",
+          "winbackOffers" : []
+        },
+        {
+          "adHocOffers" : [],
+          "codeOffers" : [],
+          "displayPrice" : "19.99",
+          "familyShareable" : false,
+          "groupNumber" : 1,
+          "internalID" : "C0DFE808-EF85-4331-AE28-EACBA6044256",
+          "introductoryOffer" : null,
+          "localizations" : [
+            {
+              "description" : "Armario ilimitado, generador de outfits e historial de color sin límite. Sale más a cuenta que el plan mensual.",
+              "displayName" : "Premium anual",
+              "locale" : "es_ES"
+            }
+          ],
+          "productID" : "com.admist.colorblindapp.premium.annual",
+          "recurringSubscriptionPeriod" : "P1Y",
+          "referenceName" : "Premium anual",
+          "subscriptionGroupID" : "CF58780E-3E24-4631-880E-7D38D5792566",
+          "type" : "RecurringSubscription",
+          "winbackOffers" : []
+        }
+      ]
+    }
+  ],
+  "version" : {
+    "major" : 3,
+    "minor" : 0
+  }
+}

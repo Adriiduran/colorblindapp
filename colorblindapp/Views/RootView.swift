@@ -22,5 +22,6 @@ struct RootView: View {
 
 #Preview {
     RootView()
+        .environment(PurchaseManager())
         .modelContainer(for: [UserProfile.self, SavedColor.self], inMemory: true)
 }

@@ -11,11 +11,18 @@ import SwiftUI
 struct WardrobeView: View {
     @Query(sort: \Garment.createdAt, order: .reverse) private var garments: [Garment]
     @Environment(\.modelContext) private var modelContext
+    @Environment(PurchaseManager.self) private var purchaseManager
     @State private var showAddGarment = false
+    @State private var showPaywall = false
     @State private var selectedCategory: GarmentCategory?
     @State private var selectedColorName: String?
 
     private let columns = [GridItem(.adaptive(minimum: 150), spacing: 12)]
+
+    /// Se alcanzó el límite gratuito de prendas y el usuario no es premium.
+    private var reachedFreeLimit: Bool {
+        !purchaseManager.isPremium && garments.count >= PurchaseManager.freeWardrobeLimit
+    }
 
     var body: some View {
         NavigationStack {
@@ -33,7 +40,11 @@ struct WardrobeView: View {
                         colorFilterMenu
                     }
                     Button {
-                        showAddGarment = true
+                        if reachedFreeLimit {
+                            showPaywall = true
+                        } else {
+                            showAddGarment = true
+                        }
                     } label: {
                         Image(systemName: "plus")
                     }
@@ -42,6 +53,9 @@ struct WardrobeView: View {
             }
             .sheet(isPresented: $showAddGarment) {
                 AddGarmentView()
+            }
+            .sheet(isPresented: $showPaywall) {
+                PaywallView(reason: "Tu armario gratis está al completo (\(PurchaseManager.freeWardrobeLimit) prendas). Hazte premium para añadir sin límite.")
             }
         }
     }
@@ -147,6 +161,7 @@ struct WardrobeView: View {
             } else {
                 grid
             }
+            freeLimitBanner
         }
     }
 
@@ -163,6 +178,28 @@ struct WardrobeView: View {
                     .singleLineFitted()
             }
             .buttonStyle(.borderedProminent)
+        }
+    }
+
+    /// Aviso al pie del catálogo cuando el armario gratis está lleno.
+    @ViewBuilder
+    private var freeLimitBanner: some View {
+        if reachedFreeLimit {
+            Button {
+                showPaywall = true
+            } label: {
+                Label(
+                    "Armario gratis completo (\(PurchaseManager.freeWardrobeLimit) prendas) · Hazte premium",
+                    systemImage: "lock.fill"
+                )
+                .singleLineFitted()
+                .font(.footnote.weight(.medium))
+                .frame(maxWidth: .infinity)
+                .padding(.vertical, 10)
+            }
+            .buttonStyle(.bordered)
+            .padding(.horizontal)
+            .padding(.bottom, 8)
         }
     }
 
@@ -252,5 +289,6 @@ struct GarmentCard: View {
 
 #Preview {
     WardrobeView()
+        .environment(PurchaseManager())
         .modelContainer(for: [UserProfile.self, SavedColor.self, Garment.self], inMemory: true)
 }

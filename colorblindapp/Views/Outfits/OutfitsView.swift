@@ -11,15 +11,19 @@ import SwiftUI
 struct OutfitsView: View {
     @Query(sort: \Garment.createdAt, order: .reverse) private var garments: [Garment]
     @Environment(\.modelContext) private var modelContext
+    @Environment(PurchaseManager.self) private var purchaseManager
     @State private var anchor: Garment?
     @State private var proposals: [OutfitEngine.Proposal] = []
     @State private var hasGenerated = false
     @State private var savedProposalIDs: Set<UUID> = []
+    @State private var showPaywall = false
 
     var body: some View {
         NavigationStack {
             Group {
-                if canGenerate {
+                if !purchaseManager.isPremium {
+                    premiumLockedState
+                } else if canGenerate {
                     generator
                 } else {
                     emptyState
@@ -44,6 +48,27 @@ struct OutfitsView: View {
                 hasGenerated = false
                 savedProposalIDs = []
             }
+            .sheet(isPresented: $showPaywall) {
+                PaywallView(reason: "El generador de outfits es una función premium.")
+            }
+        }
+    }
+
+    // MARK: - Bloqueo premium
+
+    private var premiumLockedState: some View {
+        ContentUnavailableView {
+            Label("Generador de outfits", systemImage: "sparkles")
+        } description: {
+            Text("Combina tu armario en outfits completos con explicación de por qué funcionan. Es una función premium.")
+        } actions: {
+            Button {
+                showPaywall = true
+            } label: {
+                Text("Ver planes premium")
+                    .singleLineFitted()
+            }
+            .buttonStyle(.borderedProminent)
         }
     }
 
@@ -289,5 +314,6 @@ struct GarmentThumbnail: View {
 
 #Preview {
     OutfitsView()
+        .environment(PurchaseManager())
         .modelContainer(for: [UserProfile.self, SavedColor.self, Garment.self, Outfit.self], inMemory: true)
 }

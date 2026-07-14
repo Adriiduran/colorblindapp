@@ -29,5 +29,6 @@ struct MainTabView: View {
 
 #Preview {
     MainTabView(profile: UserProfile(visionType: .deutan))
+        .environment(PurchaseManager())
         .modelContainer(for: [UserProfile.self, SavedColor.self], inMemory: true)
 }

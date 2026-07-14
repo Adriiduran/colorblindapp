@@ -10,9 +10,15 @@ import SwiftUI
 
 @main
 struct colorblindappApp: App {
+    @State private var purchaseManager = PurchaseManager()
+
     var body: some Scene {
         WindowGroup {
             RootView()
+                .environment(purchaseManager)
+                .task {
+                    await purchaseManager.start()
+                }
         }
         .modelContainer(for: [UserProfile.self, SavedColor.self, Garment.self, Outfit.self])
     }
