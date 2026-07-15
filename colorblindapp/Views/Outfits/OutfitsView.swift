@@ -3,6 +3,7 @@
 //  colorblindapp
 //
 
+import Foundation
 import SwiftData
 import SwiftUI
 
@@ -20,8 +21,8 @@ struct OutfitsView: View {
 
     var body: some View {
         Group {
-            if !purchaseManager.isPremium {
-                premiumLockedState
+            if isLockedByTrialCooldown {
+                trialCooldownState
             } else if canGenerate {
                 generator
             } else {
@@ -51,13 +52,29 @@ struct OutfitsView: View {
         }
     }
 
-    // MARK: - Bloqueo premium
+    // MARK: - Cata gratuita y bloqueo premium
 
-    private var premiumLockedState: some View {
+    /// Un usuario no premium que ya ha consumido su generación gratuita de
+    /// esta semana (y no está viendo los resultados de esa generación) se
+    /// queda bloqueado hasta la próxima semana o hasta hacerse premium.
+    private var isLockedByTrialCooldown: Bool {
+        !purchaseManager.isPremium && !purchaseManager.canUseFreeOutfitTrial && !hasGenerated
+    }
+
+    private var daysUntilNextFreeTrial: Int {
+        guard let nextDate = purchaseManager.nextFreeOutfitTrialDate else { return 0 }
+        return max(1, Int((nextDate.timeIntervalSinceNow / 86400).rounded(.up)))
+    }
+
+    private var daysRemainingText: String {
+        daysUntilNextFreeTrial == 1 ? "1 día" : "\(daysUntilNextFreeTrial) días"
+    }
+
+    private var trialCooldownState: some View {
         ContentUnavailableView {
             Label("Generador de outfits", systemImage: "sparkles")
         } description: {
-            Text("Combina tu armario en outfits completos con explicación de por qué funcionan. Es una función premium.")
+            Text("Ya has usado tu prueba gratis de esta semana. Vuelve en \(daysRemainingText) o hazte premium para generar outfits sin límite.")
         } actions: {
             Button {
                 showPaywall = true
@@ -66,6 +83,29 @@ struct OutfitsView: View {
                     .singleLineFitted()
             }
             .buttonStyle(.borderedProminent)
+        }
+    }
+
+    /// Banner que informa del estado de la cata semanal a un usuario no
+    /// premium mientras usa el generador.
+    @ViewBuilder
+    private var freeTrialBanner: some View {
+        if !purchaseManager.isPremium {
+            HStack(alignment: .top, spacing: 8) {
+                Image(systemName: "gift.fill")
+                    .foregroundStyle(.tint)
+                Text(
+                    purchaseManager.canUseFreeOutfitTrial
+                        ? "Prueba gratis: te queda 1 generación esta semana."
+                        : "Ya has usado tu prueba gratis de esta semana. Vuelve en \(daysRemainingText) o hazte premium."
+                )
+                .font(.footnote)
+                .foregroundStyle(.secondary)
+            }
+            .padding(12)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .background(Color(.secondarySystemGroupedBackground), in: RoundedRectangle(cornerRadius: 12))
+            .padding(.horizontal)
         }
     }
 
@@ -95,6 +135,7 @@ struct OutfitsView: View {
     private var generator: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 16) {
+                freeTrialBanner
                 anchorPicker
                 actionButtons
                 if hasGenerated {
@@ -177,9 +218,16 @@ struct OutfitsView: View {
     }
 
     private func generate() {
+        if !purchaseManager.isPremium && !purchaseManager.canUseFreeOutfitTrial {
+            showPaywall = true
+            return
+        }
         proposals = OutfitEngine.proposals(from: garments, anchor: anchor)
         hasGenerated = true
         savedProposalIDs = []
+        if !purchaseManager.isPremium {
+            purchaseManager.consumeFreeOutfitTrial()
+        }
     }
 
     // MARK: - Resultados

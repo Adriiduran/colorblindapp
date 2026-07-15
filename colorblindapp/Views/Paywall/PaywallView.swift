@@ -3,6 +3,7 @@
 //  colorblindapp
 //
 
+import Foundation
 import StoreKit
 import SwiftUI
 
@@ -82,6 +83,10 @@ struct PaywallView: View {
                     .foregroundStyle(.secondary)
                     .multilineTextAlignment(.center)
             }
+
+            Text("7 días de prueba gratis en cualquier plan")
+                .font(.footnote.weight(.semibold))
+                .foregroundStyle(.tint)
         }
     }
 
@@ -129,6 +134,26 @@ struct PaywallView: View {
 
     // MARK: - Planes
 
+    /// Ahorro real del plan anual frente a pagar el mensual doce veces,
+    /// calculado a partir de los precios que devuelve StoreKit (no
+    /// hardcodeado, para que el copy nunca se desincronice del precio real).
+    private var annualSavingsText: String? {
+        guard
+            let monthly = purchaseManager.products.first(where: { $0.id == PurchaseManager.ProductID.monthly.rawValue }),
+            let annual = purchaseManager.products.first(where: { $0.id == PurchaseManager.ProductID.annual.rawValue }),
+            monthly.price > 0
+        else { return nil }
+
+        let monthlyValue = (monthly.price as NSDecimalNumber).doubleValue
+        let annualValue = (annual.price as NSDecimalNumber).doubleValue
+        let yearlyIfMonthly = monthlyValue * 12
+        guard yearlyIfMonthly > annualValue else { return nil }
+
+        let percent = ((yearlyIfMonthly - annualValue) / yearlyIfMonthly * 100).rounded()
+        guard percent > 0 else { return nil }
+        return "Ahorra un \(Int(percent))% frente al plan mensual"
+    }
+
     private var productPicker: some View {
         VStack(spacing: 10) {
             ForEach(purchaseManager.products) { product in
@@ -146,8 +171,8 @@ struct PaywallView: View {
                 VStack(alignment: .leading, spacing: 2) {
                     Text(product.displayName)
                         .font(.headline)
-                    if product.id == PurchaseManager.ProductID.annual.rawValue {
-                        Text("Equivale a menos al mes que el plan mensual")
+                    if product.id == PurchaseManager.ProductID.annual.rawValue, let annualSavingsText {
+                        Text(annualSavingsText)
                             .font(.caption)
                             .foregroundStyle(.secondary)
                     }
@@ -182,7 +207,7 @@ struct PaywallView: View {
                     ProgressView()
                         .frame(maxWidth: .infinity)
                 } else {
-                    Text("Suscribirme")
+                    Text("Empezar prueba gratis de 7 días")
                         .singleLineFitted()
                         .frame(maxWidth: .infinity)
                 }
@@ -199,7 +224,7 @@ struct PaywallView: View {
     }
 
     private var legalFooter: some View {
-        Text("La suscripción se renueva automáticamente salvo que la canceles al menos 24 horas antes de que termine el periodo actual, desde los ajustes de tu cuenta de Apple.")
+        Text("Incluye 7 días de prueba gratis. Pasado ese periodo, la suscripción se cobra y se renueva automáticamente al precio indicado, salvo que la canceles al menos 24 horas antes de que termine el periodo de prueba o el periodo actual, desde los ajustes de tu cuenta de Apple.")
             .font(.caption)
             .foregroundStyle(.tertiary)
             .multilineTextAlignment(.center)

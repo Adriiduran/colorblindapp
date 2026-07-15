@@ -69,7 +69,13 @@
           "familyShareable" : false,
           "groupNumber" : 1,
           "internalID" : "28C62212-6DF8-4F4A-9688-5FAD270048D5",
-          "introductoryOffer" : null,
+          "introductoryOffer" : {
+            "displayPrice" : "0",
+            "internalID" : "F312035D-0101-4E0D-B22E-467114EB2E80",
+            "numberOfPeriods" : 1,
+            "paymentMode" : "free",
+            "subscriptionPeriod" : "P1W"
+          },
           "localizations" : [
             {
               "description" : "Armario ilimitado, generador de outfits e historial de color sin límite.",
@@ -87,11 +93,17 @@
         {
           "adHocOffers" : [],
           "codeOffers" : [],
-          "displayPrice" : "19.99",
+          "displayPrice" : "22.99",
           "familyShareable" : false,
           "groupNumber" : 1,
           "internalID" : "C0DFE808-EF85-4331-AE28-EACBA6044256",
-          "introductoryOffer" : null,
+          "introductoryOffer" : {
+            "displayPrice" : "0",
+            "internalID" : "08471674-44D0-445D-A51D-C6808B11A07B",
+            "numberOfPeriods" : 1,
+            "paymentMode" : "free",
+            "subscriptionPeriod" : "P1W"
+          },
           "localizations" : [
             {
               "description" : "Armario ilimitado, generador de outfits e historial de color sin límite. Sale más a cuenta que el plan mensual.",

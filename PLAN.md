@@ -310,9 +310,9 @@ Notas adicionales:
   accesibilidad) y subir ingresos — encaja con la Opción B del plan.
 
 **Criterios de cierre:**
-- [ ] Generador probable 1 vez/semana sin ser premium.
-- [ ] Prueba gratis de 7 días en ambos planes.
-- [ ] Precios y copy actualizados y coherentes en `.storekit` y paywall.
+- [x] Generador probable 1 vez/semana sin ser premium.
+- [x] Prueba gratis de 7 días en ambos planes.
+- [x] Precios y copy actualizados y coherentes en `.storekit` y paywall.
 
 ### 3.6 (Hito 15) — Internacionalización (español + inglés)
 
