@@ -64,6 +64,14 @@ struct SettingsView: View {
 
                 #if DEBUG
                 Section("Depuración") {
+                    Toggle(
+                        "Simular suscripción premium",
+                        isOn: Binding(
+                            get: { purchaseManager.debugForcePremium },
+                            set: { purchaseManager.debugForcePremium = $0 }
+                        )
+                    )
+
                     NavigationLink("Benchmark del analizador de color") {
                         GarmentAnalyzerBenchmarkView()
                     }

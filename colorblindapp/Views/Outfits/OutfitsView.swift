@@ -72,6 +72,13 @@ struct OutfitsView: View {
             : String(localized: "\(daysUntilNextFreeTrial) días")
     }
 
+    private var remainingTrialsText: String {
+        let remaining = purchaseManager.remainingFreeOutfitTrials
+        return remaining == 1
+            ? String(localized: "Prueba gratis: te queda 1 generación esta semana.")
+            : String(localized: "Prueba gratis: te quedan \(remaining) generaciones esta semana.")
+    }
+
     private var trialCooldownState: some View {
         ContentUnavailableView {
             Label("Generador de outfits", systemImage: "sparkles")
@@ -98,7 +105,7 @@ struct OutfitsView: View {
                     .foregroundStyle(.tint)
                 Text(
                     purchaseManager.canUseFreeOutfitTrial
-                        ? "Prueba gratis: te queda 1 generación esta semana."
+                        ? remainingTrialsText
                         : "Ya has usado tu prueba gratis de esta semana. Vuelve en \(daysRemainingText) o hazte premium."
                 )
                 .font(.footnote)

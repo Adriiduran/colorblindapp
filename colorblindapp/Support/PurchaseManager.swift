@@ -24,44 +24,71 @@ final class PurchaseManager {
 
     static let freeWardrobeLimit = 5
     static let freeHistoryLimit = 10
+    static let freeOutfitTrialLimit = 3
     static let freeOutfitTrialInterval: TimeInterval = 7 * 24 * 60 * 60
 
-    private static let lastFreeOutfitDateKey = "lastFreeOutfitDate"
+    private static let freeOutfitTrialUsesKey = "freeOutfitTrialUses"
 
     private(set) var products: [Product] = []
-    private(set) var isPremium = false
     private(set) var isLoadingProducts = false
     var purchaseError: String?
 
-    /// Última vez que un usuario no premium generó outfits con la cata
-    /// gratuita semanal. `nil` si nunca la ha usado.
-    private(set) var lastFreeOutfitDate: Date?
+    #if DEBUG
+    /// Override manual de depuración: fuerza `isPremium` a `true` sin pasar
+    /// por StoreKit. Solo para probar features premium sin comprar ni gastar
+    /// la cata semanal.
+    var debugForcePremium = false
+    #endif
+
+    private(set) var hasActiveEntitlement = false
+
+    /// Fechas (dentro de los últimos 7 días) en las que un usuario no
+    /// premium ha generado outfits con la cata gratuita semanal.
+    private(set) var freeOutfitTrialUses: [Date] = []
 
     private var transactionListener: Task<Void, Never>?
 
     init() {
-        lastFreeOutfitDate = UserDefaults.standard.object(forKey: Self.lastFreeOutfitDateKey) as? Date
+        freeOutfitTrialUses = (UserDefaults.standard.array(forKey: Self.freeOutfitTrialUsesKey) as? [Date]) ?? []
     }
 
-    /// Si el usuario no premium puede generar outfits ahora mismo: nunca lo
-    /// ha hecho, o han pasado 7 días desde la última vez.
+    var isPremium: Bool {
+        #if DEBUG
+        if debugForcePremium { return true }
+        #endif
+        return hasActiveEntitlement
+    }
+
+    /// Usos de la cata gratuita todavía dentro de la ventana de 7 días.
+    private var activeFreeOutfitTrialUses: [Date] {
+        let cutoff = Date().addingTimeInterval(-Self.freeOutfitTrialInterval)
+        return freeOutfitTrialUses.filter { $0 >= cutoff }
+    }
+
+    /// Si el usuario no premium puede generar outfits ahora mismo: le queda
+    /// alguna de sus `freeOutfitTrialLimit` generaciones de los últimos 7 días.
     var canUseFreeOutfitTrial: Bool {
-        guard let lastFreeOutfitDate else { return true }
-        return Date().timeIntervalSince(lastFreeOutfitDate) >= Self.freeOutfitTrialInterval
+        activeFreeOutfitTrialUses.count < Self.freeOutfitTrialLimit
     }
 
-    /// Fecha en la que volverá a estar disponible la cata gratuita, si ya se
-    /// ha consumido.
+    /// Generaciones gratuitas que le quedan al usuario esta semana.
+    var remainingFreeOutfitTrials: Int {
+        max(0, Self.freeOutfitTrialLimit - activeFreeOutfitTrialUses.count)
+    }
+
+    /// Fecha en la que volverá a estar disponible una generación gratuita,
+    /// si ya se ha consumido el cupo.
     var nextFreeOutfitTrialDate: Date? {
-        lastFreeOutfitDate?.addingTimeInterval(Self.freeOutfitTrialInterval)
+        activeFreeOutfitTrialUses.sorted().first?.addingTimeInterval(Self.freeOutfitTrialInterval)
     }
 
-    /// Marca la cata semanal como usada hoy. Llamar solo cuando un usuario
-    /// no premium genera outfits.
+    /// Registra un uso de la cata semanal. Llamar solo cuando un usuario no
+    /// premium genera outfits.
     func consumeFreeOutfitTrial() {
-        let now = Date()
-        lastFreeOutfitDate = now
-        UserDefaults.standard.set(now, forKey: Self.lastFreeOutfitDateKey)
+        var uses = activeFreeOutfitTrialUses
+        uses.append(Date())
+        freeOutfitTrialUses = uses
+        UserDefaults.standard.set(uses, forKey: Self.freeOutfitTrialUsesKey)
     }
 
     /// Arranca el listener de transacciones y hace la carga inicial.
@@ -131,6 +158,6 @@ final class PurchaseManager {
                 break
             }
         }
-        isPremium = active
+        hasActiveEntitlement = active
     }
 }
