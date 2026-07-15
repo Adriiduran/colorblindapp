@@ -246,8 +246,8 @@ el gancho de pago y debe tener presencia visible.
   DeepFashion/MobileNet) si la precisión de las etiquetas genéricas no basta.
 
 **Criterios de cierre:**
-- [ ] Alta desde cámara y desde galería, ambas al mismo pipeline.
-- [ ] Categoría preseleccionada por IA y editable; fallback razonable.
+- [x] Alta desde cámara y desde galería, ambas al mismo pipeline.
+- [x] Categoría preseleccionada por IA y editable; fallback razonable.
 
 ### 3.4 (Hito 13) — Confirmación de borrado nativa y consistente
 

@@ -14,6 +14,7 @@ struct AddGarmentView: View {
     @Environment(\.modelContext) private var modelContext
 
     @State private var selection: PhotosPickerItem?
+    @State private var showCamera = false
     @State private var isAnalyzing = false
     @State private var analysis: GarmentAnalyzer.Analysis?
     @State private var selectedDominant: LinearRGB?
@@ -45,6 +46,15 @@ struct AddGarmentView: View {
             guard let selection else { return }
             analyze(selection)
         }
+        .fullScreenCover(isPresented: $showCamera) {
+            CameraPicker { data in
+                showCamera = false
+                if let data {
+                    analyze(imageData: data)
+                }
+            }
+            .ignoresSafeArea()
+        }
     }
 
     // MARK: - Selección
@@ -70,13 +80,29 @@ struct AddGarmentView: View {
 
             Spacer()
 
-            PhotosPicker(selection: $selection, matching: .images) {
-                Label("Elegir foto", systemImage: "photo.on.rectangle")
-                    .singleLineFitted()
-                    .frame(maxWidth: .infinity)
+            VStack(spacing: 12) {
+                Button {
+                    if UIImagePickerController.isSourceTypeAvailable(.camera) {
+                        showCamera = true
+                    } else {
+                        errorMessage = "La cámara no está disponible en este dispositivo."
+                    }
+                } label: {
+                    Label("Hacer foto", systemImage: "camera")
+                        .singleLineFitted()
+                        .frame(maxWidth: .infinity)
+                }
+                .buttonStyle(.borderedProminent)
+                .controlSize(.large)
+
+                PhotosPicker(selection: $selection, matching: .images) {
+                    Label("Elegir de la galería", systemImage: "photo.on.rectangle")
+                        .singleLineFitted()
+                        .frame(maxWidth: .infinity)
+                }
+                .buttonStyle(.bordered)
+                .controlSize(.large)
             }
-            .buttonStyle(.borderedProminent)
-            .controlSize(.large)
         }
         .padding(24)
     }
@@ -216,12 +242,34 @@ struct AddGarmentView: View {
                 guard let data = try await item.loadTransferable(type: Data.self) else {
                     throw GarmentAnalyzer.AnalysisError.invalidImage
                 }
-                analysis = try await GarmentAnalyzer.analyze(imageData: data)
+                try await runAnalysis(data)
             } catch {
                 errorMessage = error.localizedDescription
                 selection = nil
             }
         }
+    }
+
+    private func analyze(imageData: Data) {
+        isAnalyzing = true
+        errorMessage = nil
+        selectedDominant = nil
+        Task {
+            defer { isAnalyzing = false }
+            do {
+                try await runAnalysis(imageData)
+            } catch {
+                errorMessage = error.localizedDescription
+            }
+        }
+    }
+
+    /// Corre el análisis y preselecciona la categoría estimada, dejando la
+    /// elección manual del usuario intacta si Vision no reconoció nada.
+    private func runAnalysis(_ data: Data) async throws {
+        let result = try await GarmentAnalyzer.analyze(imageData: data)
+        analysis = result
+        category = result.estimatedCategory ?? .camiseta
     }
 
     private func save(_ analysis: GarmentAnalyzer.Analysis, dominant: LinearRGB) {

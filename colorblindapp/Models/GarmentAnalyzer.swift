@@ -21,6 +21,10 @@ nonisolated enum GarmentAnalyzer {
         /// se equivocó de color.
         let candidates: [LinearRGB]
         let secondary: LinearRGB?
+        /// Categoría de prenda estimada por clasificación de imagen, para
+        /// preseleccionarla en la revisión. `nil` si Vision no reconoció
+        /// nada mapeable con confianza suficiente.
+        let estimatedCategory: GarmentCategory?
     }
 
     enum AnalysisError: LocalizedError {
@@ -49,6 +53,7 @@ nonisolated enum GarmentAnalyzer {
         let segmentation = subjectSegmentation(from: cgImage)
         let cropped = segmentation?.croppedMasked ?? cgImage
         let illuminant = segmentation.flatMap { estimateIlluminant(fullImage: cgImage, maskBuffer: $0.maskBuffer) }
+        let estimatedCategory = estimateCategory(from: cgImage)
 
         let clusters = dominantColors(in: cropped, illuminant: illuminant)
         guard let first = clusters.first else {
@@ -74,8 +79,75 @@ nonisolated enum GarmentAnalyzer {
             croppedImagePNG: png,
             dominant: first.color,
             candidates: Array(candidates),
-            secondary: secondary?.color
+            secondary: secondary?.color,
+            estimatedCategory: estimatedCategory
         )
+    }
+
+    // MARK: - Categoría estimada
+
+    /// Estima la categoría de la prenda con el clasificador de imágenes
+    /// general de Vision (offline, sin modelo propio). Se clasifica la foto
+    /// completa —no el recorte, que al perder el contexto de fondo se aleja
+    /// de las fotos con las que se entrenó el clasificador— y se mapean sus
+    /// identificadores (en inglés) a `GarmentCategory` por palabras clave.
+    private static func estimateCategory(from cgImage: CGImage) -> GarmentCategory? {
+        let request = VNClassifyImageRequest()
+        let handler = VNImageRequestHandler(cgImage: cgImage)
+        guard (try? handler.perform([request])) != nil,
+              let observations = request.results
+        else {
+            return nil
+        }
+
+        let minConfidence: Float = 0.1
+        for observation in observations.sorted(by: { $0.confidence > $1.confidence }) {
+            guard observation.confidence >= minConfidence else { continue }
+            if let category = category(forIdentifier: observation.identifier) {
+                return category
+            }
+        }
+        return nil
+    }
+
+    /// Los identificadores de `VNClassifyImageRequest` son términos en
+    /// inglés de un vocabulario amplio y no documentado con exactitud; se
+    /// buscan por subcadena para cubrir variantes ("t-shirt", "tee shirt"…).
+    /// El orden importa: las categorías más específicas ("t-shirt") se
+    /// comprueban antes que las genéricas que las contienen como subcadena
+    /// ("shirt").
+    private static func category(forIdentifier identifier: String) -> GarmentCategory? {
+        let id = identifier.lowercased()
+        func matches(_ keywords: String...) -> Bool { keywords.contains { id.contains($0) } }
+
+        if matches("shoe", "sneaker", "boot", "sandal", "footwear", "heel", "loafer", "clog") {
+            return .zapatos
+        }
+        if matches("dress", "gown") {
+            return .vestido
+        }
+        if matches("skirt") {
+            return .falda
+        }
+        if matches("jean", "trouser", "pant", "legging", "short") {
+            return .pantalon
+        }
+        if matches("jacket", "coat", "blazer", "parka", "windbreaker", "vest") {
+            return .chaqueta
+        }
+        if matches("sweater", "sweatshirt", "hoodie", "cardigan", "pullover", "jumper") {
+            return .jersey
+        }
+        if matches("t-shirt", "tshirt", "tee shirt", "tank top", "polo shirt") {
+            return .camiseta
+        }
+        if matches("shirt", "blouse") {
+            return .camisa
+        }
+        if matches("bag", "hat", "cap", "scarf", "belt", "necktie", "bow tie", "glove", "sunglasses", "watch", "purse", "backpack", "sock") {
+            return .accesorio
+        }
+        return nil
     }
 
     // MARK: - Normalización
