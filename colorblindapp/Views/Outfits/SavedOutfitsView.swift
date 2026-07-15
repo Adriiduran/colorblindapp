@@ -72,6 +72,11 @@ struct SavedOutfitRow: View {
                         GarmentThumbnail(garment: garment, side: 56)
                     }
                 }
+                if outfit.isIncomplete {
+                    Label("Falta alguna prenda: se borró del armario.", systemImage: "exclamationmark.triangle")
+                        .font(.footnote)
+                        .foregroundStyle(.secondary)
+                }
             }
 
             Text(current?.explanation ?? outfit.explanation)

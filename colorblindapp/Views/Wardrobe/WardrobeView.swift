@@ -16,6 +16,7 @@ struct WardrobeView: View {
     @State private var showPaywall = false
     @State private var selectedCategory: GarmentCategory?
     @State private var selectedColorName: String?
+    @State private var garmentPendingDeletion: Garment?
 
     private let columns = [GridItem(.adaptive(minimum: 150), spacing: 12)]
 
@@ -54,6 +55,25 @@ struct WardrobeView: View {
         }
         .sheet(isPresented: $showPaywall) {
             PaywallView(reason: "Tu armario gratis está al completo (\(PurchaseManager.freeWardrobeLimit) prendas). Hazte premium para añadir sin límite.")
+        }
+        .alert(
+            "¿Eliminar esta prenda?",
+            isPresented: Binding(
+                get: { garmentPendingDeletion != nil },
+                set: { if !$0 { garmentPendingDeletion = nil } }
+            )
+        ) {
+            Button("Eliminar", role: .destructive) {
+                if let garment = garmentPendingDeletion {
+                    modelContext.delete(garment)
+                }
+                garmentPendingDeletion = nil
+            }
+            Button("Cancelar", role: .cancel) {
+                garmentPendingDeletion = nil
+            }
+        } message: {
+            Text("No se puede deshacer. La prenda también se quitará de los outfits guardados que la incluyan.")
         }
     }
 
@@ -226,7 +246,7 @@ struct WardrobeView: View {
                     .buttonStyle(.plain)
                     .contextMenu {
                         Button(role: .destructive) {
-                            modelContext.delete(garment)
+                            garmentPendingDeletion = garment
                         } label: {
                             Label("Eliminar", systemImage: "trash")
                         }

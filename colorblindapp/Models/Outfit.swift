@@ -21,11 +21,25 @@ final class Outfit {
     /// Última vez que el usuario marcó el outfit como puesto ("usado hoy").
     var lastWornAt: Date?
 
+    /// Nº de prendas con las que se guardó el outfit. Al borrar una prenda,
+    /// `deleteRule: .nullify` la quita de `garments` en vez de borrar el
+    /// outfit entero: comparar contra este valor es cómo detectamos que el
+    /// outfit se quedó incompleto, sin necesitar borrarlo.
+    var originalGarmentCount: Int = 0
+
     init(garments: [Garment], score: Double, explanation: String) {
         self.garments = garments
         self.score = score
         self.explanation = explanation
         self.createdAt = .now
+        self.originalGarmentCount = garments.count
+    }
+
+    /// Al usuario se le quitó al menos una prenda de este outfit desde que lo
+    /// guardó (la borró del armario). Los outfits guardados antes de esta
+    /// versión no tienen `originalGarmentCount` fiable y nunca se marcan así.
+    var isIncomplete: Bool {
+        originalGarmentCount > 0 && garments.count < originalGarmentCount
     }
 
     /// Prendas en orden de presentación; SwiftData no conserva el orden del

@@ -24,16 +24,14 @@ struct GarmentDetailView: View {
         }
         .navigationTitle(garment.descriptiveName)
         .navigationBarTitleDisplayMode(.inline)
-        .confirmationDialog(
-            "¿Eliminar esta prenda?",
-            isPresented: $showDeleteConfirmation,
-            titleVisibility: .visible
-        ) {
-            Button("Eliminar prenda", role: .destructive) {
+        .alert("¿Eliminar esta prenda?", isPresented: $showDeleteConfirmation) {
+            Button("Eliminar", role: .destructive) {
                 modelContext.delete(garment)
                 dismiss()
             }
             Button("Cancelar", role: .cancel) {}
+        } message: {
+            Text("No se puede deshacer. La prenda también se quitará de los outfits guardados que la incluyan.")
         }
     }
 

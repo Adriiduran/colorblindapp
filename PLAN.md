@@ -268,8 +268,8 @@ puntos donde se puede borrar.
   incompleto al quedarse sin una de sus prendas.
 
 **Criterios de cierre:**
-- [ ] Alert nativo de confirmación en detalle y en el grid.
-- [ ] Comportamiento definido para outfits que referencian la prenda borrada.
+- [x] Alert nativo de confirmación en detalle y en el grid.
+- [x] Comportamiento definido para outfits que referencian la prenda borrada.
 
 ### 3.5 (Hito 14) — Monetización 2.0: prueba gratis del generador + precios
 
