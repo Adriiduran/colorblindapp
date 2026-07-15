@@ -139,6 +139,214 @@ Un pago de 9,99-14,99 € que desbloquea todo. Menos ingresos recurrentes pero m
 
 ---
 
+## FASE 3 — Pulido para lanzamiento internacional (v2.1)
+
+> Bloque de mejoras posteriores al lanzamiento v2.0. Ataca el punto de venta
+> (detección de color), reduce fricción del armario, sube la conversión a
+> premium y abre la puerta a mercados no hispanohablantes. Cada hito se cierra
+> con commit propio, verificado antes en el simulador.
+
+**Prioridad recomendada:** primero el Hito 10 (detección de color: si esto no
+convence, no hay app que vender), después las mejoras de armario (11–13) que
+son rápidas y muy visibles, luego la palanca de conversión (14) y por último la
+internacionalización (15), que es mecánica y puede avanzar en paralelo.
+
+### 3.1 (Hito 10) — Afinar la detección de color de las prendas
+
+**Objetivo:** que el color detectado al dar de alta una prenda acierte de forma
+fiable. Es la promesa central de la app para un usuario daltónico: si el color
+falla, el generador de outfits pierde toda la credibilidad.
+
+**Diagnóstico del pipeline actual** (`GarmentAnalyzer`):
+- Se muestrea a **64×64 px**: resolución muy baja, mezcla colores y difumina.
+- `generateMaskedImage(croppedToInstancesExtent:)` deja un **halo de borde**
+  donde los píxeles de la prenda se mezclan con el fondo → contamina el color.
+- No hay **balance de blancos**: con luz cálida de interior todo vira a naranja.
+- Se rechazan sombras, pero **no los brillos especulares** (un reflejo blanco
+  sobre tela saturada arrastra el dominante hacia el blanco).
+- El dominante es la **media** del cluster mayor: sensible a outliers y puede
+  ganar un pliegue/sombra en vez del color real.
+
+**Mejoras a implementar (por orden de impacto):**
+1. **Erosionar la máscara** unos píxeles antes de muestrear, para eliminar el
+   halo de borde con el fondo (causa nº1 de contaminación).
+2. **Subir la resolución de muestreo** a 128–256 px y muestrear solo el interior
+   de la máscara.
+3. **Clustering en espacio Lab** (perceptual) en vez de RGB lineal euclídeo, y
+   reportar la **mediana** del cluster elegido, no la media (robusto a outliers).
+4. **Rechazo de brillos especulares** simétrico al de sombras: si la prenda
+   tiene croma, descartar píxeles muy claros y acromáticos.
+5. **Elegir el cluster** por `peso × croma` (y opcionalmente cercanía al centro
+   de la prenda), no solo por peso: evita que gane una sombra grande.
+6. **Normalización de iluminante** (gray-world / white-patch) opcional y
+   conservadora, para reducir el tinte de la luz ambiente.
+7. **Corrección asistida en la UI:** en la pantalla de revisión, ofrecer los
+   **2-3 colores candidatos** como swatches tocables (un toque para corregir),
+   además del `ColorPicker` a mano ya existente. Cubrir el error del algoritmo
+   con una corrección de un toque es tan importante como afinar el algoritmo.
+
+**Cómo medir (imprescindible para "afinar" de verdad):**
+- Montar un **set de prueba interno** de fotos de prenda etiquetadas con su
+  color básico esperado (varias condiciones de luz y tejidos).
+- Pantalla/prueba de depuración que corra el analizador sobre el set y mida
+  acierto de categoría de color y ΔE medio, para iterar con datos y no a ojo.
+
+**Criterios de cierre:**
+- [x] Halo de borde eliminado y muestreo a mayor resolución.
+- [x] Selección de dominante robusta (Lab + mediana + peso×croma + rechazo de brillos).
+- [x] Swatches candidatos tocables en la revisión de alta.
+- [x] Benchmark interno con métricas antes/después documentadas.
+
+### 3.2 (Hito 11) — Unificar Armario y Outfits en una sola pestaña
+
+**Objetivo:** el armario y el generador son la misma tarea (vestirse); tenerlos
+en pestañas separadas los divorcia. Fusionarlos deja un tab bar de 3
+(**Escáner · Armario · Ajustes**), más limpio.
+
+**Diseño recomendado:** una pestaña "Armario" con un **control segmentado**
+arriba (`Prendas` | `Outfits`) dentro de un `NavigationStack` compartido. Se
+elige el segmentado (y no enterrar Outfits tras un botón) porque el generador es
+el gancho de pago y debe tener presencia visible.
+
+**Detalles técnicos:**
+- Nueva vista contenedora que hospeda `WardrobeView` y `OutfitsView` según un
+  enum de selección; mantiene su propio `@Query` de `Garment`.
+- Revisar la invalidación de propuestas de `OutfitsView` al cambiar el armario
+  (hoy en `.onChange(of: garments…)`), que sigue siendo válida en el contenedor.
+- Los outfits guardados (`SavedOutfitsView`) siguen accesibles desde la toolbar
+  del segmento Outfits.
+
+**Criterios de cierre:**
+- [ ] Tab bar de 3 pestañas; armario y outfits conviven con segmentado.
+- [ ] Estado y navegación correctos al alternar segmentos.
+
+### 3.3 (Hito 12) — Alta de prenda: cámara o galería + categoría por IA
+
+**Objetivo:** reducir fricción al añadir ropa y dejar de asumir siempre
+"camiseta".
+
+**Parte A — Origen de la foto (cámara o galería):**
+- Sustituir el único `PhotosPicker` por una elección: **"Hacer foto"** (cámara)
+  o **"Elegir de la galería"** (el `PhotosPicker` actual).
+- Cámara vía `UIImagePickerController` (o `AVFoundation`) envuelto en
+  `UIViewControllerRepresentable`; la imagen resultante entra al mismo
+  `GarmentAnalyzer.analyze(imageData:)`. Requiere `NSCameraUsageDescription`
+  (ya presente por el escáner).
+
+**Parte B — Estimación de categoría por IA:**
+- Al analizar la prenda, **estimar la categoría** (camiseta, pantalón, zapatos,
+  vestido, chaqueta…) y preseleccionarla en el `Picker`, en vez de fijar
+  siempre `.camiseta`. El usuario la puede cambiar como hasta ahora.
+- Implementación offline con **Vision** (`VNClassifyImageRequest`): mapear sus
+  etiquetas genéricas (shirt, trouser, shoe, dress, jacket, hat, bag…) a
+  `GarmentCategory`; si la confianza es baja, caer a `.otro`/`.camiseta`.
+- Se ejecuta dentro del `analyze()` existente (ya es async y ya recorta), y se
+  expone como `estimatedCategory` en `GarmentAnalyzer.Analysis`.
+- *Mejora futura:* sustituir Vision por un modelo Core ML de moda (tipo
+  DeepFashion/MobileNet) si la precisión de las etiquetas genéricas no basta.
+
+**Criterios de cierre:**
+- [ ] Alta desde cámara y desde galería, ambas al mismo pipeline.
+- [ ] Categoría preseleccionada por IA y editable; fallback razonable.
+
+### 3.4 (Hito 13) — Confirmación de borrado nativa y consistente
+
+**Objetivo:** que borrar una prenda pida confirmación con un **popup nativo
+centrado** (`.alert`), con texto que explique la consecuencia, en **todos** los
+puntos donde se puede borrar.
+
+**Detalles:**
+- Cambiar el `.confirmationDialog` (hoja inferior) de `GarmentDetailView` por un
+  **`.alert`** centrado: título "¿Eliminar esta prenda?", mensaje explicando que
+  la acción no se puede deshacer y que la prenda se quitará también de los
+  outfits guardados que la incluyan; botones **Eliminar** (destructivo) y
+  **Cancelar**.
+- Aplicar la **misma** confirmación al `contextMenu` del grid en `WardrobeView`,
+  que hoy borra **sin preguntar**.
+- Revisar el efecto en cascada sobre `Outfit` (relación inversa `garments`):
+  decidir y documentar si el outfit guardado se borra o se marca como
+  incompleto al quedarse sin una de sus prendas.
+
+**Criterios de cierre:**
+- [ ] Alert nativo de confirmación en detalle y en el grid.
+- [ ] Comportamiento definido para outfits que referencian la prenda borrada.
+
+### 3.5 (Hito 14) — Monetización 2.0: prueba gratis del generador + precios
+
+**Objetivo:** dejar que el usuario **pruebe el generador de outfits** (el gancho
+de pago) antes de comprar, y ajustar el pricing al mercado.
+
+**Parte A — Prueba gratis semanal del generador:**
+- Hoy Outfits está 100% bloqueado para no premium. Cambiarlo por una **cata**:
+  el usuario no premium puede **generar outfits una vez cada 7 días** y ver el
+  resultado completo; a partir de ahí, paywall.
+- Guardar `lastFreeOutfitDate` (p. ej. `@AppStorage`). Banner claro: "Prueba
+  gratis: te queda 1 generación esta semana" y, tras usarla, "Vuelve en X días o
+  hazte premium".
+- Premium sigue siendo ilimitado.
+
+**Parte B — Prueba gratuita de la suscripción (StoreKit):**
+- Añadir un **introductory offer de 7 días gratis** a ambos productos en
+  `Configuration.storekit` (hoy `introductoryOffer: null`) y en App Store
+  Connect. Es estándar y sube conversión; es independiente de la cata semanal.
+
+**Parte C — Revisión de precios (mensual 2,99 € / anual):**
+
+Análisis frente al mercado (subs de apps de utilidad/accesibilidad iOS suelen
+moverse en 2,99–4,99 €/mes; el anual suele ofrecer un 30–60 % de descuento
+sobre 12× el mensual para resultar atractivo):
+
+| Plan | Actual `.storekit` | Propuesta usuario | Recomendación |
+|------|--------------------|-------------------|---------------|
+| Mensual | 2,99 € | 2,99 € | **Mantener 2,99 €** para el MVP: baja fricción, bien visto por la comunidad de accesibilidad y fácil de subir después. (3,99 € es defendible por valor, pero conviene no arriesgar la conversión inicial.) |
+| Anual | 19,99 € | 22,90 € | **Subir a 22,99 €** (formato .99, no .90). 12×2,99 = 35,88 €, así que 22,99 € ≈ **36 % de descuento** (~1,92 €/mes) → gancho "más de 4 meses gratis". 19,99 € regalaba demasiado ARPU; 24,99 € (~30 % off) es la alternativa si se prioriza ingreso sobre conversión. |
+
+Notas adicionales:
+- Actualizar el anual en `Configuration.storekit` (hoy sigue en 19,99 €).
+- Ajustar el copy del paywall que dice "menos al mes que el mensual" a la cifra real.
+- Precio base en EUR; App Store mapea automáticamente los tiers por región.
+- *A explorar tras el MVP:* un desbloqueo **"de por vida" (~34,99 €)** junto a las
+  suscripciones, para captar al usuario averso a suscribirse (frecuente en
+  accesibilidad) y subir ingresos — encaja con la Opción B del plan.
+
+**Criterios de cierre:**
+- [ ] Generador probable 1 vez/semana sin ser premium.
+- [ ] Prueba gratis de 7 días en ambos planes.
+- [ ] Precios y copy actualizados y coherentes en `.storekit` y paywall.
+
+### 3.6 (Hito 15) — Internacionalización (español + inglés)
+
+**Objetivo:** dejar la app en **español e inglés** para el MVP internacional, con
+la base preparada para añadir más idiomas barato después. (Recoge y prioriza la
+sugerencia futura nº 11.)
+
+**Estado actual:** `developmentRegion = en` pero **todos los textos son literales
+en español** vía `String(localized:)`, y `knownRegions` solo tiene `en, Base`.
+Hay una incoherencia que hay que resolver: el idioma de desarrollo real es el
+español.
+
+**Detalles técnicos:**
+- Adoptar un **String Catalog** (`Localizable.xcstrings`), que extrae
+  automáticamente las claves de `String(localized:)`.
+- Fijar el **idioma de desarrollo = español** y **añadir inglés** como traducción
+  (evita reescribir todas las claves, que hoy son el texto español).
+- **Nombres de color del catálogo** (`ColorCatalog`): hoy son español puro y **no**
+  están localizados. Añadir el nombre inglés por entrada (p. ej. "Verde oliva" →
+  "Olive"), traducidos **con criterio, no literal** (mismo cuidado que pide la
+  sugerencia nº 11). Igual con los `basicName` de `ColorNamer`.
+- Revisar textos de sistema: permisos (`Info.plist`), nombres de categoría,
+  copy del paywall y del onboarding.
+- Precios y fechas ya salen localizados (StoreKit `displayPrice`, formateadores).
+- Dejar el andamiaje listo para sumar después los idiomas más hablados
+  (inglés ✓, y a futuro chino, hindi, árabe —con RTL—, portugués, francés…).
+
+**Criterios de cierre:**
+- [ ] String Catalog con es (desarrollo) + en completos.
+- [ ] Nombres de color bilingües y curados.
+- [ ] App revisada en inglés de principio a fin en el simulador.
+
+---
+
 ## Sugerencias futuras (NO prioritarias — fuera del plan actual)
 
 Ideas alineadas con la visión de "navaja multiusos" para incorporar después de las Fases 1 y 2:
@@ -170,3 +378,9 @@ Ideas alineadas con la visión de "navaja multiusos" para incorporar después de
 | 7 | Armario: catálogo, categorías, edición |
 | 8 | Generador de outfits: motor de colorimetría + explicaciones |
 | 9 | Paywall + suscripción (StoreKit 2 / RevenueCat) → **lanzamiento v2.0** |
+| 10 | Afinar la detección de color de las prendas (el punto de venta) |
+| 11 | Unificar Armario y Outfits en una sola pestaña (tab bar de 3) |
+| 12 | Alta de prenda desde cámara o galería + categoría estimada por IA |
+| 13 | Confirmación de borrado nativa (`.alert`) y consistente |
+| 14 | Monetización 2.0: prueba gratis del generador + prueba StoreKit + precios |
+| 15 | Internacionalización español + inglés (String Catalog) → **v2.1** |

@@ -61,6 +61,14 @@ struct SettingsView: View {
                 } footer: {
                     Text("Esta app no realiza diagnósticos médicos. Si tienes dudas sobre tu visión, consulta a un oftalmólogo.")
                 }
+
+                #if DEBUG
+                Section("Depuración") {
+                    NavigationLink("Benchmark del analizador de color") {
+                        GarmentAnalyzerBenchmarkView()
+                    }
+                }
+                #endif
             }
             .navigationTitle("Ajustes")
             .fullScreenCover(isPresented: $showTest) {

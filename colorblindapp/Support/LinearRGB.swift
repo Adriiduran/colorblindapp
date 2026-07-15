@@ -110,6 +110,30 @@ nonisolated struct LinearRGB {
         return (dl * dl + da * da + db * db).squareRoot()
     }
 
+    /// Construye un color desde coordenadas CIELAB (D65): la inversa de
+    /// `lab`. Se usa para reportar la mediana de un cluster calculada en
+    /// espacio Lab (perceptual) de vuelta en RGB lineal para guardarla.
+    static func fromLab(l: Double, a: Double, b: Double) -> LinearRGB {
+        func finv(_ t: Double) -> Double {
+            let cubed = t * t * t
+            return cubed > 0.008856 ? cubed : (t - 16.0 / 116.0) / 7.787
+        }
+        let fy = (l + 16) / 116
+        let fx = a / 500 + fy
+        let fz = fy - b / 200
+
+        // Blanco de referencia D65
+        let x = 0.95047 * finv(fx)
+        let y = finv(fy)
+        let z = 1.08883 * finv(fz)
+
+        // XYZ (D65) -> RGB lineal sRGB, inversa de la matriz usada en `lab`.
+        let r = 3.2404542 * x - 1.5371385 * y - 0.4985314 * z
+        let g = -0.9692660 * x + 1.8760108 * y + 0.0415560 * z
+        let bl = 0.0556434 * x - 0.2040259 * y + 1.0572252 * z
+        return LinearRGB(red: max(0, r), green: max(0, g), blue: max(0, bl))
+    }
+
     /// Representación hexadecimal sRGB, p. ej. "#6B8E23".
     var hexString: String {
         let (r, g, b) = srgbComponents

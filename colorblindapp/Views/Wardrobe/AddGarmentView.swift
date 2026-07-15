@@ -16,6 +16,7 @@ struct AddGarmentView: View {
     @State private var selection: PhotosPickerItem?
     @State private var isAnalyzing = false
     @State private var analysis: GarmentAnalyzer.Analysis?
+    @State private var selectedDominant: LinearRGB?
     @State private var category: GarmentCategory = .camiseta
     @State private var errorMessage: String?
 
@@ -95,7 +96,9 @@ struct AddGarmentView: View {
     // MARK: - Revisión
 
     private func review(_ analysis: GarmentAnalyzer.Analysis) -> some View {
-        Form {
+        let dominant = selectedDominant ?? analysis.dominant
+
+        return Form {
             Section {
                 HStack {
                     Spacer()
@@ -113,13 +116,13 @@ struct AddGarmentView: View {
             Section("Color detectado") {
                 HStack(spacing: 14) {
                     RoundedRectangle(cornerRadius: 8)
-                        .fill(analysis.dominant.color)
+                        .fill(dominant.color)
                         .strokeBorder(.quaternary, lineWidth: 1)
                         .frame(width: 44, height: 44)
                     VStack(alignment: .leading, spacing: 2) {
-                        Text(ColorNamer.descriptiveName(for: analysis.dominant))
+                        Text(ColorNamer.descriptiveName(for: dominant))
                             .font(.headline)
-                        Text("\(ColorNamer.basicName(for: analysis.dominant)) · \(analysis.dominant.hexString)")
+                        Text("\(ColorNamer.basicName(for: dominant)) · \(dominant.hexString)")
                             .font(.subheadline.monospaced())
                             .foregroundStyle(.secondary)
                     }
@@ -138,6 +141,10 @@ struct AddGarmentView: View {
                 }
             }
 
+            if !analysis.candidates.isEmpty {
+                candidatesSection(analysis, current: dominant)
+            }
+
             Section("Categoría") {
                 Picker("Tipo de prenda", selection: $category) {
                     ForEach(GarmentCategory.allCases) { category in
@@ -148,7 +155,7 @@ struct AddGarmentView: View {
 
             Section {
                 Button {
-                    save(analysis)
+                    save(analysis, dominant: dominant)
                 } label: {
                     Text("Guardar en el armario")
                         .singleLineFitted()
@@ -160,6 +167,7 @@ struct AddGarmentView: View {
 
                 Button("Elegir otra foto") {
                     self.analysis = nil
+                    self.selectedDominant = nil
                     self.selection = nil
                 }
                 .frame(maxWidth: .infinity)
@@ -168,11 +176,40 @@ struct AddGarmentView: View {
         }
     }
 
+    /// Swatches tocables con los demás colores detectados en la foto, para
+    /// corregir con un toque cuando el algoritmo elige el color equivocado
+    /// (p. ej. una sombra o un estampado) sin tener que abrir el selector.
+    private func candidatesSection(_ analysis: GarmentAnalyzer.Analysis, current: LinearRGB) -> some View {
+        Section {
+            HStack(spacing: 12) {
+                ForEach(Array(([analysis.dominant] + analysis.candidates).enumerated()), id: \.offset) { _, option in
+                    let isSelected = option.hexString == current.hexString
+                    Button {
+                        selectedDominant = option
+                    } label: {
+                        RoundedRectangle(cornerRadius: 8)
+                            .fill(option.color)
+                            .strokeBorder(isSelected ? Color.accentColor : Color(.quaternaryLabel), lineWidth: isSelected ? 3 : 1)
+                            .frame(width: 40, height: 40)
+                    }
+                    .buttonStyle(.plain)
+                    .accessibilityLabel(ColorNamer.descriptiveName(for: option))
+                }
+                Spacer()
+            }
+        } header: {
+            Text("¿No es el color correcto?")
+        } footer: {
+            Text("Toca otro de los colores detectados en la foto, o ajusta el color a mano desde la ficha de la prenda tras guardarla.")
+        }
+    }
+
     // MARK: - Acciones
 
     private func analyze(_ item: PhotosPickerItem) {
         isAnalyzing = true
         errorMessage = nil
+        selectedDominant = nil
         Task {
             defer { isAnalyzing = false }
             do {
@@ -187,10 +224,10 @@ struct AddGarmentView: View {
         }
     }
 
-    private func save(_ analysis: GarmentAnalyzer.Analysis) {
+    private func save(_ analysis: GarmentAnalyzer.Analysis, dominant: LinearRGB) {
         let garment = Garment(
             imageData: analysis.croppedImagePNG,
-            dominant: analysis.dominant,
+            dominant: dominant,
             secondary: analysis.secondary,
             category: category
         )
