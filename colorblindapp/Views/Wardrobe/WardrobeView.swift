@@ -25,38 +25,35 @@ struct WardrobeView: View {
     }
 
     var body: some View {
-        NavigationStack {
-            Group {
-                if garments.isEmpty {
-                    emptyState
-                } else {
-                    catalog
+        Group {
+            if garments.isEmpty {
+                emptyState
+            } else {
+                catalog
+            }
+        }
+        .toolbar {
+            ToolbarItemGroup(placement: .primaryAction) {
+                if !garments.isEmpty {
+                    colorFilterMenu
                 }
-            }
-            .navigationTitle("Armario")
-            .toolbar {
-                ToolbarItemGroup(placement: .primaryAction) {
-                    if !garments.isEmpty {
-                        colorFilterMenu
+                Button {
+                    if reachedFreeLimit {
+                        showPaywall = true
+                    } else {
+                        showAddGarment = true
                     }
-                    Button {
-                        if reachedFreeLimit {
-                            showPaywall = true
-                        } else {
-                            showAddGarment = true
-                        }
-                    } label: {
-                        Image(systemName: "plus")
-                    }
-                    .accessibilityLabel("Añadir prenda")
+                } label: {
+                    Image(systemName: "plus")
                 }
+                .accessibilityLabel("Añadir prenda")
             }
-            .sheet(isPresented: $showAddGarment) {
-                AddGarmentView()
-            }
-            .sheet(isPresented: $showPaywall) {
-                PaywallView(reason: "Tu armario gratis está al completo (\(PurchaseManager.freeWardrobeLimit) prendas). Hazte premium para añadir sin límite.")
-            }
+        }
+        .sheet(isPresented: $showAddGarment) {
+            AddGarmentView()
+        }
+        .sheet(isPresented: $showPaywall) {
+            PaywallView(reason: "Tu armario gratis está al completo (\(PurchaseManager.freeWardrobeLimit) prendas). Hazte premium para añadir sin límite.")
         }
     }
 
@@ -288,7 +285,10 @@ struct GarmentCard: View {
 }
 
 #Preview {
-    WardrobeView()
-        .environment(PurchaseManager())
-        .modelContainer(for: [UserProfile.self, SavedColor.self, Garment.self], inMemory: true)
+    NavigationStack {
+        WardrobeView()
+            .navigationTitle("Armario")
+    }
+    .environment(PurchaseManager())
+    .modelContainer(for: [UserProfile.self, SavedColor.self, Garment.self], inMemory: true)
 }

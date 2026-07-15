@@ -217,8 +217,8 @@ el gancho de pago y debe tener presencia visible.
   del segmento Outfits.
 
 **Criterios de cierre:**
-- [ ] Tab bar de 3 pestañas; armario y outfits conviven con segmentado.
-- [ ] Estado y navegación correctos al alternar segmentos.
+- [x] Tab bar de 3 pestañas; armario y outfits conviven con segmentado.
+- [x] Estado y navegación correctos al alternar segmentos.
 
 ### 3.3 (Hito 12) — Alta de prenda: cámara o galería + categoría por IA
 

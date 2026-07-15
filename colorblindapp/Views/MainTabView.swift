@@ -15,10 +15,7 @@ struct MainTabView: View {
                 ScannerView()
             }
             Tab("Armario", systemImage: "tshirt") {
-                WardrobeView()
-            }
-            Tab("Outfits", systemImage: "sparkles") {
-                OutfitsView()
+                WardrobeHomeView()
             }
             Tab("Ajustes", systemImage: "gearshape") {
                 SettingsView(profile: profile)

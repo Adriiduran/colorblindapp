@@ -19,38 +19,35 @@ struct OutfitsView: View {
     @State private var showPaywall = false
 
     var body: some View {
-        NavigationStack {
-            Group {
-                if !purchaseManager.isPremium {
-                    premiumLockedState
-                } else if canGenerate {
-                    generator
-                } else {
-                    emptyState
+        Group {
+            if !purchaseManager.isPremium {
+                premiumLockedState
+            } else if canGenerate {
+                generator
+            } else {
+                emptyState
+            }
+        }
+        .toolbar {
+            ToolbarItem(placement: .primaryAction) {
+                NavigationLink {
+                    SavedOutfitsView()
+                } label: {
+                    Image(systemName: "bookmark")
                 }
+                .accessibilityLabel("Outfits guardados")
             }
-            .navigationTitle("Outfits")
-            .toolbar {
-                ToolbarItem(placement: .primaryAction) {
-                    NavigationLink {
-                        SavedOutfitsView()
-                    } label: {
-                        Image(systemName: "bookmark")
-                    }
-                    .accessibilityLabel("Outfits guardados")
-                }
-            }
-            // Si el armario cambia, las propuestas pueden apuntar a prendas
-            // borradas: se invalida todo y se vuelve a empezar.
-            .onChange(of: garments.map(\.persistentModelID)) {
-                anchor = nil
-                proposals = []
-                hasGenerated = false
-                savedProposalIDs = []
-            }
-            .sheet(isPresented: $showPaywall) {
-                PaywallView(reason: "El generador de outfits es una función premium.")
-            }
+        }
+        // Si el armario cambia, las propuestas pueden apuntar a prendas
+        // borradas: se invalida todo y se vuelve a empezar.
+        .onChange(of: garments.map(\.persistentModelID)) {
+            anchor = nil
+            proposals = []
+            hasGenerated = false
+            savedProposalIDs = []
+        }
+        .sheet(isPresented: $showPaywall) {
+            PaywallView(reason: "El generador de outfits es una función premium.")
         }
     }
 
@@ -313,7 +310,10 @@ struct GarmentThumbnail: View {
 }
 
 #Preview {
-    OutfitsView()
-        .environment(PurchaseManager())
-        .modelContainer(for: [UserProfile.self, SavedColor.self, Garment.self, Outfit.self], inMemory: true)
+    NavigationStack {
+        OutfitsView()
+            .navigationTitle("Outfits")
+    }
+    .environment(PurchaseManager())
+    .modelContainer(for: [UserProfile.self, SavedColor.self, Garment.self, Outfit.self], inMemory: true)
 }
