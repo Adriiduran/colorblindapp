@@ -44,7 +44,12 @@ nonisolated enum ColorNamer {
             return lightness > 0.72 ? String(localized: "Rosa") : String(localized: "Rojo")
         case ..<40:
             if lightness < 0.36 { return String(localized: "Marrón") }
-            if lightness > 0.68 && saturation < 0.55 { return String(localized: "Beige") }
+            // Un tono cálido con poca saturación es beige/topo aunque no sea
+            // muy claro (p. ej. un pantalón de lino topo a media luz): la
+            // saturación manda sobre la luminosidad para decidir "Beige".
+            if saturation < 0.35 || (lightness > 0.68 && saturation < 0.55) {
+                return String(localized: "Beige")
+            }
             return String(localized: "Naranja")
         case ..<68:
             if lightness < 0.28 { return String(localized: "Marrón") }

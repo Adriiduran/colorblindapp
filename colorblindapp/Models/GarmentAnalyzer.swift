@@ -231,7 +231,7 @@ nonisolated enum GarmentAnalyzer {
         }
 
         let total = Double(labs.count)
-        let clusters: [(color: LinearRGB, weight: Double, chroma: Double)] = (0..<k).compactMap { j in
+        let clusters: [(color: LinearRGB, weight: Double, chroma: Double, lightness: Double)] = (0..<k).compactMap { j in
             let members = labs.indices.filter { assignments[$0] == j }
             guard !members.isEmpty else { return nil }
             let weight = Double(members.count) / total
@@ -245,7 +245,7 @@ nonisolated enum GarmentAnalyzer {
             let medianB = median(members.map { labs[$0].b })
             let color = LinearRGB.fromLab(l: medianL, a: medianA, b: medianB)
             let chroma = (medianA * medianA + medianB * medianB).squareRoot()
-            return (color, weight, chroma)
+            return (color, weight, chroma, medianL)
         }
 
         // Si ningún cluster conserva croma real, la prenda es gris/negra/
@@ -253,9 +253,19 @@ nonisolated enum GarmentAnalyzer {
         // peso×croma para que un pliegue o sombra grande y apagada no gane
         // sobre el color real de la prenda por pura mayoría de píxeles.
         let hasChroma = clusters.contains { $0.chroma >= 8 }
-        let ranked = hasChroma
-            ? clusters.sorted { $0.weight * $0.chroma > $1.weight * $1.chroma }
-            : clusters.sorted { $0.weight > $1.weight }
+        let ranked: [(color: LinearRGB, weight: Double, chroma: Double, lightness: Double)]
+        if hasChroma {
+            ranked = clusters.sorted { $0.weight * $0.chroma > $1.weight * $1.chroma }
+        } else {
+            // Prendas negras de tejido acanalado (pana, punto grueso...)
+            // reflejan tanta luz en las crestas que el brillo especular
+            // puede cubrir más píxeles que el propio tejido oscuro. Si hay
+            // un modo oscuro sustancial, tratamos los clusters muy claros
+            // como brillo y no como el color real, aunque pesen más.
+            let hasDarkMode = clusters.contains { $0.lightness < 35 && $0.weight >= 0.15 }
+            let candidates = hasDarkMode ? clusters.filter { $0.lightness < 88 } : clusters
+            ranked = (candidates.isEmpty ? clusters : candidates).sorted { $0.weight > $1.weight }
+        }
 
         return ranked.map { (color: $0.color, weight: $0.weight) }
     }
