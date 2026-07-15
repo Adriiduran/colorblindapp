@@ -1,0 +1,3247 @@
+{
+  "sourceLanguage": "es",
+  "strings": {
+    " y ": {
+      "comment": "Separador entre avisos de un outfit, p. ej. \"aviso 1 y aviso 2\"",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": " and "
+          }
+        }
+      }
+    },
+    "¿Borrar tu perfil y reiniciar?": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Delete your profile and reset?"
+          }
+        }
+      }
+    },
+    "¿Cuál es tu tipo?": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "What's your type?"
+          }
+        }
+      }
+    },
+    "¿El color no es correcto?": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Is the color wrong?"
+          }
+        }
+      }
+    },
+    "¿Eliminar esta prenda?": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Delete this garment?"
+          }
+        }
+      }
+    },
+    "¿No es el color correcto?": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Not the right color?"
+          }
+        }
+      }
+    },
+    "¿Qué número ves?": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "What number do you see?"
+          }
+        }
+      }
+    },
+    "/ 10": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "/ 10"
+          }
+        }
+      }
+    },
+    "%@ · %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ · %@"
+          }
+        }
+      }
+    },
+    "%@ %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ %@"
+          }
+        }
+      }
+    },
+    "%@ es un neutro que combina con casi todo": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ is a neutral that goes with almost everything"
+          }
+        }
+      }
+    },
+    "%@ y %@ comparten tono en distinta intensidad: un monocromático elegante": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ and %@ share a hue at different intensities: an elegant monochrome look"
+          }
+        }
+      }
+    },
+    "%@ y %@ son casi del mismo color y pueden fundirse entre sí": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ and %@ are almost the same color and can blend into each other"
+          }
+        }
+      }
+    },
+    "%@ y %@ van en colores neutros, una base que nunca falla": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ and %@ are neutral colors, a base that never fails"
+          }
+        }
+      }
+    },
+    "%lld": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld"
+          }
+        }
+      }
+    },
+    "%lld días": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld days"
+          }
+        }
+      }
+    },
+    "1 día": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 day"
+          }
+        }
+      }
+    },
+    "7 días de prueba gratis en cualquier plan": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "7-day free trial on any plan"
+          }
+        }
+      }
+    },
+    "Abrir Ajustes": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open Settings"
+          }
+        }
+      }
+    },
+    "Accesorio": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Accessory"
+          }
+        }
+      }
+    },
+    "Aguamarina": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aquamarine"
+          }
+        }
+      }
+    },
+    "Ahorra un %lld%% frente al plan mensual": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Save %lld%% compared to the monthly plan"
+          }
+        }
+      }
+    },
+    "Ajustes": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Settings"
+          }
+        }
+      }
+    },
+    "Albaricoque": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apricot"
+          }
+        }
+      }
+    },
+    "Amarillo": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yellow"
+          }
+        }
+      }
+    },
+    "Amarillo canario": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Canary yellow"
+          }
+        }
+      }
+    },
+    "Amarillo limón": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lemon yellow"
+          }
+        }
+      }
+    },
+    "Amarillo pastel": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pastel yellow"
+          }
+        }
+      }
+    },
+    "Amatista": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Amethyst"
+          }
+        }
+      }
+    },
+    "Ámbar": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Amber"
+          }
+        }
+      }
+    },
+    "Añade fotos de tu ropa y detectaremos el color de cada prenda para ayudarte a combinarlas.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Add photos of your clothes and we'll detect each garment's color to help you put together outfits."
+          }
+        }
+      }
+    },
+    "Añade toda tu ropa sin límite de prendas.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Add all your clothes with no garment limit."
+          }
+        }
+      }
+    },
+    "Añade una foto de tu prenda": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Add a photo of your garment"
+          }
+        }
+      }
+    },
+    "Añadir a favoritos": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Add to favorites"
+          }
+        }
+      }
+    },
+    "Añadir mi primera prenda": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Add my first garment"
+          }
+        }
+      }
+    },
+    "Añadir prenda": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Add garment"
+          }
+        }
+      }
+    },
+    "Analizando la prenda…": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Analyzing the garment…"
+          }
+        }
+      }
+    },
+    "Apunta a cualquier objeto y te diremos su color al instante. La imagen se procesa en tu iPhone y nunca sale de él.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Point at any object and we'll tell you its color instantly. The image is processed on your iPhone and never leaves it."
+          }
+        }
+      }
+    },
+    "Arena": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sand"
+          }
+        }
+      }
+    },
+    "Armario": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wardrobe"
+          }
+        }
+      }
+    },
+    "Armario gratis completo (%lld prendas) · Hazte premium": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Free wardrobe full (%lld garments) · Go premium"
+          }
+        }
+      }
+    },
+    "Armario ilimitado": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Unlimited wardrobe"
+          }
+        }
+      }
+    },
+    "Armario ilimitado, generador de outfits e historial sin límite.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Unlimited wardrobe, outfit generator, and unlimited history."
+          }
+        }
+      }
+    },
+    "Avellana": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hazelnut"
+          }
+        }
+      }
+    },
+    "Azul": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Blue"
+          }
+        }
+      }
+    },
+    "Azul acero": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Steel blue"
+          }
+        }
+      }
+    },
+    "Azul aciano": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cornflower blue"
+          }
+        }
+      }
+    },
+    "Azul bebé": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Baby blue"
+          }
+        }
+      }
+    },
+    "Azul cobalto": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cobalt blue"
+          }
+        }
+      }
+    },
+    "Azul denim": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Denim blue"
+          }
+        }
+      }
+    },
+    "Azul eléctrico": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Electric blue"
+          }
+        }
+      }
+    },
+    "Azul marino": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Navy blue"
+          }
+        }
+      }
+    },
+    "Azul medianoche": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Midnight blue"
+          }
+        }
+      }
+    },
+    "Azul pastel": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pastel blue"
+          }
+        }
+      }
+    },
+    "Azul petróleo": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Petrol blue"
+          }
+        }
+      }
+    },
+    "Azul pizarra": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Slate blue"
+          }
+        }
+      }
+    },
+    "Azul puro": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pure blue"
+          }
+        }
+      }
+    },
+    "Azul real": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Royal blue"
+          }
+        }
+      }
+    },
+    "Azul zafiro": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sapphire blue"
+          }
+        }
+      }
+    },
+    "Beige": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Beige"
+          }
+        }
+      }
+    },
+    "Berenjena": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aubergine"
+          }
+        }
+      }
+    },
+    "Bermellón": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vermilion"
+          }
+        }
+      }
+    },
+    "Blanco": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "White"
+          }
+        }
+      }
+    },
+    "Blanco nieve": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Snow white"
+          }
+        }
+      }
+    },
+    "Blanco roto": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Off-white"
+          }
+        }
+      }
+    },
+    "Borrar y reiniciar": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Delete and reset"
+          }
+        }
+      }
+    },
+    "Bronce": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bronze"
+          }
+        }
+      }
+    },
+    "Burdeos": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Burgundy"
+          }
+        }
+      }
+    },
+    "Café": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Coffee"
+          }
+        }
+      }
+    },
+    "Calabaza": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pumpkin"
+          }
+        }
+      }
+    },
+    "Cámara no disponible": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Camera unavailable"
+          }
+        }
+      }
+    },
+    "Camisa": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Shirt"
+          }
+        }
+      }
+    },
+    "Camiseta": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "T-shirt"
+          }
+        }
+      }
+    },
+    "Cancelar": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cancel"
+          }
+        }
+      }
+    },
+    "Canela": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cinnamon"
+          }
+        }
+      }
+    },
+    "Caoba": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mahogany"
+          }
+        }
+      }
+    },
+    "Caqui": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Khaki"
+          }
+        }
+      }
+    },
+    "Caqui oscuro": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dark khaki"
+          }
+        }
+      }
+    },
+    "Carmesí": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Crimson"
+          }
+        }
+      }
+    },
+    "Castaño": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chestnut"
+          }
+        }
+      }
+    },
+    "Categoría": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Category"
+          }
+        }
+      }
+    },
+    "Celeste": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sky blue"
+          }
+        }
+      }
+    },
+    "Cerrar": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Close"
+          }
+        }
+      }
+    },
+    "Chaqueta": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jacket"
+          }
+        }
+      }
+    },
+    "Chocolate": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chocolate"
+          }
+        }
+      }
+    },
+    "Cian": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cyan"
+          }
+        }
+      }
+    },
+    "Ciruela": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plum"
+          }
+        }
+      }
+    },
+    "Cobre": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copper"
+          }
+        }
+      }
+    },
+    "Color": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Color"
+          }
+        }
+      }
+    },
+    "Color detectado": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Detected color"
+          }
+        }
+      }
+    },
+    "Color secundario: %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Secondary color: %@"
+          }
+        }
+      }
+    },
+    "Combina porque %@.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "It works because %@."
+          }
+        }
+      }
+    },
+    "Combinaciones puntuadas y explicadas para vestirte con confianza.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scored, explained combinations to help you dress with confidence."
+          }
+        }
+      }
+    },
+    "Con esa prenda ancla no sale ningún outfit completo. Prueba con otra o añade más prendas.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No complete outfit works with that anchor garment. Try another one or add more garments."
+          }
+        }
+      }
+    },
+    "Con tu visión podría parecer %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "With your vision this might look %@"
+          }
+        }
+      }
+    },
+    "Concede acceso a la cámara en Ajustes para poder escanear colores.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Grant camera access in Settings to scan colors."
+          }
+        }
+      }
+    },
+    "Congelar": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Freeze"
+          }
+        }
+      }
+    },
+    "Continuar": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Continue"
+          }
+        }
+      }
+    },
+    "Coral": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Coral"
+          }
+        }
+      }
+    },
+    "Crema": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cream"
+          }
+        }
+      }
+    },
+    "Deután (verde)": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deutan (green)"
+          }
+        }
+      }
+    },
+    "Distingues los colores con normalidad.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "You perceive colors normally."
+          }
+        }
+      }
+    },
+    "Dorado": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Golden"
+          }
+        }
+      }
+    },
+    "dos colores muy intensos compiten por la atención": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "two very intense colors compete for attention"
+          }
+        }
+      }
+    },
+    "el %@ y el %@ guardan un contraste a tres bandas (tríada), vivo sin estridencias": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ and %@ form a three-way contrast (triad), lively without clashing"
+          }
+        }
+      }
+    },
+    "el %@ y el %@ no siguen una armonía clara entre sí": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ and %@ don't follow a clear harmony with each other"
+          }
+        }
+      }
+    },
+    "el %@ y el %@ se oponen en el círculo cromático: un contraste llamativo que da vida al conjunto": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ and %@ sit opposite each other on the color wheel: a striking contrast that brings the outfit to life"
+          }
+        }
+      }
+    },
+    "el %@ y el %@ son tonos vecinos en el círculo cromático y armonizan con naturalidad": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ and %@ are neighboring hues on the color wheel and harmonize naturally"
+          }
+        }
+      }
+    },
+    "el accesorio": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "the accessory"
+          }
+        }
+      }
+    },
+    "El escáner necesita la cámara": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The scanner needs the camera"
+          }
+        }
+      }
+    },
+    "El generador de outfits es una función premium.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The outfit generator is a premium feature."
+          }
+        }
+      }
+    },
+    "El historial gratis guarda tus últimos %lld colores.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The free history keeps your last %lld colors."
+          }
+        }
+      }
+    },
+    "el jersey": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "the sweater"
+          }
+        }
+      }
+    },
+    "el pantalón": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "the pants"
+          }
+        }
+      }
+    },
+    "el rojo y el rosa suelen chocar entre sí": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "red and pink tend to clash with each other"
+          }
+        }
+      }
+    },
+    "el vestido": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "the dress"
+          }
+        }
+      }
+    },
+    "Elegido manualmente": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chosen manually"
+          }
+        }
+      }
+    },
+    "Elegir de la galería": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choose from gallery"
+          }
+        }
+      }
+    },
+    "Elegir el color a mano": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choose color by hand"
+          }
+        }
+      }
+    },
+    "Elegir mi tipo manualmente": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choose my type manually"
+          }
+        }
+      }
+    },
+    "Elegir otra foto": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choose another photo"
+          }
+        }
+      }
+    },
+    "Elige la prenda que quieres llevar sí o sí, o deja que elijamos por ti.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choose the garment you definitely want to wear, or let us pick for you."
+          }
+        }
+      }
+    },
+    "Eliminar": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Delete"
+          }
+        }
+      }
+    },
+    "Eliminar prenda": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Delete garment"
+          }
+        }
+      }
+    },
+    "Empezar prueba gratis de 7 días": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Start 7-day free trial"
+          }
+        }
+      }
+    },
+    "Escáner": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scanner"
+          }
+        }
+      }
+    },
+    "Escarlata": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scarlet"
+          }
+        }
+      }
+    },
+    "Esta app no realiza diagnósticos médicos. Si tienes dudas sobre tu visión, consulta a un oftalmólogo.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This app doesn't perform medical diagnoses. If you have doubts about your vision, consult an ophthalmologist."
+          }
+        }
+      }
+    },
+    "Este test es orientativo y no sustituye un diagnóstico médico. Si tienes dudas, consulta a un oftalmólogo.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This test is indicative and doesn't replace a medical diagnosis. If you have doubts, consult an ophthalmologist."
+          }
+        }
+      }
+    },
+    "Falda": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skirt"
+          }
+        }
+      }
+    },
+    "Fallaste alguna de las láminas de control que todo el mundo debería ver. Puede que la pantalla tuviera reflejos o el brillo bajo. Busca buena luz, sube el brillo y vuelve a intentarlo.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "You missed one of the control plates that everyone should be able to see. The screen might have had glare or low brightness. Find good light, turn up the brightness, and try again."
+          }
+        }
+      }
+    },
+    "Falta alguna prenda: se borró del armario.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A garment is missing: it was deleted from the wardrobe."
+          }
+        }
+      }
+    },
+    "Faltan prendas para combinar": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Missing garments to combine"
+          }
+        }
+      }
+    },
+    "Favoritos": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Favorites"
+          }
+        }
+      }
+    },
+    "Filtrar por color": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Filter by color"
+          }
+        }
+      }
+    },
+    "Filtro": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Filter"
+          }
+        }
+      }
+    },
+    "Fucsia": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fuchsia"
+          }
+        }
+      }
+    },
+    "Fuerte": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Strong"
+          }
+        }
+      }
+    },
+    "Generador de outfits": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Outfit generator"
+          }
+        }
+      }
+    },
+    "Gestionar suscripción": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Manage subscription"
+          }
+        }
+      }
+    },
+    "Grafito": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Graphite"
+          }
+        }
+      }
+    },
+    "Granate": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Maroon"
+          }
+        }
+      }
+    },
+    "Gris": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gray"
+          }
+        }
+      }
+    },
+    "Gris carbón": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Charcoal gray"
+          }
+        }
+      }
+    },
+    "Gris claro": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Light gray"
+          }
+        }
+      }
+    },
+    "Gris perla": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pearl gray"
+          }
+        }
+      }
+    },
+    "Gris pizarra": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Slate gray"
+          }
+        }
+      }
+    },
+    "Guarda todos los colores que escanees, sin borrar los antiguos.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Save every color you scan, without deleting older ones."
+          }
+        }
+      }
+    },
+    "Guarda tus propuestas favoritas desde el generador y aparecerán aquí.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Save your favorite suggestions from the generator and they'll appear here."
+          }
+        }
+      }
+    },
+    "Guardado": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Saved"
+          }
+        }
+      }
+    },
+    "Guardar": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Save"
+          }
+        }
+      }
+    },
+    "Guardar en el armario": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Save to wardrobe"
+          }
+        }
+      }
+    },
+    "Guardar mi perfil": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Save my profile"
+          }
+        }
+      }
+    },
+    "Hacer el test": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Take the test"
+          }
+        }
+      }
+    },
+    "Hacer foto": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Take photo"
+          }
+        }
+      }
+    },
+    "Hazte premium": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Go premium"
+          }
+        }
+      }
+    },
+    "Historial": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "History"
+          }
+        }
+      }
+    },
+    "Historial gratis: últimos %lld colores · Hazte premium": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Free history: last %lld colors · Go premium"
+          }
+        }
+      }
+    },
+    "Historial ilimitado": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Unlimited history"
+          }
+        }
+      }
+    },
+    "Historial vacío": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Empty history"
+          }
+        }
+      }
+    },
+    "Hueso": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bone"
+          }
+        }
+      }
+    },
+    "Identifica cualquier color con la cámara y combina tu ropa con confianza. Para adaptarnos a ti, primero necesitamos saber qué tipo de daltonismo tienes.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Identify any color with your camera and put together outfits with confidence. To tailor the app to you, we first need to know your type of color blindness."
+          }
+        }
+      }
+    },
+    "Incluye 7 días de prueba gratis. Pasado ese periodo, la suscripción se cobra y se renueva automáticamente al precio indicado, salvo que la canceles al menos 24 horas antes de que termine el periodo de prueba o el periodo actual, desde los ajustes de tu cuenta de Apple.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Includes a 7-day free trial. After that period, the subscription is charged and renews automatically at the price shown, unless you cancel it at least 24 hours before the trial or the current period ends, from your Apple account settings."
+          }
+        }
+      }
+    },
+    "Índigo": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Indigo"
+          }
+        }
+      }
+    },
+    "Intensidad: %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Intensity: %@"
+          }
+        }
+      }
+    },
+    "Jersey": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sweater"
+          }
+        }
+      }
+    },
+    "La cámara no está disponible en este dispositivo.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The camera isn't available on this device."
+          }
+        }
+      }
+    },
+    "la camisa": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "the shirt"
+          }
+        }
+      }
+    },
+    "la camiseta": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "the t-shirt"
+          }
+        }
+      }
+    },
+    "la chaqueta": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "the jacket"
+          }
+        }
+      }
+    },
+    "la falda": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "the skirt"
+          }
+        }
+      }
+    },
+    "la prenda": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "the garment"
+          }
+        }
+      }
+    },
+    "Ladrillo": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Brick"
+          }
+        }
+      }
+    },
+    "Lámina %lld de %lld": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plate %lld of %lld"
+          }
+        }
+      }
+    },
+    "Las prendas de este outfit ya no están en tu armario.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This outfit's garments are no longer in your wardrobe."
+          }
+        }
+      }
+    },
+    "Lavanda": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lavender"
+          }
+        }
+      }
+    },
+    "Leve o moderada": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mild or moderate"
+          }
+        }
+      }
+    },
+    "Lila": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lilac"
+          }
+        }
+      }
+    },
+    "Lima": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lime"
+          }
+        }
+      }
+    },
+    "Los colores que guardes desde el escáner aparecerán aquí.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Colors you save from the scanner will appear here."
+          }
+        }
+      }
+    },
+    "los zapatos": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "the shoes"
+          }
+        }
+      }
+    },
+    "Magenta": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Magenta"
+          }
+        }
+      }
+    },
+    "Malva": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mauve"
+          }
+        }
+      }
+    },
+    "Mandarina": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tangerine"
+          }
+        }
+      }
+    },
+    "Marca colores con la estrella para verlos aquí.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mark colors with the star to see them here."
+          }
+        }
+      }
+    },
+    "Marfil": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ivory"
+          }
+        }
+      }
+    },
+    "Marrón": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Brown"
+          }
+        }
+      }
+    },
+    "marrón con negro es una mezcla delicada": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "brown with black is a delicate mix"
+          }
+        }
+      }
+    },
+    "Melocotón": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Peach"
+          }
+        }
+      }
+    },
+    "Moca": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mocha"
+          }
+        }
+      }
+    },
+    "MODO DEMO": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "DEMO MODE"
+          }
+        }
+      }
+    },
+    "Morado": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Purple"
+          }
+        }
+      }
+    },
+    "Mostaza": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mustard"
+          }
+        }
+      }
+    },
+    "Naranja": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Orange"
+          }
+        }
+      }
+    },
+    "Naranja quemado": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Burnt orange"
+          }
+        }
+      }
+    },
+    "Negro": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Black"
+          }
+        }
+      }
+    },
+    "No hay outfits guardados": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No saved outfits"
+          }
+        }
+      }
+    },
+    "No hay prendas que coincidan con los filtros.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No garments match the filters."
+          }
+        }
+      }
+    },
+    "No se pudieron cargar los planes. Comprueba tu conexión.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Couldn't load the plans. Check your connection."
+          }
+        }
+      }
+    },
+    "No se pudieron restaurar las compras.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The purchases couldn't be restored."
+          }
+        }
+      }
+    },
+    "No se pudo acceder a la cámara de este dispositivo.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Couldn't access this device's camera."
+          }
+        }
+      }
+    },
+    "No se pudo completar la compra.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The purchase couldn't be completed."
+          }
+        }
+      }
+    },
+    "No se pudo detectar el color de la prenda. Prueba con una foto sobre fondo liso y con buena luz.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The garment's color couldn't be detected. Try a photo on a plain background with good light."
+          }
+        }
+      }
+    },
+    "No se pudo leer la imagen.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The image couldn't be read."
+          }
+        }
+      }
+    },
+    "No se puede deshacer. La prenda también se quitará de los outfits guardados que la incluyan.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This can't be undone. The garment will also be removed from any saved outfits that include it."
+          }
+        }
+      }
+    },
+    "No veo ningún número": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I don't see a number"
+          }
+        }
+      }
+    },
+    "Nueva prenda": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "New garment"
+          }
+        }
+      }
+    },
+    "Ocre": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ochre"
+          }
+        }
+      }
+    },
+    "Ojo: %@.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Heads up: %@."
+          }
+        }
+      }
+    },
+    "Oliva": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Olive"
+          }
+        }
+      }
+    },
+    "Origen": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Source"
+          }
+        }
+      }
+    },
+    "Orquídea": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Orchid"
+          }
+        }
+      }
+    },
+    "Otro": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Other"
+          }
+        }
+      }
+    },
+    "Outfits": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Outfits"
+          }
+        }
+      }
+    },
+    "Outfits guardados": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Saved outfits"
+          }
+        }
+      }
+    },
+    "Pantalón": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pants"
+          }
+        }
+      }
+    },
+    "Para proponerte outfits necesito al menos una parte de arriba y una de abajo (o un vestido) en tu armario.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "To suggest outfits I need at least one top and one bottom (or a dress) in your wardrobe."
+          }
+        }
+      }
+    },
+    "Pardo": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Taupe"
+          }
+        }
+      }
+    },
+    "Permitir cámara": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Allow camera"
+          }
+        }
+      }
+    },
+    "Plata": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Silver"
+          }
+        }
+      }
+    },
+    "Premium": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Premium"
+          }
+        }
+      }
+    },
+    "Prenda ancla": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Anchor garment"
+          }
+        }
+      }
+    },
+    "Prendas": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Garments"
+          }
+        }
+      }
+    },
+    "Proponme outfits": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Suggest outfits"
+          }
+        }
+      }
+    },
+    "Propuesta con reservas: %@.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Proposal with some reservations: %@."
+          }
+        }
+      }
+    },
+    "Propuestas": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Suggestions"
+          }
+        }
+      }
+    },
+    "Protán (rojo)": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Protan (red)"
+          }
+        }
+      }
+    },
+    "Prueba gratis: te queda 1 generación esta semana.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Free trial: you have 1 generation left this week."
+          }
+        }
+      }
+    },
+    "Puntuación %@ sobre 10": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Score %@ out of 10"
+          }
+        }
+      }
+    },
+    "Púrpura": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Purple"
+          }
+        }
+      }
+    },
+    "Quitar de favoritos": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Remove from favorites"
+          }
+        }
+      }
+    },
+    "Quitar filtros": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Clear filters"
+          }
+        }
+      }
+    },
+    "Quitar usado hoy": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Unmark worn today"
+          }
+        }
+      }
+    },
+    "Reanudar": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Resume"
+          }
+        }
+      }
+    },
+    "Recortando el fondo y detectando el color": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cutting out the background and detecting the color"
+          }
+        }
+      }
+    },
+    "Recortaremos la prenda del fondo y detectaremos su color automáticamente. Funciona mejor con la prenda extendida sobre un fondo liso.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "We'll cut the garment out from the background and detect its color automatically. It works best with the garment laid flat on a plain background."
+          }
+        }
+      }
+    },
+    "Reiniciar el onboarding borra tu perfil y vuelve a la pantalla inicial.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Resetting onboarding deletes your profile and returns to the initial screen."
+          }
+        }
+      }
+    },
+    "Reiniciar onboarding": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reset onboarding"
+          }
+        }
+      }
+    },
+    "Repetir el test": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Retake the test"
+          }
+        }
+      }
+    },
+    "Restaurar compras": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Restore purchases"
+          }
+        }
+      }
+    },
+    "Resultado no concluyente": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Inconclusive result"
+          }
+        }
+      }
+    },
+    "Rojo": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Red"
+          }
+        }
+      }
+    },
+    "Rojo carmín": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Carmine red"
+          }
+        }
+      }
+    },
+    "Rojo cereza": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cherry red"
+          }
+        }
+      }
+    },
+    "Rojo intenso": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vivid red"
+          }
+        }
+      }
+    },
+    "Rojo óxido": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rust red"
+          }
+        }
+      }
+    },
+    "Rojo teja": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Brick red"
+          }
+        }
+      }
+    },
+    "Rojo vino": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wine red"
+          }
+        }
+      }
+    },
+    "Rosa": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pink"
+          }
+        }
+      }
+    },
+    "Rosa chicle": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bubblegum pink"
+          }
+        }
+      }
+    },
+    "Rosa fuerte": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hot pink"
+          }
+        }
+      }
+    },
+    "Rosa palo": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dusty pink"
+          }
+        }
+      }
+    },
+    "Rosa pastel": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pastel pink"
+          }
+        }
+      }
+    },
+    "Rosa salmón": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Salmon pink"
+          }
+        }
+      }
+    },
+    "Rosa viejo": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dusty rose"
+          }
+        }
+      }
+    },
+    "Salmón": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Salmon"
+          }
+        }
+      }
+    },
+    "Salmón claro": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Light salmon"
+          }
+        }
+      }
+    },
+    "Sección": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Section"
+          }
+        }
+      }
+    },
+    "Si la foto engañó al análisis, corrige aquí el color de la prenda. El nombre se recalcula automáticamente.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "If the photo threw off the analysis, correct the garment's color here. The name recalculates automatically."
+          }
+        }
+      }
+    },
+    "Siena": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sienna"
+          }
+        }
+      }
+    },
+    "Sin acceso a la cámara": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No camera access"
+          }
+        }
+      }
+    },
+    "Sin combinaciones": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No combinations"
+          }
+        }
+      }
+    },
+    "Sin determinar": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Not determined"
+          }
+        }
+      }
+    },
+    "Sin favoritos": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No favorites"
+          }
+        }
+      }
+    },
+    "Sin resultados": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No results"
+          }
+        }
+      }
+    },
+    "Sorpréndeme": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Surprise me"
+          }
+        }
+      }
+    },
+    "Suscripción activa": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Active subscription"
+          }
+        }
+      }
+    },
+    "Tamaño de la mirilla": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reticle size"
+          }
+        }
+      }
+    },
+    "Terracota": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Terracotta"
+          }
+        }
+      }
+    },
+    "Test de daltonismo": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Color blindness test"
+          }
+        }
+      }
+    },
+    "Test de la app": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "App test"
+          }
+        }
+      }
+    },
+    "Tienes dificultad con azules y amarillos: los azules pueden confundirse con verdes y los amarillos con rosas o grises.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "You have difficulty with blues and yellows: blues can be confused with greens, and yellows with pinks or grays."
+          }
+        }
+      }
+    },
+    "Tienes dificultad con los rojos: pueden parecerte más oscuros o confundirse con verdes y marrones.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "You have difficulty with reds: they may look darker to you or be confused with greens and browns."
+          }
+        }
+      }
+    },
+    "Tienes dificultad con los verdes: pueden confundirse con rojos, marrones y naranjas. Es el tipo más común.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "You have difficulty with greens: they can be confused with reds, browns, and oranges. It's the most common type."
+          }
+        }
+      }
+    },
+    "Tierra": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Clay"
+          }
+        }
+      }
+    },
+    "Tipo": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Type"
+          }
+        }
+      }
+    },
+    "Tipo de prenda": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Garment type"
+          }
+        }
+      }
+    },
+    "Toca otro de los colores detectados en la foto, o ajusta el color a mano desde la ficha de la prenda tras guardarla.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tap another of the colors detected in the photo, or adjust the color by hand from the garment's detail screen after saving it."
+          }
+        }
+      }
+    },
+    "Todas": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "All"
+          }
+        }
+      }
+    },
+    "Todos": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "All"
+          }
+        }
+      }
+    },
+    "Todos los colores": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "All colors"
+          }
+        }
+      }
+    },
+    "Trigo": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wheat"
+          }
+        }
+      }
+    },
+    "Tritán (azul-amarillo)": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tritan (blue-yellow)"
+          }
+        }
+      }
+    },
+    "Tu armario está vacío": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your wardrobe is empty"
+          }
+        }
+      }
+    },
+    "Tu armario gratis está al completo (%lld prendas). Hazte premium para añadir sin límite.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your free wardrobe is full (%lld garments). Go premium to add without limits."
+          }
+        }
+      }
+    },
+    "Tu asistente para el color": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your color assistant"
+          }
+        }
+      }
+    },
+    "Tu perfil de visión": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your vision profile"
+          }
+        }
+      }
+    },
+    "Turquesa": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Turquoise"
+          }
+        }
+      }
+    },
+    "Último test": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Last test"
+          }
+        }
+      }
+    },
+    "Un vestido funciona por sí solo. Añade calzado a tu armario para propuestas más completas.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A dress works on its own. Add shoes to your wardrobe for more complete outfit ideas."
+          }
+        }
+      }
+    },
+    "Usado hoy": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Worn today"
+          }
+        }
+      }
+    },
+    "Usar el color secundario como principal": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Use secondary color as primary"
+          }
+        }
+      }
+    },
+    "Uva": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Grape"
+          }
+        }
+      }
+    },
+    "Vainilla": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vanilla"
+          }
+        }
+      }
+    },
+    "Ver planes premium": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "View premium plans"
+          }
+        }
+      }
+    },
+    "Verde": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Green"
+          }
+        }
+      }
+    },
+    "Verde agua": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aqua"
+          }
+        }
+      }
+    },
+    "Verde azulado": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Teal"
+          }
+        }
+      }
+    },
+    "Verde bosque": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Forest green"
+          }
+        }
+      }
+    },
+    "Verde botella": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bottle green"
+          }
+        }
+      }
+    },
+    "Verde caqui": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Khaki green"
+          }
+        }
+      }
+    },
+    "Verde esmeralda": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Emerald green"
+          }
+        }
+      }
+    },
+    "Verde hierba": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Grass green"
+          }
+        }
+      }
+    },
+    "Verde jade": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jade green"
+          }
+        }
+      }
+    },
+    "Verde lima": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lime green"
+          }
+        }
+      }
+    },
+    "Verde manzana": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apple green"
+          }
+        }
+      }
+    },
+    "Verde mar": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sea green"
+          }
+        }
+      }
+    },
+    "Verde menta": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mint green"
+          }
+        }
+      }
+    },
+    "Verde militar": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Military green"
+          }
+        }
+      }
+    },
+    "Verde musgo": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Moss green"
+          }
+        }
+      }
+    },
+    "Verde oliva": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Olive green"
+          }
+        }
+      }
+    },
+    "Verde pastel": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pastel green"
+          }
+        }
+      }
+    },
+    "Verde pino": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pine green"
+          }
+        }
+      }
+    },
+    "Verde primavera": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Spring green"
+          }
+        }
+      }
+    },
+    "Verde puro": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pure green"
+          }
+        }
+      }
+    },
+    "Verde salvia": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sage green"
+          }
+        }
+      }
+    },
+    "Versión": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Version"
+          }
+        }
+      }
+    },
+    "Vestido": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dress"
+          }
+        }
+      }
+    },
+    "Violeta": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Violet"
+          }
+        }
+      }
+    },
+    "Visión normal": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Normal vision"
+          }
+        }
+      }
+    },
+    "Ya has usado tu prueba gratis de esta semana. Vuelve en %@ o hazte premium para generar outfits sin límite.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "You've already used this week's free trial. Come back in %@ or go premium to generate unlimited outfits."
+          }
+        }
+      }
+    },
+    "Ya has usado tu prueba gratis de esta semana. Vuelve en %@ o hazte premium.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "You've already used this week's free trial. Come back in %@ or go premium."
+          }
+        }
+      }
+    },
+    "Zanahoria": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Carrot orange"
+          }
+        }
+      }
+    },
+    "Zapatos": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Shoes"
+          }
+        }
+      }
+    }
+  },
+  "version": "1.0"
+}

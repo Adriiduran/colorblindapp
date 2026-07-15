@@ -86,9 +86,10 @@
 				};
 			};
 			buildConfigurationList = 5371038D3003FB9900E771E8 /* Build configuration list for PBXProject "colorblindapp" */;
-			developmentRegion = en;
+			developmentRegion = es;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				es,
 				en,
 				Base,
 			);

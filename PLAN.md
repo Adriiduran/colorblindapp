@@ -341,9 +341,9 @@ español.
   (inglés ✓, y a futuro chino, hindi, árabe —con RTL—, portugués, francés…).
 
 **Criterios de cierre:**
-- [ ] String Catalog con es (desarrollo) + en completos.
-- [ ] Nombres de color bilingües y curados.
-- [ ] App revisada en inglés de principio a fin en el simulador.
+- [x] String Catalog con es (desarrollo) + en completos.
+- [x] Nombres de color bilingües y curados.
+- [x] App revisada en inglés de principio a fin en el simulador.
 
 ---
 

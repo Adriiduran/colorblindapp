@@ -214,14 +214,14 @@ enum OutfitEngine {
             verdict = PairVerdict(
                 score: 80,
                 kind: .neutralPair,
-                phrase: "\(a.label) y \(b.label) van en colores neutros, una base que nunca falla"
+                phrase: String(localized: "\(a.label) y \(b.label) van en colores neutros, una base que nunca falla")
             )
         } else if a.isNeutral || b.isNeutral {
             let neutral = a.isNeutral ? a : b
             verdict = PairVerdict(
                 score: 85,
                 kind: .neutralSingle,
-                phrase: "\(neutral.label) es un neutro que combina con casi todo"
+                phrase: String(localized: "\(neutral.label) es un neutro que combina con casi todo")
             )
         } else {
             let rawDelta = abs(a.hue - b.hue)
@@ -232,37 +232,37 @@ enum OutfitEngine {
                 verdict = PairVerdict(
                     score: 80,
                     kind: .mono,
-                    phrase: "\(a.label) y \(b.label) comparten tono en distinta intensidad: un monocromático elegante"
+                    phrase: String(localized: "\(a.label) y \(b.label) comparten tono en distinta intensidad: un monocromático elegante")
                 )
             case ..<18:
                 verdict = PairVerdict(
                     score: 52,
                     kind: .monoFlat,
-                    phrase: "\(a.label) y \(b.label) son casi del mismo color y pueden fundirse entre sí"
+                    phrase: String(localized: "\(a.label) y \(b.label) son casi del mismo color y pueden fundirse entre sí")
                 )
             case ..<45:
                 verdict = PairVerdict(
                     score: 75,
                     kind: .analogous,
-                    phrase: "el \(a.colorLabel) y el \(b.colorLabel) son tonos vecinos en el círculo cromático y armonizan con naturalidad"
+                    phrase: String(localized: "el \(a.colorLabel) y el \(b.colorLabel) son tonos vecinos en el círculo cromático y armonizan con naturalidad")
                 )
             case 150...:
                 verdict = PairVerdict(
                     score: 70,
                     kind: .complementary,
-                    phrase: "el \(a.colorLabel) y el \(b.colorLabel) se oponen en el círculo cromático: un contraste llamativo que da vida al conjunto"
+                    phrase: String(localized: "el \(a.colorLabel) y el \(b.colorLabel) se oponen en el círculo cromático: un contraste llamativo que da vida al conjunto")
                 )
             case 100...:
                 verdict = PairVerdict(
                     score: 64,
                     kind: .triad,
-                    phrase: "el \(a.colorLabel) y el \(b.colorLabel) guardan un contraste a tres bandas (tríada), vivo sin estridencias"
+                    phrase: String(localized: "el \(a.colorLabel) y el \(b.colorLabel) guardan un contraste a tres bandas (tríada), vivo sin estridencias")
                 )
             default:
                 verdict = PairVerdict(
                     score: 45,
                     kind: .unclear,
-                    phrase: "el \(a.colorLabel) y el \(b.colorLabel) no siguen una armonía clara entre sí"
+                    phrase: String(localized: "el \(a.colorLabel) y el \(b.colorLabel) no siguen una armonía clara entre sí")
                 )
             }
 
@@ -308,7 +308,8 @@ enum OutfitEngine {
             ? String(localized: "Combina porque \(reasons).")
             : String(localized: "Propuesta con reservas: \(reasons).")
         if !warnings.isEmpty {
-            text += " " + String(localized: "Ojo: \(warnings.joined(separator: " y ")).")
+            let joinedWarnings = warnings.joined(separator: String(localized: " y ", comment: "Separador entre avisos de un outfit, p. ej. \"aviso 1 y aviso 2\""))
+            text += " " + String(localized: "Ojo: \(joinedWarnings).")
         }
         return text
     }

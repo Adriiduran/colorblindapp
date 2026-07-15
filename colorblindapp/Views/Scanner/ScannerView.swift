@@ -168,7 +168,7 @@ struct ScannerView: View {
             // daltonismo) para que el panel no dé saltos al aparecer.
             if profiles.first?.visionType != .normal {
                 Label(
-                    confusionWarning.map { "Con tu visión podría parecer \($0.lowercased())" } ?? " ",
+                    confusionWarning.map { String(localized: "Con tu visión podría parecer \($0.lowercased())") } ?? " ",
                     systemImage: "exclamationmark.triangle.fill"
                 )
                 .singleLineFitted()

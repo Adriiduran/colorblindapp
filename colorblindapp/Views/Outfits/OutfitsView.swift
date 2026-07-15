@@ -67,7 +67,9 @@ struct OutfitsView: View {
     }
 
     private var daysRemainingText: String {
-        daysUntilNextFreeTrial == 1 ? "1 día" : "\(daysUntilNextFreeTrial) días"
+        daysUntilNextFreeTrial == 1
+            ? String(localized: "1 día")
+            : String(localized: "\(daysUntilNextFreeTrial) días")
     }
 
     private var trialCooldownState: some View {

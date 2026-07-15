@@ -1,0 +1,30 @@
+{
+  "sourceLanguage" : "es",
+  "strings" : {
+    "CFBundleName" : {
+      "comment" : "Bundle name",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "colorblindapp"
+          }
+        }
+      }
+    },
+    "NSCameraUsageDescription" : {
+      "comment" : "Privacy - Camera Usage Description",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The camera is used to identify the color of the objects you point it at. The image is processed on the device and never leaves it."
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

@@ -16,7 +16,7 @@ struct PaywallView: View {
     @State private var isPurchasing = false
 
     /// Explica por qué ha aparecido el paywall en este punto concreto.
-    var reason: String?
+    var reason: LocalizedStringResource?
 
     var body: some View {
         NavigationStack {
@@ -115,7 +115,7 @@ struct PaywallView: View {
         .background(Color(.secondarySystemGroupedBackground), in: RoundedRectangle(cornerRadius: 16))
     }
 
-    private func benefitRow(icon: String, title: String, detail: String) -> some View {
+    private func benefitRow(icon: String, title: LocalizedStringKey, detail: LocalizedStringKey) -> some View {
         HStack(alignment: .top, spacing: 12) {
             Image(systemName: icon)
                 .font(.title3)
@@ -151,7 +151,7 @@ struct PaywallView: View {
 
         let percent = ((yearlyIfMonthly - annualValue) / yearlyIfMonthly * 100).rounded()
         guard percent > 0 else { return nil }
-        return "Ahorra un \(Int(percent))% frente al plan mensual"
+        return String(localized: "Ahorra un \(Int(percent))% frente al plan mensual")
     }
 
     private var productPicker: some View {

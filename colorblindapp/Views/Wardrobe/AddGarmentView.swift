@@ -85,7 +85,7 @@ struct AddGarmentView: View {
                     if UIImagePickerController.isSourceTypeAvailable(.camera) {
                         showCamera = true
                     } else {
-                        errorMessage = "La cámara no está disponible en este dispositivo."
+                        errorMessage = String(localized: "La cámara no está disponible en este dispositivo.")
                     }
                 } label: {
                     Label("Hacer foto", systemImage: "camera")

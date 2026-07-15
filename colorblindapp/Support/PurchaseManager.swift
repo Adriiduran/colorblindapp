@@ -84,7 +84,7 @@ final class PurchaseManager {
             products = try await Product.products(for: ProductID.allCases.map(\.rawValue))
                 .sorted { $0.price < $1.price }
         } catch {
-            purchaseError = "No se pudieron cargar los planes. Comprueba tu conexión."
+            purchaseError = String(localized: "No se pudieron cargar los planes. Comprueba tu conexión.")
         }
     }
 
@@ -101,7 +101,7 @@ final class PurchaseManager {
                 break
             }
         } catch {
-            purchaseError = "No se pudo completar la compra."
+            purchaseError = String(localized: "No se pudo completar la compra.")
         }
     }
 
@@ -111,7 +111,7 @@ final class PurchaseManager {
             try await AppStore.sync()
             await refreshEntitlement()
         } catch {
-            purchaseError = "No se pudieron restaurar las compras."
+            purchaseError = String(localized: "No se pudieron restaurar las compras.")
         }
     }
 
