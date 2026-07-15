@@ -37,7 +37,14 @@ nonisolated enum ColorNamer {
         let chroma = (lab.a * lab.a + lab.b * lab.b).squareRoot()
         if lightness < 0.09 { return String(localized: "Negro") }
         if lightness > 0.93 && chroma < 12 { return String(localized: "Blanco") }
-        if chroma < 8 { return String(localized: "Gris") }
+        // El croma perceptual se comprime cerca del negro (Lab tiene menos
+        // rango de a/b a luminosidad baja): un umbral fijo de 8 cuela como
+        // "Gris" tintes oscuros reales (un verde militar o un marrón muy
+        // oscuro) que sí se perciben con color. Para eso existe la app —
+        // para revelarle al usuario justo el matiz que no puede verificar
+        // a ojo — así que en oscuros exigimos menos croma para dejarlo pasar.
+        let grayThreshold = lightness < 0.3 ? 4.0 : 8.0
+        if chroma < grayThreshold { return String(localized: "Gris") }
 
         switch hue {
         case ..<12, 347...:
@@ -56,6 +63,11 @@ nonisolated enum ColorNamer {
             // Banda oliva: amarillo verdoso apagado y medio-oscuro es lo
             // que la gente llama caqui o verde militar.
             if hue >= 52 && saturation < 0.5 && lightness < 0.5 { return String(localized: "Verde") }
+            // Mismo caso que en la franja anterior: pálido y poco saturado
+            // es beige/crema/hueso, no amarillo.
+            if saturation < 0.35 || (lightness > 0.68 && saturation < 0.55) {
+                return String(localized: "Beige")
+            }
             return String(localized: "Amarillo")
         case ..<165:
             return String(localized: "Verde")
