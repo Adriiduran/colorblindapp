@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 App iOS (SwiftUI + SwiftData, iOS 17+, MVVM) para personas daltónicas: test de daltonismo en el onboarding, escáner de color con la cámara, y armario virtual con generador de outfits por colorimetría. Todo funciona offline (Vision on-device, sin llamadas de red). Bilingüe es/en vía String Catalog (`Localizable.xcstrings`); el idioma de desarrollo es el español y los textos del código son las claves.
 
-El plan de desarrollo (fases, hitos, backlog) vive en Notion, no en el repo — ver la memoria `project-plan-in-notion`. Al cerrar cada hito: verificar en el simulador y commit directo en `main` ("Hito N: …").
+El plan de desarrollo (fases, hitos, backlog) vive en Notion, no en el repo — ver la memoria `project-plan-in-notion`. Al cerrar cada hito: verificar en el simulador y proponer el mensaje de commit; commitea el usuario, no Claude.
 
 ## Build y verificación
 
@@ -40,6 +40,7 @@ Flujo raíz: `colorblindappApp` crea `PurchaseManager` (en `@Environment`) y el 
 
 ## Convenciones
 
-- Comentarios y mensajes de commit en español.
+- Código y comentarios en español.
+- Commits: los hace **el usuario**, nunca Claude. Al cerrar un hito o un cambio significativo, proponer el mensaje en un bloque de código listo para copiar, con formato [Conventional Commits](https://www.conventionalcommits.org/) **en inglés** (`feat:`, `fix:`, `refactor:`, `docs:`, `chore:`…), asunto en imperativo y sin punto final.
 - Localización: nunca pasar `String` por parámetros de helpers de vista para texto visible — rompe la extracción del String Catalog; usar `LocalizedStringKey` (ver memoria `swiftui-localization-string-vs-localizedstringkey`).
 - Afinado del color: no iterar a ojo — usar `GarmentAnalyzerBenchmarkView` (Ajustes, solo DEBUG), que corre `GarmentAnalyzer.Benchmark` y reporta acierto de categoría y ΔE medio.
