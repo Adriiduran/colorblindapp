@@ -2390,7 +2390,14 @@
       }
     },
     "Prueba gratis: te quedan %lld generaciones esta semana." : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Free trial: you have %lld generations left this week."
+          }
+        }
+      }
     },
     "Puntuación %@ sobre 10" : {
       "localizations" : {
