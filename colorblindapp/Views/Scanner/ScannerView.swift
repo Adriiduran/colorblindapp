@@ -12,6 +12,7 @@ import SwiftUI
 struct ScannerView: View {
     @State private var model = ScannerModel()
     @State private var showHistory = false
+    @State private var showShoppingMode = false
     @State private var justSaved = false
     @Environment(\.modelContext) private var modelContext
     @Environment(PurchaseManager.self) private var purchaseManager
@@ -33,6 +34,9 @@ struct ScannerView: View {
         }
         .sheet(isPresented: $showHistory) {
             ColorHistoryView()
+        }
+        .sheet(isPresented: $showShoppingMode) {
+            ShoppingModeView()
         }
     }
 
@@ -70,7 +74,10 @@ struct ScannerView: View {
                 readoutPanel
             }
             .overlay(alignment: .topTrailing) {
-                historyButton
+                VStack(spacing: 10) {
+                    historyButton
+                    shoppingModeButton
+                }
             }
             .overlay(alignment: .topLeading) {
                 if model.isDemoMode {
@@ -140,6 +147,19 @@ struct ScannerView: View {
         }
         .padding(.trailing, 16)
         .accessibilityLabel("Historial")
+    }
+
+    private var shoppingModeButton: some View {
+        Button {
+            showShoppingMode = true
+        } label: {
+            Image(systemName: "bag.badge.questionmark")
+                .font(.title3)
+                .padding(12)
+                .background(.regularMaterial, in: Circle())
+        }
+        .padding(.trailing, 16)
+        .accessibilityLabel("Modo compra")
     }
 
     private var readoutPanel: some View {

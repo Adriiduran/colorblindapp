@@ -109,6 +109,11 @@ struct PaywallView: View {
                 title: "Historial ilimitado",
                 detail: "Guarda todos los colores que escanees, sin borrar los antiguos."
             )
+            benefitRow(
+                icon: "bag.badge.questionmark",
+                title: "Modo compra",
+                detail: "Comprueba en la tienda si una prenda combina con tu armario antes de comprarla."
+            )
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(16)
