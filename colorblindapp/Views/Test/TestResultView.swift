@@ -8,7 +8,7 @@ import SwiftUI
 struct TestResultView: View {
     let outcome: TestOutcome
     var showsManualOption = false
-    let onSave: () -> Void
+    var onSave: (() -> Void)? = nil
     let onRetry: () -> Void
 
     var body: some View {
@@ -73,7 +73,7 @@ struct TestResultView: View {
 
     @ViewBuilder
     private var actionButtons: some View {
-        if outcome.isConclusive {
+        if outcome.isConclusive, let onSave {
             Button(action: onSave) {
                 Text("Guardar mi perfil")
                     .singleLineFitted()

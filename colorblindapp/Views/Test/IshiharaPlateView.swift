@@ -6,27 +6,38 @@
 import CoreText
 import SwiftUI
 
+/// Qué se talla en la lámina: el dígito del test estándar o la figura del
+/// test infantil.
+enum PlateFigure: Hashable {
+    case digit
+    case shape
+}
+
 /// Dibuja una lámina pseudo-isocromática: un disco de puntos donde el dígito
-/// solo se distingue por tono. Cada punto lleva un jitter de luminancia
-/// aleatorio mayor que la diferencia de luminancia dígito/fondo, para que el
-/// brillo no sirva de pista y el único señal sea el color.
+/// (o la figura) solo se distingue por tono. Cada punto lleva un jitter de
+/// luminancia aleatorio mayor que la diferencia de luminancia figura/fondo,
+/// para que el brillo no sirva de pista y el único señal sea el color.
 struct IshiharaPlateView: View {
     let plate: TestPlate
+    var figure: PlateFigure = .digit
 
-    /// Los puntos son deterministas por lámina (semilla fija), así que se
-    /// generan una única vez por id y se sirven de caché. Evita depender de
-    /// `.task`/estado, que no se dispara fiablemente en algunas presentaciones.
-    private static var dotCache: [Int: [PlateDot]] = [:]
+    /// Los puntos son deterministas por lámina + figura (semilla fija), así
+    /// que se generan una única vez por combinación y se sirven de caché.
+    /// Evita depender de `.task`/estado, que no se dispara fiablemente en
+    /// algunas presentaciones.
+    private static var dotCache: [String: [PlateDot]] = [:]
 
     /// Lado del espacio virtual en el que se generan los puntos.
     private static let canvasSide: CGFloat = 360
 
+    private var cacheKey: String { "\(plate.id)-\(figure)" }
+
     private var dots: [PlateDot] {
-        if let cached = Self.dotCache[plate.id] {
+        if let cached = Self.dotCache[cacheKey] {
             return cached
         }
-        let generated = Self.generateDots(for: plate)
-        Self.dotCache[plate.id] = generated
+        let generated = Self.generateDots(for: plate, figure: figure)
+        Self.dotCache[cacheKey] = generated
         return generated
     }
 
@@ -55,15 +66,16 @@ struct PlateDot {
 }
 
 private extension IshiharaPlateView {
-    static func generateDots(for plate: TestPlate) -> [PlateDot] {
+    static func generateDots(for plate: TestPlate, figure: PlateFigure) -> [PlateDot] {
         var rng = SeededGenerator(seed: plate.seed)
         let side = canvasSide
         let plateRadius = side / 2 - 4
         let center = CGPoint(x: side / 2, y: side / 2)
-        let digitPath = Self.digitPath(
-            plate.digit,
-            in: CGRect(x: side * 0.17, y: side * 0.14, width: side * 0.66, height: side * 0.72)
-        )
+        let figureRect = CGRect(x: side * 0.17, y: side * 0.14, width: side * 0.66, height: side * 0.72)
+        let digitPath: Path = switch figure {
+        case .digit: Self.digitPath(plate.digit, in: figureRect)
+        case .shape: plate.shape.path(in: figureRect)
+        }
 
         let background = LinearRGB(hex: plate.backgroundHex)
         let digitColor = LinearRGB(hex: plate.digitHex)

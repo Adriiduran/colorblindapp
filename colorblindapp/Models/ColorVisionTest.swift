@@ -21,6 +21,7 @@ enum PlateKind: String {
 struct TestPlate: Identifiable {
     let id: Int
     let digit: Int
+    let shape: TestShape
     let kind: PlateKind
     let backgroundHex: String
     let digitHex: String
@@ -37,19 +38,19 @@ struct TestOutcome {
 enum ColorVisionTest {
     /// Láminas intercaladas para que dos del mismo eje no vayan seguidas.
     static let plates: [TestPlate] = [
-        TestPlate(id: 1, digit: 7, kind: .control, backgroundHex: "#E3C99B", digitHex: "#2F6B8F", seed: 11),
-        TestPlate(id: 2, digit: 3, kind: .deutan, backgroundHex: "#C8783C", digitHex: "#909835", seed: 22),
-        TestPlate(id: 3, digit: 2, kind: .protan, backgroundHex: "#AA6E3C", digitHex: "#D7613B", seed: 33),
-        TestPlate(id: 4, digit: 6, kind: .tritan, backgroundHex: "#8CA0AA", digitHex: "#9598CF", seed: 44),
-        TestPlate(id: 5, digit: 8, kind: .deutan, backgroundHex: "#8C8246", digitHex: "#C6594B", seed: 55),
-        TestPlate(id: 6, digit: 6, kind: .protan, backgroundHex: "#C86E46", digitHex: "#9B7847", seed: 66),
-        TestPlate(id: 7, digit: 4, kind: .control, backgroundHex: "#D9B48A", digitHex: "#4A7A52", seed: 77),
-        TestPlate(id: 8, digit: 9, kind: .tritan, backgroundHex: "#B9AA8C", digitHex: "#C1A0C6", seed: 88),
-        TestPlate(id: 9, digit: 5, kind: .deutan, backgroundHex: "#B98750", digitHex: "#7DA14C", seed: 99),
-        TestPlate(id: 10, digit: 9, kind: .protan, backgroundHex: "#967D4B", digitHex: "#CF714A", seed: 110),
-        TestPlate(id: 11, digit: 3, kind: .tritan, backgroundHex: "#AFA5AF", digitHex: "#B49FCC", seed: 121),
-        TestPlate(id: 12, digit: 2, kind: .deutan, backgroundHex: "#827855", digitHex: "#C4405A", seed: 132),
-        TestPlate(id: 13, digit: 5, kind: .protan, backgroundHex: "#B97D5A", digitHex: "#7D875B", seed: 143),
+        TestPlate(id: 1, digit: 7, shape: .circle, kind: .control, backgroundHex: "#E3C99B", digitHex: "#2F6B8F", seed: 11),
+        TestPlate(id: 2, digit: 3, shape: .square, kind: .deutan, backgroundHex: "#C8783C", digitHex: "#909835", seed: 22),
+        TestPlate(id: 3, digit: 2, shape: .triangle, kind: .protan, backgroundHex: "#AA6E3C", digitHex: "#D7613B", seed: 33),
+        TestPlate(id: 4, digit: 6, shape: .star, kind: .tritan, backgroundHex: "#8CA0AA", digitHex: "#9598CF", seed: 44),
+        TestPlate(id: 5, digit: 8, shape: .heart, kind: .deutan, backgroundHex: "#8C8246", digitHex: "#C6594B", seed: 55),
+        TestPlate(id: 6, digit: 6, shape: .circle, kind: .protan, backgroundHex: "#C86E46", digitHex: "#9B7847", seed: 66),
+        TestPlate(id: 7, digit: 4, shape: .square, kind: .control, backgroundHex: "#D9B48A", digitHex: "#4A7A52", seed: 77),
+        TestPlate(id: 8, digit: 9, shape: .triangle, kind: .tritan, backgroundHex: "#B9AA8C", digitHex: "#C1A0C6", seed: 88),
+        TestPlate(id: 9, digit: 5, shape: .star, kind: .deutan, backgroundHex: "#B98750", digitHex: "#7DA14C", seed: 99),
+        TestPlate(id: 10, digit: 9, shape: .heart, kind: .protan, backgroundHex: "#967D4B", digitHex: "#CF714A", seed: 110),
+        TestPlate(id: 11, digit: 3, shape: .circle, kind: .tritan, backgroundHex: "#AFA5AF", digitHex: "#B49FCC", seed: 121),
+        TestPlate(id: 12, digit: 2, shape: .square, kind: .deutan, backgroundHex: "#827855", digitHex: "#C4405A", seed: 132),
+        TestPlate(id: 13, digit: 5, shape: .triangle, kind: .protan, backgroundHex: "#B97D5A", digitHex: "#7D875B", seed: 143),
     ]
 
     /// Calcula el resultado. `answers` mapea id de lámina → dígito respondido
@@ -62,7 +63,25 @@ enum ColorVisionTest {
                 misses[plate.kind, default: 0] += 1
             }
         }
+        return outcome(misses: misses)
+    }
 
+    /// Igual que `outcome(for:)` pero para el test infantil, que responde con
+    /// figuras en vez de dígitos.
+    static func outcome(forShapes answers: [Int: TestShape?]) -> TestOutcome {
+        var misses: [PlateKind: Int] = [:]
+        for plate in plates {
+            let answer = answers[plate.id] ?? nil
+            if answer != plate.shape {
+                misses[plate.kind, default: 0] += 1
+            }
+        }
+        return outcome(misses: misses)
+    }
+
+    /// Núcleo de puntuación compartido: a partir de fallos por eje decide si
+    /// el test es concluyente y, si lo es, tipo y severidad.
+    private static func outcome(misses: [PlateKind: Int]) -> TestOutcome {
         // Fallar una lámina de control invalida el test (mala luz, respuestas
         // al azar…): mejor no concluir nada que concluir mal.
         if misses[.control, default: 0] > 0 {

@@ -13,6 +13,7 @@ struct SettingsView: View {
     @Environment(PurchaseManager.self) private var purchaseManager
     @State private var showResetConfirmation = false
     @State private var showTest = false
+    @State private var showGuestTest = false
     @State private var showPaywall = false
     @State private var showManageSubscriptions = false
     @State private var isRestoring = false
@@ -57,6 +58,14 @@ struct SettingsView: View {
                 }
 
                 Section {
+                    Button("Hacer el test a otra persona") {
+                        showGuestTest = true
+                    }
+                } footer: {
+                    Text("Ideal para probar a un familiar o a un niño: el resultado solo se muestra en pantalla, no se guarda.")
+                }
+
+                Section {
                     LabeledContent("Versión", value: appVersion)
                 } footer: {
                     Text("Esta app no realiza diagnósticos médicos. Si tienes dudas sobre tu visión, consulta a un oftalmólogo.")
@@ -95,6 +104,11 @@ struct SettingsView: View {
                             }
                         }
                     }
+                }
+            }
+            .fullScreenCover(isPresented: $showGuestTest) {
+                NavigationStack {
+                    GuestTestView()
                 }
             }
             .confirmationDialog(

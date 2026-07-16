@@ -1,38 +1,28 @@
 //
-//  ColorVisionTestView.swift
+//  ChildColorVisionTestView.swift
 //  colorblindapp
 //
 
 import SwiftUI
 
-/// Test de daltonismo: muestra las láminas una a una y termina en la
-/// pantalla de resultado. `showsManualOption` añade en el resultado la
-/// salida hacia la selección manual (solo tiene sentido en onboarding).
-/// `showsSaveButton` controla si el resultado ofrece guardar el perfil: en
-/// el test a otra persona se desactiva para que el resultado sea transitorio.
-struct ColorVisionTestView: View {
-    var showsManualOption = false
-    var showsSaveButton = true
-    let onSave: (TestOutcome) -> Void
-
+/// Versión gamificada del test para niños pequeños: en vez de dígitos,
+/// cada lámina talla una figura geométrica y se responde tocando la forma
+/// correspondiente. El resultado es siempre transitorio (nunca se guarda),
+/// por eso no recibe `onSave`.
+struct ChildColorVisionTestView: View {
     @State private var plateIndex = 0
-    @State private var answers: [Int: Int?] = [:]
+    @State private var answers: [Int: TestShape?] = [:]
     @State private var outcome: TestOutcome?
 
     var body: some View {
         Group {
             if let outcome {
-                TestResultView(
-                    outcome: outcome,
-                    showsManualOption: showsManualOption,
-                    onSave: showsSaveButton ? { onSave(outcome) } : nil,
-                    onRetry: restart
-                )
+                TestResultView(outcome: outcome, onRetry: restart)
             } else {
                 plateScreen
             }
         }
-        .navigationTitle("Test de daltonismo")
+        .navigationTitle("Test para niños")
         .navigationBarTitleDisplayMode(.inline)
     }
 
@@ -46,36 +36,37 @@ struct ColorVisionTestView: View {
                 .font(.subheadline)
                 .foregroundStyle(.secondary)
 
-            IshiharaPlateView(plate: plate)
+            IshiharaPlateView(plate: plate, figure: .shape)
                 .padding(.horizontal, 24)
 
-            Text("¿Qué número ves?")
+            Text("¿Qué figura ves?")
                 .font(.headline)
 
-            keypad(for: plate)
+            shapePad(for: plate)
         }
         .padding(.vertical)
     }
 
-    private func keypad(for plate: TestPlate) -> some View {
+    private func shapePad(for plate: TestPlate) -> some View {
         VStack(spacing: 10) {
             LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 5), spacing: 10) {
-                ForEach(0...9, id: \.self) { number in
+                ForEach(TestShape.allCases) { shape in
                     Button {
-                        answer(number, for: plate)
+                        answer(shape, for: plate)
                     } label: {
-                        Text("\(number)")
-                            .font(.title2.bold())
+                        TestShapeMark(shape: shape)
+                            .frame(width: 36, height: 36)
                             .frame(maxWidth: .infinity, minHeight: 52)
                     }
                     .buttonStyle(.bordered)
+                    .accessibilityLabel(shape.displayName)
                 }
             }
 
             Button {
                 answer(nil, for: plate)
             } label: {
-                Text("No veo ningún número")
+                Text("No veo ninguna figura")
                     .singleLineFitted()
                     .frame(maxWidth: .infinity, minHeight: 44)
             }
@@ -84,15 +75,15 @@ struct ColorVisionTestView: View {
         .padding(.horizontal)
     }
 
-    private func answer(_ digit: Int?, for plate: TestPlate) {
-        answers[plate.id] = digit
+    private func answer(_ shape: TestShape?, for plate: TestPlate) {
+        answers[plate.id] = shape
         if plateIndex + 1 < ColorVisionTest.plates.count {
             withAnimation {
                 plateIndex += 1
             }
         } else {
             withAnimation {
-                outcome = ColorVisionTest.outcome(for: answers)
+                outcome = ColorVisionTest.outcome(forShapes: answers)
             }
         }
     }
@@ -108,6 +99,6 @@ struct ColorVisionTestView: View {
 
 #Preview {
     NavigationStack {
-        ColorVisionTestView(showsManualOption: true) { _ in }
+        ChildColorVisionTestView()
     }
 }
