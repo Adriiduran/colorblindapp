@@ -30,7 +30,15 @@ struct OutfitsView: View {
             }
         }
         .toolbar {
-            ToolbarItem(placement: .primaryAction) {
+            ToolbarItemGroup(placement: .primaryAction) {
+                // Icono invisible que replica el del filtro de "Prendas":
+                // sin él, el trailing toolbar de Outfits (1 icono) pesa menos
+                // que el de Prendas (2 iconos) y el segmented de la barra
+                // se recoloca al cambiar de sección.
+                Image(systemName: "line.3.horizontal.decrease.circle")
+                    .opacity(0)
+                    .allowsHitTesting(false)
+                    .accessibilityHidden(true)
                 NavigationLink {
                     SavedOutfitsView()
                 } label: {

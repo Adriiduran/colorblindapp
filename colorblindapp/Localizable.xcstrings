@@ -12,6 +12,106 @@
         }
       }
     },
+    "¿A quién le vas a hacer el test?" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Who are you testing?"
+          }
+        }
+      }
+    },
+    "¿Borrar tu perfil y reiniciar?" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete your profile and reset?"
+          }
+        }
+      }
+    },
+    "¿Cuál es tu tipo?" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "What's your type?"
+          }
+        }
+      }
+    },
+    "¿El color no es correcto?" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Is the color wrong?"
+          }
+        }
+      }
+    },
+    "¿Eliminar esta prenda?" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete this garment?"
+          }
+        }
+      }
+    },
+    "¿No es el color correcto?" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Not the right color?"
+          }
+        }
+      }
+    },
+    "¿Qué figura ves?" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Which shape do you see?"
+          }
+        }
+      }
+    },
+    "¿Qué número ves?" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "What number do you see?"
+          }
+        }
+      }
+    },
+    "/ 10" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "/ 10"
+          }
+        }
+      }
+    },
+    "%@ · %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ · %@"
+          }
+        }
+      }
+    },
     "%@ %@" : {
       "localizations" : {
         "en" : {
@@ -62,16 +162,6 @@
         }
       }
     },
-    "%@ · %@" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%@ · %@"
-          }
-        }
-      }
-    },
     "%lld" : {
       "localizations" : {
         "en" : {
@@ -88,16 +178,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "%lld days"
-          }
-        }
-      }
-    },
-    "/ 10" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "/ 10"
           }
         }
       }
@@ -141,6 +221,9 @@
           }
         }
       }
+    },
+    "Acerca de" : {
+
     },
     "Aguamarina" : {
       "localizations" : {
@@ -228,6 +311,76 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Amethyst"
+          }
+        }
+      }
+    },
+    "Ámbar" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Amber"
+          }
+        }
+      }
+    },
+    "Añade fotos de tu ropa y detectaremos el color de cada prenda para ayudarte a combinarlas." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add photos of your clothes and we'll detect each garment's color to help you put together outfits."
+          }
+        }
+      }
+    },
+    "Añade toda tu ropa sin límite de prendas." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add all your clothes with no garment limit."
+          }
+        }
+      }
+    },
+    "Añade una foto de tu prenda" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add a photo of your garment"
+          }
+        }
+      }
+    },
+    "Añadir a favoritos" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add to favorites"
+          }
+        }
+      }
+    },
+    "Añadir mi primera prenda" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add my first garment"
+          }
+        }
+      }
+    },
+    "Añadir prenda" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add garment"
           }
         }
       }
@@ -462,66 +615,6 @@
         }
       }
     },
-    "Añade fotos de tu ropa y detectaremos el color de cada prenda para ayudarte a combinarlas." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Add photos of your clothes and we'll detect each garment's color to help you put together outfits."
-          }
-        }
-      }
-    },
-    "Añade toda tu ropa sin límite de prendas." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Add all your clothes with no garment limit."
-          }
-        }
-      }
-    },
-    "Añade una foto de tu prenda" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Add a photo of your garment"
-          }
-        }
-      }
-    },
-    "Añadir a favoritos" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Add to favorites"
-          }
-        }
-      }
-    },
-    "Añadir mi primera prenda" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Add my first garment"
-          }
-        }
-      }
-    },
-    "Añadir prenda" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Add garment"
-          }
-        }
-      }
-    },
     "Beige" : {
       "localizations" : {
         "en" : {
@@ -628,6 +721,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pumpkin"
+          }
+        }
+      }
+    },
+    "Cámara no disponible" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Camera unavailable"
           }
         }
       }
@@ -778,6 +881,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Cyan"
+          }
+        }
+      }
+    },
+    "Círculo" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Circle"
           }
         }
       }
@@ -942,26 +1055,6 @@
         }
       }
     },
-    "Cámara no disponible" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Camera unavailable"
-          }
-        }
-      }
-    },
-    "Círculo" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Circle"
-          }
-        }
-      }
-    },
     "Deután (verde)" : {
       "localizations" : {
         "en" : {
@@ -988,6 +1081,66 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Golden"
+          }
+        }
+      }
+    },
+    "dos colores muy intensos compiten por la atención" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "two very intense colors compete for attention"
+          }
+        }
+      }
+    },
+    "el %@ y el %@ guardan un contraste a tres bandas (tríada), vivo sin estridencias" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ and %@ form a three-way contrast (triad), lively without clashing"
+          }
+        }
+      }
+    },
+    "el %@ y el %@ no siguen una armonía clara entre sí" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ and %@ don't follow a clear harmony with each other"
+          }
+        }
+      }
+    },
+    "el %@ y el %@ se oponen en el círculo cromático: un contraste llamativo que da vida al conjunto" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ and %@ sit opposite each other on the color wheel: a striking contrast that brings the outfit to life"
+          }
+        }
+      }
+    },
+    "el %@ y el %@ son tonos vecinos en el círculo cromático y armonizan con naturalidad" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ and %@ are neighboring hues on the color wheel and harmonize naturally"
+          }
+        }
+      }
+    },
+    "el accesorio" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "the accessory"
           }
         }
       }
@@ -1022,12 +1175,52 @@
         }
       }
     },
+    "el jersey" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "the sweater"
+          }
+        }
+      }
+    },
+    "el pantalón" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "the pants"
+          }
+        }
+      }
+    },
     "El resultado solo se muestra en pantalla: no se guarda ni cambia tu perfil." : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "The result is only shown on screen: it isn't saved and doesn't change your profile."
+          }
+        }
+      }
+    },
+    "el rojo y el rosa suelen chocar entre sí" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "red and pink tend to clash with each other"
+          }
+        }
+      }
+    },
+    "el vestido" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "the dress"
           }
         }
       }
@@ -1122,22 +1315,22 @@
         }
       }
     },
-    "Escarlata" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Scarlet"
-          }
-        }
-      }
-    },
     "Escáner" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Scanner"
+          }
+        }
+      }
+    },
+    "Escarlata" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Scarlet"
           }
         }
       }
@@ -1223,6 +1416,7 @@
       }
     },
     "Filtrar por color" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1241,6 +1435,9 @@
           }
         }
       }
+    },
+    "Filtros" : {
+
     },
     "Fucsia" : {
       "localizations" : {
@@ -1532,6 +1729,16 @@
         }
       }
     },
+    "Índigo" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Indigo"
+          }
+        }
+      }
+    },
     "Intensidad: %@" : {
       "localizations" : {
         "en" : {
@@ -1562,12 +1769,72 @@
         }
       }
     },
+    "la camisa" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "the shirt"
+          }
+        }
+      }
+    },
+    "la camiseta" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "the t-shirt"
+          }
+        }
+      }
+    },
+    "la chaqueta" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "the jacket"
+          }
+        }
+      }
+    },
+    "la falda" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "the skirt"
+          }
+        }
+      }
+    },
+    "la prenda" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "the garment"
+          }
+        }
+      }
+    },
     "Ladrillo" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Brick"
+          }
+        }
+      }
+    },
+    "Lámina %lld de %lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Plate %lld of %lld"
           }
         }
       }
@@ -1632,22 +1899,12 @@
         }
       }
     },
-    "Lámina %lld de %lld" : {
+    "los zapatos" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Plate %lld of %lld"
-          }
-        }
-      }
-    },
-    "MODO DEMO" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "DEMO MODE"
+            "value" : "the shoes"
           }
         }
       }
@@ -1712,6 +1969,16 @@
         }
       }
     },
+    "marrón con negro es una mezcla delicada" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "brown with black is a delicate mix"
+          }
+        }
+      }
+    },
     "Melocotón" : {
       "localizations" : {
         "en" : {
@@ -1728,6 +1995,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Mocha"
+          }
+        }
+      }
+    },
+    "MODO DEMO" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "DEMO MODE"
           }
         }
       }
@@ -1872,22 +2149,22 @@
         }
       }
     },
-    "No veo ninguna figura" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "I don't see any shape"
-          }
-        }
-      }
-    },
     "No veo ningún número" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "I don't see a number"
+          }
+        }
+      }
+    },
+    "No veo ninguna figura" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "I don't see any shape"
           }
         }
       }
@@ -2112,7 +2389,9 @@
         }
       }
     },
-    "Prueba gratis: te quedan %lld generaciones esta semana." : {},
+    "Prueba gratis: te quedan %lld generaciones esta semana." : {
+
+    },
     "Puntuación %@ sobre 10" : {
       "localizations" : {
         "en" : {
@@ -2283,6 +2562,16 @@
         }
       }
     },
+    "Rojo óxido" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rust red"
+          }
+        }
+      }
+    },
     "Rojo teja" : {
       "localizations" : {
         "en" : {
@@ -2299,16 +2588,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Wine red"
-          }
-        }
-      }
-    },
-    "Rojo óxido" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Rust red"
           }
         }
       }
@@ -2563,6 +2842,9 @@
         }
       }
     },
+    "Tests" : {
+
+    },
     "Tienes dificultad con azules y amarillos: los azules pueden confundirse con verdes y los amarillos con rosas o grises." : {
       "localizations" : {
         "en" : {
@@ -2663,6 +2945,16 @@
         }
       }
     },
+    "Triángulo" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Triangle"
+          }
+        }
+      }
+    },
     "Trigo" : {
       "localizations" : {
         "en" : {
@@ -2679,16 +2971,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tritan (blue-yellow)"
-          }
-        }
-      }
-    },
-    "Triángulo" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Triangle"
           }
         }
       }
@@ -2739,6 +3021,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Turquoise"
+          }
+        }
+      }
+    },
+    "Último test" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Last test"
           }
         }
       }
@@ -3109,286 +3401,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Shoes"
-          }
-        }
-      }
-    },
-    "dos colores muy intensos compiten por la atención" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "two very intense colors compete for attention"
-          }
-        }
-      }
-    },
-    "el %@ y el %@ guardan un contraste a tres bandas (tríada), vivo sin estridencias" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%@ and %@ form a three-way contrast (triad), lively without clashing"
-          }
-        }
-      }
-    },
-    "el %@ y el %@ no siguen una armonía clara entre sí" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%@ and %@ don't follow a clear harmony with each other"
-          }
-        }
-      }
-    },
-    "el %@ y el %@ se oponen en el círculo cromático: un contraste llamativo que da vida al conjunto" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%@ and %@ sit opposite each other on the color wheel: a striking contrast that brings the outfit to life"
-          }
-        }
-      }
-    },
-    "el %@ y el %@ son tonos vecinos en el círculo cromático y armonizan con naturalidad" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%@ and %@ are neighboring hues on the color wheel and harmonize naturally"
-          }
-        }
-      }
-    },
-    "el accesorio" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "the accessory"
-          }
-        }
-      }
-    },
-    "el jersey" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "the sweater"
-          }
-        }
-      }
-    },
-    "el pantalón" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "the pants"
-          }
-        }
-      }
-    },
-    "el rojo y el rosa suelen chocar entre sí" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "red and pink tend to clash with each other"
-          }
-        }
-      }
-    },
-    "el vestido" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "the dress"
-          }
-        }
-      }
-    },
-    "la camisa" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "the shirt"
-          }
-        }
-      }
-    },
-    "la camiseta" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "the t-shirt"
-          }
-        }
-      }
-    },
-    "la chaqueta" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "the jacket"
-          }
-        }
-      }
-    },
-    "la falda" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "the skirt"
-          }
-        }
-      }
-    },
-    "la prenda" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "the garment"
-          }
-        }
-      }
-    },
-    "los zapatos" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "the shoes"
-          }
-        }
-      }
-    },
-    "marrón con negro es una mezcla delicada" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "brown with black is a delicate mix"
-          }
-        }
-      }
-    },
-    "¿A quién le vas a hacer el test?" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Who are you testing?"
-          }
-        }
-      }
-    },
-    "¿Borrar tu perfil y reiniciar?" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Delete your profile and reset?"
-          }
-        }
-      }
-    },
-    "¿Cuál es tu tipo?" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "What's your type?"
-          }
-        }
-      }
-    },
-    "¿El color no es correcto?" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Is the color wrong?"
-          }
-        }
-      }
-    },
-    "¿Eliminar esta prenda?" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Delete this garment?"
-          }
-        }
-      }
-    },
-    "¿No es el color correcto?" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Not the right color?"
-          }
-        }
-      }
-    },
-    "¿Qué figura ves?" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Which shape do you see?"
-          }
-        }
-      }
-    },
-    "¿Qué número ves?" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "What number do you see?"
-          }
-        }
-      }
-    },
-    "Ámbar" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Amber"
-          }
-        }
-      }
-    },
-    "Índigo" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Indigo"
-          }
-        }
-      }
-    },
-    "Último test" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Last test"
           }
         }
       }

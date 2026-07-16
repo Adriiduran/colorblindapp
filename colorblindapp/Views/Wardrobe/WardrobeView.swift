@@ -35,9 +35,13 @@ struct WardrobeView: View {
         }
         .toolbar {
             ToolbarItemGroup(placement: .primaryAction) {
-                if !garments.isEmpty {
-                    colorFilterMenu
-                }
+                // Se mantiene siempre presente (solo deshabilitado si el
+                // armario está vacío) para que el trailing toolbar no cambie
+                // de ancho y el segmented "Prendas | Outfits" de la barra no
+                // salte al añadir la primera prenda.
+                filterMenu
+                    .disabled(garments.isEmpty)
+                    .opacity(garments.isEmpty ? 0.4 : 1)
                 Button {
                     if reachedFreeLimit {
                         showPaywall = true
@@ -105,8 +109,20 @@ struct WardrobeView: View {
             .sorted { $0.name < $1.name }
     }
 
-    private var colorFilterMenu: some View {
+    private var hasActiveFilter: Bool {
+        selectedCategory != nil || selectedColorName != nil
+    }
+
+    /// Menú único que combina el filtro de categoría y el de color.
+    private var filterMenu: some View {
         Menu {
+            Picker("Categoría", selection: $selectedCategory) {
+                Text("Todas").tag(GarmentCategory?.none)
+                ForEach(presentCategories) { category in
+                    Label(category.displayName, systemImage: category.systemImage)
+                        .tag(GarmentCategory?.some(category))
+                }
+            }
             Picker("Color", selection: $selectedColorName) {
                 Text("Todos los colores").tag(String?.none)
                 ForEach(presentColors, id: \.name) { entry in
@@ -118,10 +134,19 @@ struct WardrobeView: View {
                     .tag(String?.some(entry.name))
                 }
             }
+            if hasActiveFilter {
+                Divider()
+                Button("Quitar filtros", role: .destructive) {
+                    selectedCategory = nil
+                    selectedColorName = nil
+                }
+            }
         } label: {
-            Image(systemName: selectedColorName == nil ? "paintpalette" : "paintpalette.fill")
+            Image(systemName: hasActiveFilter
+                ? "line.3.horizontal.decrease.circle.fill"
+                : "line.3.horizontal.decrease.circle")
         }
-        .accessibilityLabel("Filtrar por color")
+        .accessibilityLabel("Filtros")
     }
 
     /// Círculo de color como imagen "original" — es la única forma de que
@@ -135,35 +160,50 @@ struct WardrobeView: View {
         .withRenderingMode(.alwaysOriginal)
     }
 
-    private var categoryChips: some View {
-        ScrollView(.horizontal, showsIndicators: false) {
-            HStack(spacing: 8) {
-                chip(title: String(localized: "Todas"), isSelected: selectedCategory == nil) {
-                    selectedCategory = nil
-                }
-                ForEach(presentCategories) { category in
-                    chip(title: category.displayName, isSelected: selectedCategory == category) {
-                        selectedCategory = category
+    /// Fila de tokens quitables con los filtros activos (categoría y/o color).
+    @ViewBuilder
+    private var activeFilterTokens: some View {
+        if hasActiveFilter {
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 8) {
+                    if let category = selectedCategory {
+                        filterToken(dot: nil, label: category.displayName) {
+                            selectedCategory = nil
+                        }
+                    }
+                    if let colorName = selectedColorName {
+                        let color = presentColors.first { $0.name == colorName }?.color
+                        filterToken(dot: color, label: colorName) {
+                            selectedColorName = nil
+                        }
                     }
                 }
+                .padding(.horizontal)
+                .padding(.vertical, 8)
             }
-            .padding(.horizontal)
-            .padding(.vertical, 8)
         }
     }
 
-    private func chip(title: String, isSelected: Bool, action: @escaping () -> Void) -> some View {
-        Button(action: action) {
-            Text(title)
-                .font(.subheadline.weight(.medium))
-                .singleLineFitted()
-                .padding(.horizontal, 14)
-                .padding(.vertical, 7)
-                .foregroundStyle(isSelected ? AnyShapeStyle(.white) : AnyShapeStyle(.primary))
-                .background(
-                    isSelected ? AnyShapeStyle(.tint) : AnyShapeStyle(Color(.secondarySystemFill)),
-                    in: Capsule()
-                )
+    private func filterToken(dot: Color?, label: String, remove: @escaping () -> Void) -> some View {
+        Button(action: remove) {
+            HStack(spacing: 6) {
+                if let dot {
+                    Circle()
+                        .fill(dot)
+                        .strokeBorder(.quaternary, lineWidth: 1)
+                        .frame(width: 12, height: 12)
+                }
+                Text(label)
+                    .font(.subheadline.weight(.medium))
+                    .singleLineFitted()
+                Image(systemName: "xmark.circle.fill")
+                    .foregroundStyle(.secondary)
+                    .imageScale(.small)
+            }
+            .padding(.horizontal, 12)
+            .padding(.vertical, 7)
+            .foregroundStyle(.primary)
+            .background(Color(.secondarySystemFill), in: Capsule())
         }
         .buttonStyle(.plain)
     }
@@ -172,7 +212,7 @@ struct WardrobeView: View {
 
     private var catalog: some View {
         VStack(spacing: 0) {
-            categoryChips
+            activeFilterTokens
             if filteredGarments.isEmpty {
                 filteredEmptyState
             } else {
@@ -307,7 +347,6 @@ struct GarmentCard: View {
 #Preview {
     NavigationStack {
         WardrobeView()
-            .navigationTitle("Armario")
     }
     .environment(PurchaseManager())
     .modelContainer(for: [UserProfile.self, SavedColor.self, Garment.self], inMemory: true)
