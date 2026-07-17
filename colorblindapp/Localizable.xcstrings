@@ -194,6 +194,16 @@
         }
       }
     },
+    "Albaricoque intenso": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deep apricot"
+          }
+        }
+      }
+    },
     "Amarillo": {
       "localizations": {
         "en": {
@@ -224,12 +234,32 @@
         }
       }
     },
+    "Amarillo mostaza claro": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Light mustard yellow"
+          }
+        }
+      }
+    },
     "Amarillo pastel": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Pastel yellow"
+          }
+        }
+      }
+    },
+    "Amarillo tostado": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Toasted yellow"
           }
         }
       }
@@ -250,6 +280,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Analyzing the garment…"
+          }
+        }
+      }
+    },
+    "Antracita": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Anthracite"
           }
         }
       }
@@ -364,6 +404,16 @@
         }
       }
     },
+    "Azul acero apagado": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Muted steel blue"
+          }
+        }
+      }
+    },
     "Azul aciano": {
       "localizations": {
         "en": {
@@ -374,12 +424,32 @@
         }
       }
     },
+    "Azul apagado": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Muted blue"
+          }
+        }
+      }
+    },
     "Azul bebé": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Baby blue"
+          }
+        }
+      }
+    },
+    "Azul cadete": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cadet blue"
           }
         }
       }
@@ -414,6 +484,26 @@
         }
       }
     },
+    "Azul grisáceo": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Grayish blue"
+          }
+        }
+      }
+    },
+    "Azul humo": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Smoke blue"
+          }
+        }
+      }
+    },
     "Azul marino": {
       "localizations": {
         "en": {
@@ -430,6 +520,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Midnight blue"
+          }
+        }
+      }
+    },
+    "Azul niebla": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fog blue"
           }
         }
       }
@@ -480,6 +580,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Royal blue"
+          }
+        }
+      }
+    },
+    "Azul verdoso": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Teal blue"
           }
         }
       }
@@ -594,6 +704,16 @@
         }
       }
     },
+    "Berenjena claro": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Light eggplant"
+          }
+        }
+      }
+    },
     "Bermellón": {
       "localizations": {
         "en": {
@@ -684,6 +804,26 @@
         }
       }
     },
+    "Calabaza apagada": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Muted pumpkin"
+          }
+        }
+      }
+    },
+    "Camel": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Camel"
+          }
+        }
+      }
+    },
     "Camisa": {
       "localizations": {
         "en": {
@@ -740,6 +880,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Khaki"
+          }
+        }
+      }
+    },
+    "Caqui arena": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sandy khaki"
           }
         }
       }
@@ -840,6 +990,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Plum"
+          }
+        }
+      }
+    },
+    "Ciruela apagado": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Muted plum"
           }
         }
       }
@@ -994,6 +1154,16 @@
         }
       }
     },
+    "Coral apagado": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Muted coral"
+          }
+        }
+      }
+    },
     "Corazón": {
       "localizations": {
         "en": {
@@ -1070,6 +1240,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Golden"
+          }
+        }
+      }
+    },
+    "Dorado apagado": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Muted gold"
           }
         }
       }
@@ -1406,6 +1586,26 @@
         }
       }
     },
+    "Granate apagado": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Muted maroon"
+          }
+        }
+      }
+    },
+    "Greige": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Greige"
+          }
+        }
+      }
+    },
     "Gris": {
       "localizations": {
         "en": {
@@ -1436,6 +1636,26 @@
         }
       }
     },
+    "Gris cálido": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Warm gray"
+          }
+        }
+      }
+    },
+    "Gris frío": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cool gray"
+          }
+        }
+      }
+    },
     "Gris perla": {
       "localizations": {
         "en": {
@@ -1452,6 +1672,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Slate gray"
+          }
+        }
+      }
+    },
+    "Gris tórtola": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dove gray"
           }
         }
       }
@@ -1726,6 +1956,16 @@
         }
       }
     },
+    "Lila grisáceo": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Grayish lilac"
+          }
+        }
+      }
+    },
     "Lima": {
       "localizations": {
         "en": {
@@ -1786,6 +2026,26 @@
         }
       }
     },
+    "Malva grisáceo": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Grayish mauve"
+          }
+        }
+      }
+    },
+    "Malva rosado": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pinkish mauve"
+          }
+        }
+      }
+    },
     "Mandarina": {
       "localizations": {
         "en": {
@@ -1822,6 +2082,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Brown"
+          }
+        }
+      }
+    },
+    "Marrón grisáceo": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Grayish brown"
           }
         }
       }
@@ -1886,6 +2156,16 @@
         }
       }
     },
+    "Mostaza apagada": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Muted mustard"
+          }
+        }
+      }
+    },
     "Naranja": {
       "localizations": {
         "en": {
@@ -1902,6 +2182,26 @@
           "stringUnit": {
             "state": "translated",
             "value": "Burnt orange"
+          }
+        }
+      }
+    },
+    "Naranja terroso": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Earthy orange"
+          }
+        }
+      }
+    },
+    "Naranja tostado": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Toasted orange"
           }
         }
       }
@@ -2036,12 +2336,32 @@
         }
       }
     },
+    "Nuez": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Walnut"
+          }
+        }
+      }
+    },
     "Ocre": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Ochre"
+          }
+        }
+      }
+    },
+    "Ocre mate": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Matte ochre"
           }
         }
       }
@@ -2156,12 +2476,32 @@
         }
       }
     },
+    "Peltre": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pewter"
+          }
+        }
+      }
+    },
     "Permitir cámara": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Allow camera"
+          }
+        }
+      }
+    },
+    "Petróleo claro": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Light petrol blue"
           }
         }
       }
@@ -2446,6 +2786,16 @@
         }
       }
     },
+    "Rojo ladrillo mate": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Matte brick red"
+          }
+        }
+      }
+    },
     "Rojo teja": {
       "localizations": {
         "en": {
@@ -2456,12 +2806,32 @@
         }
       }
     },
+    "Rojo tierra": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Earth red"
+          }
+        }
+      }
+    },
     "Rojo vino": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Wine red"
+          }
+        }
+      }
+    },
+    "Rojo vino apagado": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Muted wine red"
           }
         }
       }
@@ -2496,12 +2866,32 @@
         }
       }
     },
+    "Rosa empolvado": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dusty pink"
+          }
+        }
+      }
+    },
     "Rosa fuerte": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Hot pink"
+          }
+        }
+      }
+    },
+    "Rosa nude": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nude pink"
           }
         }
       }
@@ -2542,6 +2932,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Dusty rose"
+          }
+        }
+      }
+    },
+    "Rosa viejo apagado": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Muted dusty rose"
           }
         }
       }
@@ -2666,12 +3066,32 @@
         }
       }
     },
+    "Tabaco": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tobacco"
+          }
+        }
+      }
+    },
     "Tamaño de la mirilla": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Reticle size"
+          }
+        }
+      }
+    },
+    "Taupe": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Taupe"
           }
         }
       }
@@ -2827,6 +3247,26 @@
         }
       }
     },
+    "Topo": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mole brown"
+          }
+        }
+      }
+    },
+    "Topo gris": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gray taupe"
+          }
+        }
+      }
+    },
     "Trigo": {
       "localizations": {
         "en": {
@@ -2907,6 +3347,16 @@
         }
       }
     },
+    "Turquesa grisáceo": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Grayish turquoise"
+          }
+        }
+      }
+    },
     "Un adulto": {
       "localizations": {
         "en": {
@@ -2967,6 +3417,16 @@
         }
       }
     },
+    "Uva apagado": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Muted grape"
+          }
+        }
+      }
+    },
     "Vainilla": {
       "localizations": {
         "en": {
@@ -3017,6 +3477,26 @@
         }
       }
     },
+    "Verde azulado apagado": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Muted teal"
+          }
+        }
+      }
+    },
+    "Verde azulado grisáceo": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Grayish teal"
+          }
+        }
+      }
+    },
     "Verde bosque": {
       "localizations": {
         "en": {
@@ -3057,6 +3537,36 @@
         }
       }
     },
+    "Verde eucalipto": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eucalyptus green"
+          }
+        }
+      }
+    },
+    "Verde grisáceo": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Grayish green"
+          }
+        }
+      }
+    },
+    "Verde helecho": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fern green"
+          }
+        }
+      }
+    },
     "Verde hierba": {
       "localizations": {
         "en": {
@@ -3083,6 +3593,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Lime green"
+          }
+        }
+      }
+    },
+    "Verde loden": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Loden green"
           }
         }
       }
@@ -3147,6 +3667,16 @@
         }
       }
     },
+    "Verde oliva claro": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Light olive green"
+          }
+        }
+      }
+    },
     "Verde pastel": {
       "localizations": {
         "en": {
@@ -3193,6 +3723,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Sage green"
+          }
+        }
+      }
+    },
+    "Verde salvia apagado": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Muted sage green"
           }
         }
       }
@@ -3553,6 +4093,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Indigo"
+          }
+        }
+      }
+    },
+    "Óxido rojizo": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reddish rust"
           }
         }
       }

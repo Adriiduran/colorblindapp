@@ -103,6 +103,12 @@ struct SettingsView: View {
                     } label: {
                         SettingsRowLabel(title: "Benchmark del analizador de color", systemImage: "chart.bar", tint: .purple)
                     }
+
+                    NavigationLink {
+                        ColorNamingDiagnosticView()
+                    } label: {
+                        SettingsRowLabel(title: "Diagnóstico de nombres de color", systemImage: "eyedropper.halffull", tint: .pink)
+                    }
                 }
                 #endif
             }
