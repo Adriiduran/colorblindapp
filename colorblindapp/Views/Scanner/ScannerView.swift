@@ -22,8 +22,29 @@ struct ScannerView: View {
     var body: some View {
         NavigationStack {
             content
-                .navigationTitle("Escáner")
-                .toolbarVisibility(model.authorization == .authorized ? .hidden : .automatic, for: .navigationBar)
+                .navigationTitle(model.authorization == .authorized ? "" : "Escáner")
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbarBackground(model.authorization == .authorized ? .hidden : .automatic, for: .navigationBar)
+                .toolbar {
+                    if model.authorization == .authorized {
+                        ToolbarItem(placement: .topBarTrailing) {
+                            Button {
+                                showHistory = true
+                            } label: {
+                                Image(systemName: "clock")
+                            }
+                            .accessibilityLabel("Historial")
+                        }
+                        ToolbarItem(placement: .topBarTrailing) {
+                            Button {
+                                showShoppingMode = true
+                            } label: {
+                                Image(systemName: "bag.badge.questionmark")
+                            }
+                            .accessibilityLabel("Modo compra")
+                        }
+                    }
+                }
         }
         .onAppear {
             model.refreshAuthorization()
@@ -72,12 +93,6 @@ struct ScannerView: View {
                 .ignoresSafeArea()
 
                 readoutPanel
-            }
-            .overlay(alignment: .topTrailing) {
-                VStack(spacing: 10) {
-                    historyButton
-                    shoppingModeButton
-                }
             }
             .overlay(alignment: .topLeading) {
                 if model.isDemoMode {
@@ -134,32 +149,6 @@ struct ScannerView: View {
         }
         .shadow(radius: 2)
         .accessibilityHidden(true)
-    }
-
-    private var historyButton: some View {
-        Button {
-            showHistory = true
-        } label: {
-            Image(systemName: "clock")
-                .font(.title3)
-                .padding(12)
-                .background(.regularMaterial, in: Circle())
-        }
-        .padding(.trailing, 16)
-        .accessibilityLabel("Historial")
-    }
-
-    private var shoppingModeButton: some View {
-        Button {
-            showShoppingMode = true
-        } label: {
-            Image(systemName: "bag.badge.questionmark")
-                .font(.title3)
-                .padding(12)
-                .background(.regularMaterial, in: Circle())
-        }
-        .padding(.trailing, 16)
-        .accessibilityLabel("Modo compra")
     }
 
     private var readoutPanel: some View {
