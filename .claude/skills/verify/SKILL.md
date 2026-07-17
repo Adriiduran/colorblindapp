@@ -4,7 +4,7 @@ description: Build, install y verificación manual de colorblindapp en el simula
 context: fork
 agent: general-purpose
 model: haiku
-allowed-tools: Bash(xcodebuild:*), Bash(xcrun:*), Bash(idb:*), Bash(sips:*), Bash(git:*), Read
+allowed-tools: Bash(xcodebuild:*), Bash(xcrun:*), Bash(idb:*), Bash(sips:*), Bash(git:*), Bash(grep:*), Bash(python3:*), Read
 ---
 
 # Verificar colorblindapp en el simulador
@@ -12,6 +12,15 @@ allowed-tools: Bash(xcodebuild:*), Bash(xcrun:*), Bash(idb:*), Bash(sips:*), Bas
 App iOS SwiftUI (proyecto `colorblindapp.xcodeproj`, bundle id `com.admist.colorblindapp`).
 
 Este skill corre en un subagente aislado (no ve el resto de la conversación), así que el build log completo, las capturas y los taps de `idb` no consumen contexto de la conversación principal — solo el resumen final que devuelvas.
+
+## Presupuesto de tokens (importante)
+
+Las capturas son con diferencia lo más caro de este flujo: cada imagen leída con `Read` se re-envía en **todos** los turnos posteriores de esta sesión. Reglas:
+
+1. **Navega y comprueba con el árbol de accesibilidad, no con capturas.** `idb ui describe-all` devuelve todos los elementos con su etiqueta y su frame en puntos — sirve tanto para saber en qué pantalla estás como para calcular las coordenadas exactas del tap (centro del frame). Nada de tap a ciegas + captura para ver si acertaste.
+2. **Máximo 2–3 capturas por verificación**, solo cuando lo que hay que juzgar es visual (color, layout, un glifo) y no se puede leer del árbol de accesibilidad. Hazlas lo más tarde posible en la sesión y siempre reescaladas.
+3. **Agrupa comandos**: encadena boot + build + install + launch en una sola llamada a Bash, y las secuencias de taps que ya tengas planificadas también. Menos turnos = menos contexto re-enviado.
+4. **Cíñete a lo pedido en `$ARGUMENTS`**: verifica ese flujo y para. No exploras flujos extra "ya que estás".
 
 ## Qué verificar
 
@@ -45,22 +54,36 @@ export DEVELOPER_DIR=/Applications/Xcode-26.6.0.app/Contents/Developer
 export PATH="$PATH:$(python3 -m site --user-base)/bin"
 SIM=F4E8E923-CB33-4D03-ABFD-01860A8AC96C   # iPhone 17 Pro iOS 26.5; verificar con: xcrun simctl list devices available
 
+DD=~/Library/Caches/colorblindapp-dd            # derivedData estable entre sesiones → builds incrementales
+
 xcrun simctl boot $SIM && xcrun simctl bootstatus $SIM -b >/dev/null   # "Data Migration Failed" es inofensivo; comprobar estado Booted
 xcodebuild build -project colorblindapp.xcodeproj -scheme colorblindapp \
-  -destination "id=$SIM" -derivedDataPath <scratch>/dd -quiet > <scratch>/build.log 2>&1 \
+  -destination "id=$SIM" -derivedDataPath $DD -quiet > <scratch>/build.log 2>&1 \
   || grep -E "error:|BUILD FAILED" <scratch>/build.log   # solo muestra el log si algo falla
-xcrun simctl install $SIM <scratch>/dd/Build/Products/Debug-iphonesimulator/colorblindapp.app
+xcrun simctl install $SIM $DD/Build/Products/Debug-iphonesimulator/colorblindapp.app
 xcrun simctl launch $SIM com.admist.colorblindapp
 
-idb ui tap <x> <y> --udid $SIM             # coordenadas en puntos (iPhone 17 Pro: 402x874 pt; px/3)
-xcrun simctl io $SIM screenshot out.png    # capturas: 1206x2622 px
+# Localizar elementos y comprobar en qué pantalla estás — SIN captura.
+# La salida de describe-all es UNA sola línea JSON (no la leas ni la greppees cruda);
+# este one-liner lista "etiqueta | tipo | centro-x centro-y" con el tap ya calculado:
+ax() { idb ui describe-all --udid $SIM 2>/dev/null | python3 -c '
+import json,sys
+for e in json.load(sys.stdin):
+    f=e["frame"]
+    print(e.get("AXLabel"), "|", e["type"], "|", int(f["x"]+f["width"]/2), int(f["y"]+f["height"]/2))'; }
+ax | grep -i "<etiqueta del botón>"
+
+idb ui tap <x> <y> --udid $SIM             # coordenadas en puntos = centro del frame del elemento (iPhone 17 Pro: 402x874 pt)
+xcrun simctl io $SIM screenshot out.png    # capturas: 1206x2622 px — solo para juicios visuales, ver presupuesto arriba
 sips -Z 500 out.png --out out_small.png    # reescalar antes de verla: una captura a tamaño completo gasta muchos más tokens de los necesarios para juzgar una pantalla
 xcrun simctl terminate $SIM com.admist.colorblindapp   # para probar persistencia
 ```
 
 Ver siempre `out_small.png` (con `Read`), no `out.png`, salvo que necesites leer texto pequeño con detalle.
 
-## Flujos que merece la pena recorrer
+Verificación de estado sin gastar imágenes: tras un tap, vuelve a correr `describe-all` y greppea por un texto que solo exista en la pantalla destino — eso confirma la navegación igual de bien que una captura.
+
+## Flujos de referencia (recórrelos solo si el cambio los toca — no como checklist)
 
 - Onboarding: bienvenida → "Ya sé mi tipo, elegirlo manualmente" → seleccionar tipo → Continuar → aparece el TabView.
 - Persistencia: terminate + launch → debe ir directo al TabView sin onboarding.
