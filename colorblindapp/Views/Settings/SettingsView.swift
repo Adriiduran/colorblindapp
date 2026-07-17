@@ -184,12 +184,16 @@ struct SettingsView: View {
     private var premiumSection: some View {
         Section("Premium") {
             if purchaseManager.isPremium {
-                SettingsRowLabel(title: "Suscripción activa", systemImage: "checkmark.seal.fill", tint: .green)
+                if purchaseManager.hasLifetime {
+                    SettingsRowLabel(title: "Premium de por vida", systemImage: "checkmark.seal.fill", tint: .green)
+                } else {
+                    SettingsRowLabel(title: "Suscripción activa", systemImage: "checkmark.seal.fill", tint: .green)
 
-                Button {
-                    showManageSubscriptions = true
-                } label: {
-                    SettingsRowLabel(title: "Gestionar suscripción", systemImage: "creditcard", tint: .blue)
+                    Button {
+                        showManageSubscriptions = true
+                    } label: {
+                        SettingsRowLabel(title: "Gestionar suscripción", systemImage: "creditcard", tint: .blue)
+                    }
                 }
             } else {
                 Button {

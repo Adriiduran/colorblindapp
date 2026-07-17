@@ -113,11 +113,22 @@
       }
     },
     "7 días de prueba gratis en cualquier plan": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "7-day free trial on any plan"
+          }
+        }
+      }
+    },
+    "7 días de prueba gratis en los planes de suscripción": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "7-day free trial on subscription plans"
           }
         }
       }
@@ -889,6 +900,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Scored, explained combinations to help you dress with confidence."
+          }
+        }
+      }
+    },
+    "Comprar de por vida": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Buy lifetime access"
           }
         }
       }
@@ -2095,6 +2116,16 @@
         }
       }
     },
+    "Pago único. Desbloquea el acceso premium para siempre en este Apple ID, sin renovación ni cargos recurrentes.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "One-time payment. Unlocks premium access forever on this Apple ID, with no renewal or recurring charges."
+          }
+        }
+      }
+    },
     "Pantalón": {
       "localizations": {
         "en": {
@@ -2151,6 +2182,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Premium"
+          }
+        }
+      }
+    },
+    "Premium de por vida": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lifetime premium"
           }
         }
       }

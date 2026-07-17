@@ -84,7 +84,7 @@ struct PaywallView: View {
                     .multilineTextAlignment(.center)
             }
 
-            Text("7 días de prueba gratis en cualquier plan")
+            Text("7 días de prueba gratis en los planes de suscripción")
                 .font(.footnote.weight(.semibold))
                 .foregroundStyle(.tint)
         }
@@ -203,6 +203,11 @@ struct PaywallView: View {
 
     // MARK: - Acciones
 
+    /// El plan seleccionado es la compra única de por vida, sin trial ni renovación.
+    private var selectedIsLifetime: Bool {
+        selectedProduct?.id == PurchaseManager.ProductID.lifetime.rawValue
+    }
+
     private var actions: some View {
         VStack(spacing: 12) {
             Button {
@@ -212,7 +217,7 @@ struct PaywallView: View {
                     ProgressView()
                         .frame(maxWidth: .infinity)
                 } else {
-                    Text("Empezar prueba gratis de 7 días")
+                    Text(selectedIsLifetime ? "Comprar de por vida" : "Empezar prueba gratis de 7 días")
                         .singleLineFitted()
                         .frame(maxWidth: .infinity)
                 }
@@ -229,10 +234,14 @@ struct PaywallView: View {
     }
 
     private var legalFooter: some View {
-        Text("Incluye 7 días de prueba gratis. Pasado ese periodo, la suscripción se cobra y se renueva automáticamente al precio indicado, salvo que la canceles al menos 24 horas antes de que termine el periodo de prueba o el periodo actual, desde los ajustes de tu cuenta de Apple.")
-            .font(.caption)
-            .foregroundStyle(.tertiary)
-            .multilineTextAlignment(.center)
+        Text(
+            selectedIsLifetime
+                ? "Pago único. Desbloquea el acceso premium para siempre en este Apple ID, sin renovación ni cargos recurrentes."
+                : "Incluye 7 días de prueba gratis. Pasado ese periodo, la suscripción se cobra y se renueva automáticamente al precio indicado, salvo que la canceles al menos 24 horas antes de que termine el periodo de prueba o el periodo actual, desde los ajustes de tu cuenta de Apple."
+        )
+        .font(.caption)
+        .foregroundStyle(.tertiary)
+        .multilineTextAlignment(.center)
     }
 
     private func purchase() {

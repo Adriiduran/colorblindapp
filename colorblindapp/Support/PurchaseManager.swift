@@ -20,9 +20,10 @@ final class PurchaseManager {
     enum ProductID: String, CaseIterable {
         case monthly = "com.admist.colorblindapp.premium.monthly"
         case annual = "com.admist.colorblindapp.premium.annual"
+        case lifetime = "com.admist.colorblindapp.premium.lifetime"
     }
 
-    static let freeWardrobeLimit = 5
+    static let freeWardrobeLimit = 50
     static let freeHistoryLimit = 10
     static let freeOutfitTrialLimit = 3
     static let freeOutfitTrialInterval: TimeInterval = 7 * 24 * 60 * 60
@@ -41,6 +42,11 @@ final class PurchaseManager {
     #endif
 
     private(set) var hasActiveEntitlement = false
+
+    /// El entitlement activo es la compra única de por vida, no una
+    /// suscripción. Determina si en Ajustes se ofrece "Gestionar
+    /// suscripción" (no aplica a una compra sin renovación).
+    private(set) var hasLifetime = false
 
     /// Fechas (dentro de los últimos 7 días) en las que un usuario no
     /// premium ha generado outfits con la cata gratuita semanal.
@@ -151,13 +157,16 @@ final class PurchaseManager {
     /// Recorre las suscripciones activas del usuario y actualiza `isPremium`.
     private func refreshEntitlement() async {
         var active = false
+        var lifetime = false
         for await entitlement in Transaction.currentEntitlements {
             guard case .verified(let transaction) = entitlement else { continue }
-            if ProductID(rawValue: transaction.productID) != nil, transaction.revocationDate == nil {
+            if let productID = ProductID(rawValue: transaction.productID), transaction.revocationDate == nil {
                 active = true
+                if productID == .lifetime { lifetime = true }
                 break
             }
         }
         hasActiveEntitlement = active
+        hasLifetime = lifetime
     }
 }

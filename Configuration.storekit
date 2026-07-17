@@ -1,7 +1,23 @@
 {
   "identifier" : "5F91076A-B402-4D53-8AE6-F2FBE35309D5",
   "nonRenewingSubscriptions" : [],
-  "products" : [],
+  "products" : [
+    {
+      "displayPrice" : "29.99",
+      "familyShareable" : false,
+      "internalID" : "D5DA1BBD-3376-42C2-98E3-1FC03A157312",
+      "localizations" : [
+        {
+          "description" : "Acceso premium para siempre, con un solo pago. Armario ilimitado, generador de outfits e historial de color sin límite.",
+          "displayName" : "Premium de por vida",
+          "locale" : "es_ES"
+        }
+      ],
+      "productID" : "com.admist.colorblindapp.premium.lifetime",
+      "referenceName" : "Premium de por vida",
+      "type" : "NonConsumable"
+    }
+  ],
   "settings" : {
     "_billingIssuesEnabled" : false,
     "_disableDialogs" : false,
@@ -93,7 +109,7 @@
         {
           "adHocOffers" : [],
           "codeOffers" : [],
-          "displayPrice" : "22.99",
+          "displayPrice" : "19.99",
           "familyShareable" : false,
           "groupNumber" : 1,
           "internalID" : "C0DFE808-EF85-4331-AE28-EACBA6044256",
