@@ -3,6 +3,7 @@ name: notion
 description: Lee o actualiza el registro de funcionalidades/plan del proyecto en la base de datos de Notion. Usar para consultar el roadmap o reflejar una feature/idea recién implementada o hablada, en vez de llamar a las herramientas mcp__notion__* directamente desde la conversación principal.
 context: fork
 agent: general-purpose
+model: haiku
 allowed-tools: mcp__notion__API-post-page, mcp__notion__API-patch-page, mcp__notion__API-post-search, mcp__notion__API-retrieve-a-page, mcp__notion__API-retrieve-page-markdown, mcp__notion__API-get-block-children, mcp__notion__API-patch-block-children, mcp__notion__API-delete-a-block, mcp__notion__API-retrieve-a-block, Bash(jq:*), Bash(python3:*), Write
 ---
 

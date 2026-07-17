@@ -3,6 +3,7 @@ name: verify
 description: Build, install y verificación manual de colorblindapp en el simulador de iOS (taps con idb, capturas). Usar tras implementar o modificar una feature, antes de dar por cerrado un hito.
 context: fork
 agent: general-purpose
+model: haiku
 allowed-tools: Bash(xcodebuild:*), Bash(xcrun:*), Bash(idb:*), Bash(sips:*), Bash(git:*), Read
 ---
 
