@@ -83,6 +83,25 @@ Ver siempre `out_small.png` (con `Read`), no `out.png`, salvo que necesites leer
 
 Verificación de estado sin gastar imágenes: tras un tap, vuelve a correr `describe-all` y greppea por un texto que solo exista en la pantalla destino — eso confirma la navegación igual de bien que una captura.
 
+### Botones dentro de la toolbar o el tab bar: `ax()` no los ve
+
+`idb ui describe-all` **no recorre el interior de `UINavigationBar` (el `.toolbar` de SwiftUI) ni de `UITabBar`** (el tab bar inferior) — aparecen como un `Group "Nav bar"` / `Group "Tab Bar"` con cero hijos, tanto en modo plano como con `--nested`, sin importar si el companion es nuevo o lleva rato corriendo. No es un bug del one-liner `ax()` ni de un companion obsoleto (ambas hipótesis se descartaron); es una limitación real del bridge de accesibilidad de idb con esos dos contenedores concretos. El resto del árbol (sheets, botones, texto normal) se ve perfectamente.
+
+Si el elemento que necesitas tocar vive ahí dentro (icono del toolbar, tab del tab bar), calcula el punto a mano con una captura en vez de `ax()`:
+
+```bash
+xcrun simctl io $SIM screenshot <scratch>/nav.png
+sips -Z 500 <scratch>/nav.png --out <scratch>/nav_small.png   # solo para localizar visualmente el icono
+```
+
+Mira `nav_small.png` con `Read`, estima a ojo la posición del icono dentro de la franja reescalada (500px de ancho ⇒ factor conocido respecto a los 402pt de pantalla) y calcula el punto real: la captura completa es 1206×2622px en iPhone 17 Pro (factor **3x** sobre los 402×874pt), así que `punto = pixel / 3`. Con eso, tap directo — no hace falta cropear ni procesar la imagen con Python, con estimar el centro del icono en la miniatura reescalada basta:
+
+```bash
+idb ui tap <x-en-puntos> <y-en-puntos> --udid $SIM
+```
+
+Confirma el resultado del tap con `ax()` como siempre (grep por texto que solo exista en la pantalla destino) — una vez dentro de la sheet/pantalla que abriste, `ax()` vuelve a funcionar con normalidad.
+
 ## Flujos de referencia (recórrelos solo si el cambio los toca — no como checklist)
 
 - Onboarding: bienvenida → "Ya sé mi tipo, elegirlo manualmente" → seleccionar tipo → Continuar → aparece el TabView.
