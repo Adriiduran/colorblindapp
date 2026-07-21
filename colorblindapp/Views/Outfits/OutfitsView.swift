@@ -31,14 +31,23 @@ struct OutfitsView: View {
         }
         .toolbar {
             ToolbarItemGroup(placement: .primaryAction) {
-                // Icono invisible que replica el del filtro de "Prendas":
-                // sin él, el trailing toolbar de Outfits (1 icono) pesa menos
-                // que el de Prendas (2 iconos) y el segmented de la barra
-                // se recoloca al cambiar de sección.
+                // Iconos invisibles que replican los del filtro y la
+                // auditoría de "Prendas": sin ellos, el trailing toolbar de
+                // Outfits (1 icono) pesa menos que el de Prendas (3 iconos) y
+                // el segmented de la barra se recoloca al cambiar de sección.
+                // sharedBackgroundVisibility(.hidden) evita que el cristal de
+                // Liquid Glass se estire cubriendo también estos placeholders.
                 Image(systemName: "line.3.horizontal.decrease.circle")
                     .opacity(0)
                     .allowsHitTesting(false)
                     .accessibilityHidden(true)
+                Image(systemName: "chart.bar.xaxis")
+                    .opacity(0)
+                    .allowsHitTesting(false)
+                    .accessibilityHidden(true)
+            }
+            .sharedBackgroundVisibility(.hidden)
+            ToolbarItem(placement: .primaryAction) {
                 NavigationLink {
                     SavedOutfitsView()
                 } label: {

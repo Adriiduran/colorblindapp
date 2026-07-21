@@ -121,6 +121,21 @@ enum OutfitEngine {
         return chosen.sorted { $0.score > $1.score }
     }
 
+    // MARK: - Neutros
+
+    /// Un color de armario cuenta como neutro si es Blanco/Negro/Gris/Beige,
+    /// o azul marino/denim (marino oscuro o azul apagado). Se usa tanto para
+    /// puntuar armonía como para la auditoría de armario (`WardrobeAudit`).
+    static func isNeutral(basicName: String, saturation: Double, lightness: Double) -> Bool {
+        let neutralNames = [
+            String(localized: "Blanco"), String(localized: "Negro"),
+            String(localized: "Gris"), String(localized: "Beige"),
+        ]
+        let isMutedBlue = basicName == String(localized: "Azul")
+            && (lightness < 0.3 || saturation < 0.45)
+        return neutralNames.contains(basicName) || isMutedBlue
+    }
+
     // MARK: - Puntuación
 
     /// Puntúa un conjunto concreto y redacta su explicación.
@@ -177,15 +192,7 @@ enum OutfitEngine {
             slot = garment.category.outfitSlot ?? .top
             (hue, saturation, lightness) = garment.dominantColor.hsl
             basicName = garment.basicName
-            // Neutros clásicos de armario; el azul cuenta si es marino
-            // (oscuro) o apagado tipo denim.
-            let neutralNames = [
-                String(localized: "Blanco"), String(localized: "Negro"),
-                String(localized: "Gris"), String(localized: "Beige"),
-            ]
-            let isMutedBlue = basicName == String(localized: "Azul")
-                && (lightness < 0.3 || saturation < 0.45)
-            isNeutral = neutralNames.contains(basicName) || isMutedBlue
+            isNeutral = OutfitEngine.isNeutral(basicName: basicName, saturation: saturation, lightness: lightness)
             colorLabel = garment.descriptiveName.lowercased()
             label = "\(garment.category.withArticle) \(colorLabel)"
         }

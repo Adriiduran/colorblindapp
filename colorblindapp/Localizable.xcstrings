@@ -389,6 +389,9 @@
         }
       }
     },
+    "Añade más prendas" : {
+
+    },
     "Añade toda tu ropa sin límite de prendas." : {
       "localizations" : {
         "en" : {
@@ -408,6 +411,9 @@
           }
         }
       }
+    },
+    "Añade variedad: todavía no tienes ningún %@ en el armario." : {
+
     },
     "Añadida al armario" : {
       "localizations" : {
@@ -558,6 +564,9 @@
           }
         }
       }
+    },
+    "Auditoría del armario" : {
+
     },
     "Avellana" : {
       "localizations" : {
@@ -1029,6 +1038,16 @@
         }
       }
     },
+    "Casi el %lld%% de tu armario es %@: poca variedad de color para combinar." : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Casi el %1$lld%% de tu armario es %2$@: poca variedad de color para combinar."
+          }
+        }
+      }
+    },
     "Castaño" : {
       "localizations" : {
         "en" : {
@@ -1168,6 +1187,9 @@
           }
         }
       }
+    },
+    "Colores que se te pueden confundir" : {
+
     },
     "Combina porque %@." : {
       "localizations" : {
@@ -1319,6 +1341,12 @@
         }
       }
     },
+    "Desbloquea el informe completo: qué colores se te pueden confundir, los huecos de tu armario y una lista de compra priorizada." : {
+
+    },
+    "Descubre qué colores se te pueden confundir, los huecos de tu armario y una lista de compra priorizada." : {
+
+    },
     "Deután (verde)" : {
       "localizations" : {
         "en" : {
@@ -1338,6 +1366,9 @@
           }
         }
       }
+    },
+    "Distribución de color" : {
+
     },
     "Dorado" : {
       "localizations" : {
@@ -1405,6 +1436,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "%@ and %@ are neighboring hues on the color wheel and harmonize naturally"
+          }
+        }
+      }
+    },
+    "El %lld%% de tus prendas se puede confundir con alguna otra con tu %@." : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "El %1$lld%% de tus prendas se puede confundir con alguna otra con tu %2$@."
           }
         }
       }
@@ -2043,6 +2084,9 @@
         }
       }
     },
+    "Huecos en tu armario" : {
+
+    },
     "Hueso" : {
       "localizations" : {
         "en" : {
@@ -2092,6 +2136,9 @@
           }
         }
       }
+    },
+    "Informe completo" : {
+
     },
     "Intensidad: %@" : {
       "localizations" : {
@@ -2252,6 +2299,12 @@
           }
         }
       }
+    },
+    "Lista de compra recomendada" : {
+
+    },
+    "Lleva esta lista contigo la próxima vez que vayas de compras." : {
+
     },
     "Los colores que guardes desde el escáner aparecerán aquí." : {
       "localizations" : {
@@ -2493,6 +2546,9 @@
         }
       }
     },
+    "Necesito al menos %lld prendas en tu armario para darte un informe útil." : {
+
+    },
     "Negro" : {
       "localizations" : {
         "en" : {
@@ -2502,6 +2558,9 @@
           }
         }
       }
+    },
+    "No detectamos daltonismo en tu perfil: no hace falta este análisis." : {
+
     },
     "No hay outfits guardados" : {
       "localizations" : {
@@ -2522,6 +2581,12 @@
           }
         }
       }
+    },
+    "No hemos encontrado huecos importantes: tu armario está bien equilibrado." : {
+
+    },
+    "No hemos encontrado prendas que se te puedan confundir entre sí. Buen trabajo." : {
+
     },
     "No se pudieron cargar los planes. Comprueba tu conexión." : {
       "localizations" : {
@@ -2592,6 +2657,15 @@
           }
         }
       }
+    },
+    "No tenemos ninguna recomendación clara: tu armario ya cubre bien los básicos." : {
+
+    },
+    "No tienes calzado en el armario: no podrás completar un outfit sin él." : {
+
+    },
+    "No tienes ningún color neutro (blanco, negro, gris, beige o azul marino): son la base que combina con todo lo demás." : {
+
     },
     "No veo ningún número" : {
       "localizations" : {
@@ -3393,6 +3467,9 @@
         }
       }
     },
+    "Te faltan neutros: un %@ combina con todo lo que ya tienes." : {
+
+    },
     "Terracota" : {
       "localizations" : {
         "en" : {
@@ -3475,6 +3552,12 @@
           }
         }
       }
+    },
+    "Tienes partes de abajo pero ninguna de arriba para combinarlas." : {
+
+    },
+    "Tienes partes de arriba pero ninguna de abajo (pantalón o falda) para combinarlas." : {
+
     },
     "Tierra" : {
       "localizations" : {
@@ -3595,6 +3678,9 @@
           }
         }
       }
+    },
+    "Tu armario está descompensado de temperatura de color: un %@ lo equilibra." : {
+
     },
     "Tu armario está vacío" : {
       "localizations" : {

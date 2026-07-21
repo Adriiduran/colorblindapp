@@ -14,6 +14,7 @@ struct WardrobeView: View {
     @Environment(PurchaseManager.self) private var purchaseManager
     @State private var showAddGarment = false
     @State private var showPaywall = false
+    @State private var showAudit = false
     @State private var selectedCategory: GarmentCategory?
     @State private var selectedColorName: String?
     @State private var garmentPendingDeletion: Garment?
@@ -43,6 +44,14 @@ struct WardrobeView: View {
                     .disabled(garments.isEmpty)
                     .opacity(garments.isEmpty ? 0.4 : 1)
                 Button {
+                    showAudit = true
+                } label: {
+                    Image(systemName: "chart.bar.xaxis")
+                }
+                .disabled(garments.isEmpty)
+                .opacity(garments.isEmpty ? 0.4 : 1)
+                .accessibilityLabel("Auditoría del armario")
+                Button {
                     if reachedFreeLimit {
                         showPaywall = true
                     } else {
@@ -56,6 +65,9 @@ struct WardrobeView: View {
         }
         .sheet(isPresented: $showAddGarment) {
             AddGarmentView()
+        }
+        .sheet(isPresented: $showAudit) {
+            WardrobeAuditView()
         }
         .sheet(isPresented: $showPaywall) {
             PaywallView(reason: "Tu armario gratis está al completo (\(PurchaseManager.freeWardrobeLimit) prendas). Hazte premium para añadir sin límite.")
