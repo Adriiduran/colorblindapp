@@ -22,7 +22,7 @@ struct ShoppingModeView: View {
     @State private var isAnalyzing = false
     @State private var analysis: GarmentAnalyzer.Analysis?
     @State private var selectedDominant: LinearRGB?
-    @State private var category: GarmentCategory = .camiseta
+    @State private var category: GarmentCategory?
     @State private var candidate: Garment?
     @State private var proposals: [OutfitEngine.Proposal] = []
     @State private var errorMessage: String?
@@ -178,11 +178,18 @@ struct ShoppingModeView: View {
                 candidatesSection(analysis, current: dominant)
             }
 
-            Section("Categoría") {
+            Section {
                 Picker("Tipo de prenda", selection: $category) {
+                    Text("Sin clasificar").tag(GarmentCategory?.none)
                     ForEach(GarmentCategory.allCases) { category in
-                        Text(category.displayName).tag(category)
+                        Text(category.displayName).tag(GarmentCategory?.some(category))
                     }
+                }
+            } header: {
+                Text("Categoría")
+            } footer: {
+                if category == nil {
+                    Text("No hemos podido reconocer el tipo de prenda. Elígelo tú para continuar.")
                 }
             }
 
@@ -196,6 +203,7 @@ struct ShoppingModeView: View {
                 }
                 .buttonStyle(.borderedProminent)
                 .controlSize(.large)
+                .disabled(category == nil)
                 .listRowBackground(Color(.systemGroupedBackground))
 
                 Button("Elegir otra foto") {
@@ -323,7 +331,7 @@ struct ShoppingModeView: View {
             do {
                 let result = try await GarmentAnalyzer.analyze(imageData: imageData)
                 analysis = result
-                category = result.estimatedCategory ?? .camiseta
+                category = result.estimatedCategory
             } catch {
                 errorMessage = error.localizedDescription
             }
@@ -333,6 +341,7 @@ struct ShoppingModeView: View {
     /// Compara la prenda de tienda (nunca insertada en el `ModelContext`)
     /// contra el armario real, usándola como ancla de `OutfitEngine`.
     private func compare(_ analysis: GarmentAnalyzer.Analysis, dominant: LinearRGB) {
+        guard let category else { return }
         let newGarment = Garment(
             imageData: analysis.croppedImagePNG,
             dominant: dominant,

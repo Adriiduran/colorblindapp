@@ -18,7 +18,7 @@ struct AddGarmentView: View {
     @State private var isAnalyzing = false
     @State private var analysis: GarmentAnalyzer.Analysis?
     @State private var selectedDominant: LinearRGB?
-    @State private var category: GarmentCategory = .camiseta
+    @State private var category: GarmentCategory?
     @State private var errorMessage: String?
 
     var body: some View {
@@ -171,11 +171,18 @@ struct AddGarmentView: View {
                 candidatesSection(analysis, current: dominant)
             }
 
-            Section("Categoría") {
+            Section {
                 Picker("Tipo de prenda", selection: $category) {
+                    Text("Sin clasificar").tag(GarmentCategory?.none)
                     ForEach(GarmentCategory.allCases) { category in
-                        Text(category.displayName).tag(category)
+                        Text(category.displayName).tag(GarmentCategory?.some(category))
                     }
+                }
+            } header: {
+                Text("Categoría")
+            } footer: {
+                if category == nil {
+                    Text("No hemos podido reconocer el tipo de prenda. Elígelo tú para continuar.")
                 }
             }
 
@@ -189,6 +196,7 @@ struct AddGarmentView: View {
                 }
                 .buttonStyle(.borderedProminent)
                 .controlSize(.large)
+                .disabled(category == nil)
                 .listRowBackground(Color(.systemGroupedBackground))
 
                 Button("Elegir otra foto") {
@@ -264,15 +272,16 @@ struct AddGarmentView: View {
         }
     }
 
-    /// Corre el análisis y preselecciona la categoría estimada, dejando la
-    /// elección manual del usuario intacta si Vision no reconoció nada.
+    /// Corre el análisis y preselecciona la categoría estimada. Si no se
+    /// reconoce ninguna queda sin clasificar y la elige el usuario.
     private func runAnalysis(_ data: Data) async throws {
         let result = try await GarmentAnalyzer.analyze(imageData: data)
         analysis = result
-        category = result.estimatedCategory ?? .camiseta
+        category = result.estimatedCategory
     }
 
     private func save(_ analysis: GarmentAnalyzer.Analysis, dominant: LinearRGB) {
+        guard let category else { return }
         let garment = Garment(
             imageData: analysis.croppedImagePNG,
             dominant: dominant,

@@ -15,6 +15,26 @@
         }
       }
     },
+    "Sin clasificar" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unclassified"
+          }
+        }
+      }
+    },
+    "No hemos podido reconocer el tipo de prenda. Elígelo tú para continuar." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "We couldn't recognize the type of garment. Choose it yourself to continue."
+          }
+        }
+      }
+    },
     "¿A quién le vas a hacer el test?" : {
       "localizations" : {
         "en" : {

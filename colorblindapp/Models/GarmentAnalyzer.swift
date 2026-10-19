@@ -5,6 +5,7 @@
 
 import CoreImage
 import Foundation
+import FoundationModels
 import UIKit
 import Vision
 
@@ -22,8 +23,8 @@ nonisolated enum GarmentAnalyzer {
         let candidates: [LinearRGB]
         let secondary: LinearRGB?
         /// Categoría de prenda estimada por clasificación de imagen, para
-        /// preseleccionarla en la revisión. `nil` si Vision no reconoció
-        /// nada mapeable con confianza suficiente.
+        /// preseleccionarla en la revisión. `nil` si ni Foundation Models ni
+        /// Vision reconocieron nada mapeable con confianza suficiente.
         let estimatedCategory: GarmentCategory?
     }
 
@@ -53,7 +54,7 @@ nonisolated enum GarmentAnalyzer {
         let segmentation = subjectSegmentation(from: cgImage)
         let cropped = segmentation?.croppedMasked ?? cgImage
         let illuminant = segmentation.flatMap { estimateIlluminant(fullImage: cgImage, maskBuffer: $0.maskBuffer) }
-        let estimatedCategory = estimateCategory(from: cgImage)
+        let estimatedCategory = await estimateCategory(from: cgImage)
 
         let clusters = dominantColors(in: cropped, illuminant: illuminant)
         guard let first = clusters.first else {
@@ -86,12 +87,80 @@ nonisolated enum GarmentAnalyzer {
 
     // MARK: - Categoría estimada
 
-    /// Estima la categoría de la prenda con el clasificador de imágenes
-    /// general de Vision (offline, sin modelo propio). Se clasifica la foto
+    /// Estima la categoría de la prenda. Si el dispositivo tiene iOS 27 y
+    /// Apple Intelligence, lo decide el modelo on-device de Foundation Models
+    /// (entiende imágenes y distingue camiseta/camisa/falda…); si no, cae al
+    /// clasificador genérico de Vision, que solo reconoce unas pocas prendas.
+    private static func estimateCategory(from cgImage: CGImage) async -> GarmentCategory? {
+        if #available(iOS 27.0, *),
+           let category = await estimateCategoryWithFoundationModels(from: cgImage) {
+            return category
+        }
+        return estimateCategoryWithVision(from: cgImage)
+    }
+
+    /// Respuesta guiada: el modelo solo puede devolver uno de estos casos,
+    /// sin texto libre que parsear.
+    @available(iOS 27.0, *)
+    @Generable
+    enum ModelGarmentKind: String {
+        case tShirt
+        case buttonUpShirt
+        case sweater
+        case jacketOrCoat
+        case trousers
+        case skirt
+        case dress
+        case shoes
+        case accessory
+        case other
+
+        var category: GarmentCategory {
+            switch self {
+            case .tShirt: .camiseta
+            case .buttonUpShirt: .camisa
+            case .sweater: .jersey
+            case .jacketOrCoat: .chaqueta
+            case .trousers: .pantalon
+            case .skirt: .falda
+            case .dress: .vestido
+            case .shoes: .zapatos
+            case .accessory: .accesorio
+            case .other: .otro
+            }
+        }
+    }
+
+    /// `nil` si el modelo no está disponible (dispositivo no compatible,
+    /// Apple Intelligence desactivado, modelo aún descargándose) o falla.
+    @available(iOS 27.0, *)
+    private static func estimateCategoryWithFoundationModels(from cgImage: CGImage) async -> GarmentCategory? {
+        guard case .available = SystemLanguageModel.default.availability else { return nil }
+
+        let session = LanguageModelSession(instructions: """
+            You classify a photo of a single piece of clothing into exactly one type. \
+            T-shirts have no buttons and short sleeves or a round neck; shirts have a collar and buttons. \
+            Use "other" only if the photo does not show a garment, shoe or accessory.
+            """)
+        do {
+            let response = try await session.respond(generating: ModelGarmentKind.self) {
+                "What type of garment is shown in this photo?"
+                Attachment(cgImage)
+            }
+            return response.content.category
+        } catch {
+            return nil
+        }
+    }
+
+    // MARK: - Categoría con Vision
+
+    /// Clasificador de imágenes general de Vision (offline, sin modelo
+    /// propio). Se clasifica la foto
     /// completa —no el recorte, que al perder el contexto de fondo se aleja
     /// de las fotos con las que se entrenó el clasificador— y se mapean sus
-    /// identificadores (en inglés) a `GarmentCategory` por palabras clave.
-    private static func estimateCategory(from cgImage: CGImage) -> GarmentCategory? {
+    /// identificadores (en inglés) a `GarmentCategory`.
+    private static func estimateCategoryWithVision(from cgImage: CGImage) -> GarmentCategory? {
         let request = VNClassifyImageRequest()
         let handler = VNImageRequestHandler(cgImage: cgImage)
         guard (try? handler.perform([request])) != nil,
@@ -110,44 +179,31 @@ nonisolated enum GarmentAnalyzer {
         return nil
     }
 
-    /// Los identificadores de `VNClassifyImageRequest` son términos en
-    /// inglés de un vocabulario amplio y no documentado con exactitud; se
-    /// buscan por subcadena para cubrir variantes ("t-shirt", "tee shirt"…).
-    /// El orden importa: las categorías más específicas ("t-shirt") se
-    /// comprueban antes que las genéricas que las contienen como subcadena
-    /// ("shirt").
-    private static func category(forIdentifier identifier: String) -> GarmentCategory? {
-        let id = identifier.lowercased()
-        func matches(_ keywords: String...) -> Bool { keywords.contains { id.contains($0) } }
+    /// El vocabulario de `VNClassifyImageRequest` es cerrado (1303 etiquetas,
+    /// ver `supportedIdentifiers()`) y no incluye "shirt", "t-shirt", "pants",
+    /// "skirt", "dress" ni "sweater": una camiseta o un pantalón solo reciben
+    /// la etiqueta genérica "clothing", que aquí no mapea a nada. Se compara
+    /// por identificador exacto —no por subcadena— porque en un vocabulario
+    /// así dan falsos positivos ("dressage", "bagel", "horseshoe"…).
+    private static let categoryByIdentifier: [String: GarmentCategory] = {
+        var map: [String: GarmentCategory] = [:]
+        func add(_ category: GarmentCategory, _ identifiers: String...) {
+            for identifier in identifiers { map[identifier] = category }
+        }
+        add(.zapatos, "shoes", "sneaker", "boot", "ski_boot", "sandal", "high_heel", "loafer", "footwear")
+        add(.vestido, "wedding_dress")
+        add(.pantalon, "jeans")
+        add(.chaqueta, "jacket", "lab_coat", "suit", "poncho", "safety_vest")
+        add(.jersey, "hoodie")
+        add(.camiseta, "polo")
+        add(.accesorio, "bag", "purse", "backpack", "wallet", "hat", "baseball_hat", "cowboy_hat", "sunhat",
+            "beanie", "scarf", "glove", "glove_other", "mitten", "necktie", "bowtie", "sunglasses",
+            "eyeglasses", "watch", "jewelry", "sock")
+        return map
+    }()
 
-        if matches("shoe", "sneaker", "boot", "sandal", "footwear", "heel", "loafer", "clog") {
-            return .zapatos
-        }
-        if matches("dress", "gown") {
-            return .vestido
-        }
-        if matches("skirt") {
-            return .falda
-        }
-        if matches("jean", "trouser", "pant", "legging", "short") {
-            return .pantalon
-        }
-        if matches("jacket", "coat", "blazer", "parka", "windbreaker", "vest") {
-            return .chaqueta
-        }
-        if matches("sweater", "sweatshirt", "hoodie", "cardigan", "pullover", "jumper") {
-            return .jersey
-        }
-        if matches("t-shirt", "tshirt", "tee shirt", "tank top", "polo shirt") {
-            return .camiseta
-        }
-        if matches("shirt", "blouse") {
-            return .camisa
-        }
-        if matches("bag", "hat", "cap", "scarf", "belt", "necktie", "bow tie", "glove", "sunglasses", "watch", "purse", "backpack", "sock") {
-            return .accesorio
-        }
-        return nil
+    private static func category(forIdentifier identifier: String) -> GarmentCategory? {
+        categoryByIdentifier[identifier.lowercased()]
     }
 
     // MARK: - Normalización
