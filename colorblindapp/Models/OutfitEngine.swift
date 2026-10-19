@@ -64,6 +64,21 @@ enum OutfitEngine {
         /// Puntuación 0-100.
         let score: Double
         let explanation: String
+        /// Relación de armonía par a par, ordenada por relevancia (peso de
+        /// visibilidad × puntuación). Vacío si el outfit es un único vestido.
+        /// Es la colorimetría estructurada detrás de `explanation`, pensada
+        /// para presentaciones visuales como la rueda de color.
+        let harmonies: [HarmonyRelation]
+    }
+
+    /// Relación de armonía entre dos prendas concretas de una propuesta: qué
+    /// esquema forman (neutros, análogos, complementarios…) y su puntuación.
+    struct HarmonyRelation: Identifiable {
+        let id = UUID()
+        let first: Garment
+        let second: Garment
+        let kind: HarmonyKind
+        let score: Double
     }
 
     // MARK: - Generación
@@ -146,10 +161,13 @@ enum OutfitEngine {
         }
 
         var verdicts: [(weight: Double, verdict: PairVerdict)] = []
+        var relations: [(weight: Double, relation: HarmonyRelation)] = []
         for i in features.indices {
             for j in features.indices.dropFirst(i + 1) {
                 let weight = pairWeight(features[i].slot, features[j].slot)
-                verdicts.append((weight, assess(features[i], features[j])))
+                let verdict = assess(features[i], features[j])
+                verdicts.append((weight, verdict))
+                relations.append((weight, HarmonyRelation(first: garments[i], second: garments[j], kind: verdict.kind, score: verdict.score)))
             }
         }
 
@@ -158,13 +176,17 @@ enum OutfitEngine {
             return Proposal(
                 garments: garments,
                 score: 70,
-                explanation: String(localized: "Un vestido funciona por sí solo. Añade calzado a tu armario para propuestas más completas.")
+                explanation: String(localized: "Un vestido funciona por sí solo. Añade calzado a tu armario para propuestas más completas."),
+                harmonies: []
             )
         }
 
         let totalWeight = verdicts.reduce(0) { $0 + $1.weight }
         let score = verdicts.reduce(0) { $0 + $1.weight * $1.verdict.score } / totalWeight
-        return Proposal(garments: garments, score: score, explanation: explanation(score: score, verdicts: verdicts))
+        let orderedHarmonies = relations
+            .sorted { ($0.weight, $0.relation.score) > ($1.weight, $1.relation.score) }
+            .map(\.relation)
+        return Proposal(garments: garments, score: score, explanation: explanation(score: score, verdicts: verdicts), harmonies: orderedHarmonies)
     }
 
     /// Cuánto pesa cada par en la nota final: lo que más se ve junto manda.
@@ -200,9 +222,55 @@ enum OutfitEngine {
 
     /// Tipo de razón de armonía; se usa para no repetir la misma plantilla
     /// dos veces en una explicación ("X es un neutro…; además, Y es un
-    /// neutro…" se queda en una sola mención).
-    private enum HarmonyKind {
+    /// neutro…" se queda en una sola mención). También es la colorimetría
+    /// estructurada que consume la vista de análisis avanzado (rueda de
+    /// color): de ahí `title`/`concept`/`isHarmonious`.
+    enum HarmonyKind {
         case neutralPair, neutralSingle, mono, monoFlat, analogous, complementary, triad, unclear
+
+        /// Etiqueta corta del esquema, p. ej. para el título de una tarjeta.
+        var title: LocalizedStringResource {
+            switch self {
+            case .neutralPair, .neutralSingle: "Neutros"
+            case .mono: "Monocromático"
+            case .monoFlat: "Casi idénticos"
+            case .analogous: "Análogos"
+            case .complementary: "Complementarios"
+            case .triad: "Tríada"
+            case .unclear: "Sin armonía clara"
+            }
+        }
+
+        /// Frase de teoría del color que explica el esquema, independiente
+        /// de las prendas concretas.
+        var concept: LocalizedStringResource {
+            switch self {
+            case .neutralPair, .neutralSingle:
+                "Los neutros (blanco, negro, gris, beige, azul marino) no tienen posición fija en el círculo cromático: combinan con cualquier tono."
+            case .mono:
+                "Mismo tono en distinta intensidad: variaciones de claridad de un único punto del círculo cromático."
+            case .monoFlat:
+                "Tonos tan próximos en el círculo cromático que apenas se distinguen entre sí."
+            case .analogous:
+                "Tonos vecinos en el círculo cromático (menos de 45° de diferencia): armonía natural y de bajo contraste."
+            case .complementary:
+                "Tonos opuestos en el círculo cromático (más de 150° de diferencia): el contraste máximo posible."
+            case .triad:
+                "Tonos repartidos a un tercio del círculo cromático: contraste vivo sin llegar al extremo de los complementarios."
+            case .unclear:
+                "La diferencia de tono no encaja en ningún esquema reconocible del círculo cromático."
+            }
+        }
+
+        /// Si este esquema se considera una armonía sólida o, por el
+        /// contrario, un caso débil (colores casi iguales o sin relación
+        /// clara) que conviene señalar de otra forma en la UI.
+        var isHarmonious: Bool {
+            switch self {
+            case .monoFlat, .unclear: false
+            default: true
+            }
+        }
     }
 
     private struct PairVerdict {

@@ -6,8 +6,7 @@
 import SwiftData
 import SwiftUI
 
-/// Outfits guardados: lista con nota, explicación, marcado de "usado hoy"
-/// y borrado por deslizamiento.
+/// Outfits guardados: lista con nota, explicación y borrado por deslizamiento.
 struct SavedOutfitsView: View {
     @Query(sort: \Outfit.createdAt, order: .reverse) private var outfits: [Outfit]
     @Environment(\.modelContext) private var modelContext
@@ -41,6 +40,8 @@ struct SavedOutfitsView: View {
 struct SavedOutfitRow: View {
     let outfit: Outfit
 
+    @State private var showingAnalysis = false
+
     /// Nota y explicación recalculadas con las prendas actuales: si el
     /// usuario corrige el color de una prenda (o mejora el catálogo de
     /// nombres), el outfit guardado no se queda con el texto antiguo.
@@ -54,49 +55,54 @@ struct SavedOutfitRow: View {
             HStack {
                 ScoreBadge(score: current?.score ?? outfit.score)
                 Spacer()
-                if outfit.wornToday {
-                    Label("Usado hoy", systemImage: "checkmark.circle.fill")
-                        .font(.caption.weight(.medium))
-                        .foregroundStyle(.green)
-                        .singleLineFitted()
-                }
             }
 
-            if outfit.garments.isEmpty {
-                Text("Las prendas de este outfit ya no están en tu armario.")
-                    .font(.footnote)
-                    .foregroundStyle(.secondary)
-            } else {
-                HStack(alignment: .top, spacing: 8) {
-                    ForEach(outfit.sortedGarments) { garment in
-                        GarmentThumbnail(garment: garment, side: 56)
-                    }
-                }
-                if outfit.isIncomplete {
-                    Label("Falta alguna prenda: se borró del armario.", systemImage: "exclamationmark.triangle")
+            VStack(alignment: .leading, spacing: 10) {
+                if outfit.garments.isEmpty {
+                    Text("Las prendas de este outfit ya no están en tu armario.")
                         .font(.footnote)
                         .foregroundStyle(.secondary)
+                } else {
+                    HStack(alignment: .top, spacing: 8) {
+                        ForEach(outfit.sortedGarments) { garment in
+                            GarmentThumbnail(garment: garment, side: 56)
+                        }
+                    }
+                    if outfit.isIncomplete {
+                        Label("Falta alguna prenda: se borró del armario.", systemImage: "exclamationmark.triangle")
+                            .font(.footnote)
+                            .foregroundStyle(.secondary)
+                    }
+                }
+
+                Text(current?.explanation ?? outfit.explanation)
+                    .font(.footnote)
+                    .foregroundStyle(.secondary)
+                    .fixedSize(horizontal: false, vertical: true)
+
+                if current != nil {
+                    Label("Ver colorimetría", systemImage: "chevron.right")
+                        .labelStyle(.trailingIcon)
+                        .font(.caption.weight(.medium))
+                        .foregroundStyle(.tint)
                 }
             }
-
-            Text(current?.explanation ?? outfit.explanation)
-                .font(.footnote)
-                .foregroundStyle(.secondary)
-                .fixedSize(horizontal: false, vertical: true)
-
-            Button {
-                outfit.lastWornAt = outfit.wornToday ? nil : .now
-            } label: {
-                Label(
-                    outfit.wornToday ? "Quitar usado hoy" : "Usado hoy",
-                    systemImage: outfit.wornToday ? "arrow.uturn.backward" : "checkmark"
-                )
-                .singleLineFitted()
+            .contentShape(Rectangle())
+            .onTapGesture {
+                guard current != nil else { return }
+                showingAnalysis = true
             }
-            .buttonStyle(.bordered)
-            .controlSize(.small)
+            .accessibilityAction(named: Text("Ver análisis de color")) {
+                guard current != nil else { return }
+                showingAnalysis = true
+            }
         }
         .padding(.vertical, 4)
+        .sheet(isPresented: $showingAnalysis) {
+            if let current {
+                OutfitColorAnalysisView(proposal: current)
+            }
+        }
     }
 }
 

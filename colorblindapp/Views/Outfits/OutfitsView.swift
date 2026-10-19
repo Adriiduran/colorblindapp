@@ -16,7 +16,7 @@ struct OutfitsView: View {
     @State private var anchor: Garment?
     @State private var proposals: [OutfitEngine.Proposal] = []
     @State private var hasGenerated = false
-    @State private var savedProposalIDs: Set<UUID> = []
+    @State private var savedOutfits: [UUID: Outfit] = [:]
     @State private var showPaywall = false
 
     var body: some View {
@@ -62,7 +62,7 @@ struct OutfitsView: View {
             anchor = nil
             proposals = []
             hasGenerated = false
-            savedProposalIDs = []
+            savedOutfits = [:]
         }
         .sheet(isPresented: $showPaywall) {
             PaywallView(reason: "El generador de outfits es una función premium.")
@@ -250,7 +250,7 @@ struct OutfitsView: View {
         }
         proposals = OutfitEngine.proposals(from: garments, anchor: anchor)
         hasGenerated = true
-        savedProposalIDs = []
+        savedOutfits = [:]
         if !purchaseManager.isPremium {
             purchaseManager.consumeFreeOutfitTrial()
         }
@@ -273,16 +273,20 @@ struct OutfitsView: View {
             ForEach(proposals) { proposal in
                 OutfitProposalCard(
                     proposal: proposal,
-                    isSaved: savedProposalIDs.contains(proposal.id)
+                    isSaved: savedOutfits[proposal.id] != nil
                 ) {
-                    modelContext.insert(
-                        Outfit(
+                    if let outfit = savedOutfits[proposal.id] {
+                        modelContext.delete(outfit)
+                        savedOutfits.removeValue(forKey: proposal.id)
+                    } else {
+                        let outfit = Outfit(
                             garments: proposal.garments,
                             score: proposal.score,
                             explanation: proposal.explanation
                         )
-                    )
-                    savedProposalIDs.insert(proposal.id)
+                        modelContext.insert(outfit)
+                        savedOutfits[proposal.id] = outfit
+                    }
                 }
             }
         }
@@ -295,6 +299,8 @@ struct OutfitProposalCard: View {
     let proposal: OutfitEngine.Proposal
     let isSaved: Bool
     let onSave: () -> Void
+
+    @State private var showingAnalysis = false
 
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
@@ -311,31 +317,63 @@ struct OutfitProposalCard: View {
                     .singleLineFitted()
                 }
                 .buttonStyle(.bordered)
-                .disabled(isSaved)
             }
 
-            HStack(alignment: .top, spacing: 10) {
-                ForEach(proposal.garments) { garment in
-                    VStack(spacing: 4) {
-                        GarmentThumbnail(garment: garment, side: 76)
-                        Text(garment.category.displayName)
-                            .font(.caption2)
-                            .foregroundStyle(.secondary)
-                            .lineLimit(1)
+            VStack(alignment: .leading, spacing: 12) {
+                HStack(alignment: .top, spacing: 10) {
+                    ForEach(proposal.garments) { garment in
+                        VStack(spacing: 4) {
+                            GarmentThumbnail(garment: garment, side: 76)
+                            Text(garment.category.displayName)
+                                .font(.caption2)
+                                .foregroundStyle(.secondary)
+                                .lineLimit(1)
+                        }
                     }
                 }
-            }
-            .frame(maxWidth: .infinity)
+                .frame(maxWidth: .infinity)
 
-            Text(proposal.explanation)
-                .font(.footnote)
-                .foregroundStyle(.secondary)
-                .fixedSize(horizontal: false, vertical: true)
+                Text(proposal.explanation)
+                    .font(.footnote)
+                    .foregroundStyle(.secondary)
+                    .fixedSize(horizontal: false, vertical: true)
+
+                Label("Ver colorimetría", systemImage: "chevron.right")
+                    .labelStyle(.trailingIcon)
+                    .font(.caption.weight(.medium))
+                    .foregroundStyle(.tint)
+            }
+            .contentShape(Rectangle())
+            .onTapGesture {
+                showingAnalysis = true
+            }
+            .accessibilityAction(named: Text("Ver análisis de color")) {
+                showingAnalysis = true
+            }
         }
         .padding()
         .background(Color(.secondarySystemGroupedBackground), in: RoundedRectangle(cornerRadius: 16))
         .padding(.horizontal)
+        .sheet(isPresented: $showingAnalysis) {
+            OutfitColorAnalysisView(proposal: proposal)
+        }
     }
+}
+
+/// Estilo de `Label` con el icono a la derecha del texto en vez de a la
+/// izquierda; usado para el affordance "Ver colorimetría" al final de una
+/// tarjeta de propuesta (también reutilizado en `SavedOutfitRow`).
+struct TrailingIconLabelStyle: LabelStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        HStack(spacing: 4) {
+            configuration.title
+            configuration.icon
+        }
+    }
+}
+
+extension LabelStyle where Self == TrailingIconLabelStyle {
+    static var trailingIcon: TrailingIconLabelStyle { TrailingIconLabelStyle() }
 }
 
 /// Nota del outfit sobre 10, p. ej. "8,2".

@@ -18,9 +18,6 @@ final class Outfit {
     var explanation: String
     var createdAt: Date
 
-    /// Última vez que el usuario marcó el outfit como puesto ("usado hoy").
-    var lastWornAt: Date?
-
     /// Nº de prendas con las que se guardó el outfit. Al borrar una prenda,
     /// `deleteRule: .nullify` la quita de `garments` en vez de borrar el
     /// outfit entero: comparar contra este valor es cómo detectamos que el
@@ -46,10 +43,5 @@ final class Outfit {
     /// array, así que se reordena por el hueco que ocupa cada prenda.
     var sortedGarments: [Garment] {
         garments.sorted { ($0.category.outfitSlot ?? .top) < ($1.category.outfitSlot ?? .top) }
-    }
-
-    var wornToday: Bool {
-        guard let lastWornAt else { return false }
-        return Calendar.current.isDateInToday(lastWornAt)
     }
 }

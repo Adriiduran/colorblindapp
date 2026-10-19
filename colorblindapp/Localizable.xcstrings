@@ -195,6 +195,16 @@
         }
       }
     },
+    "%lld°" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld°"
+          }
+        }
+      }
+    },
     "1 día" : {
       "localizations" : {
         "en" : {
@@ -471,6 +481,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Analyzing the garment…"
+          }
+        }
+      }
+    },
+    "Análogos" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Analogous"
           }
         }
       }
@@ -1048,6 +1068,16 @@
         }
       }
     },
+    "Casi idénticos" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nearly identical"
+          }
+        }
+      }
+    },
     "Castaño" : {
       "localizations" : {
         "en" : {
@@ -1191,6 +1221,16 @@
     "Colores que se te pueden confundir" : {
 
     },
+    "Colorimetría del outfit" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Outfit colorimetry"
+          }
+        }
+      }
+    },
     "Combina porque %@." : {
       "localizations" : {
         "en" : {
@@ -1207,6 +1247,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Scored, explained combinations to help you dress with confidence."
+          }
+        }
+      }
+    },
+    "Complementarios" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Complementary"
           }
         }
       }
@@ -1656,6 +1706,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Scarlet"
+          }
+        }
+      }
+    },
+    "Esquema de color" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Color scheme"
           }
         }
       }
@@ -2200,6 +2260,16 @@
         }
       }
     },
+    "La diferencia de tono no encaja en ningún esquema reconocible del círculo cromático." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The hue difference doesn't fit any recognizable pattern on the color wheel."
+          }
+        }
+      }
+    },
     "la falda" : {
       "localizations" : {
         "en" : {
@@ -2303,6 +2373,17 @@
     "Lista de compra recomendada" : {
 
     },
+    "Listo" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Done"
+          }
+        }
+      }
+    },
     "Lleva esta lista contigo la próxima vez que vayas de compras." : {
 
     },
@@ -2312,6 +2393,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Colors you save from the scanner will appear here."
+          }
+        }
+      }
+    },
+    "Los neutros (blanco, negro, gris, beige, azul marino) no tienen posición fija en el círculo cromático: combinan con cualquier tono." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Neutrals (white, black, gray, beige, navy) have no fixed spot on the color wheel: they go with any hue."
           }
         }
       }
@@ -2436,6 +2527,16 @@
         }
       }
     },
+    "Mismo tono en distinta intensidad: variaciones de claridad de un único punto del círculo cromático." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Same hue at different intensities: lightness variations of a single point on the color wheel."
+          }
+        }
+      }
+    },
     "Moca" : {
       "localizations" : {
         "en" : {
@@ -2472,6 +2573,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "DEMO MODE"
+          }
+        }
+      }
+    },
+    "Monocromático" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Monochromatic"
           }
         }
       }
@@ -2555,6 +2666,26 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Black"
+          }
+        }
+      }
+    },
+    "Neutro" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Neutral"
+          }
+        }
+      }
+    },
+    "Neutros" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Neutrals"
           }
         }
       }
@@ -3028,6 +3159,7 @@
       }
     },
     "Quitar usado hoy" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -3377,6 +3509,16 @@
         }
       }
     },
+    "Sin armonía clara" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No clear harmony"
+          }
+        }
+      }
+    },
     "Sin combinaciones" : {
       "localizations" : {
         "en" : {
@@ -3629,6 +3771,46 @@
         }
       }
     },
+    "Tonos opuestos en el círculo cromático (más de 150° de diferencia): el contraste máximo posible." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Opposite hues on the color wheel (more than 150° apart): the maximum possible contrast."
+          }
+        }
+      }
+    },
+    "Tonos repartidos a un tercio del círculo cromático: contraste vivo sin llegar al extremo de los complementarios." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hues spaced a third of the way around the color wheel: a lively contrast that stops short of complementary extremes."
+          }
+        }
+      }
+    },
+    "Tonos tan próximos en el círculo cromático que apenas se distinguen entre sí." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hues so close on the color wheel that they're barely distinguishable from each other."
+          }
+        }
+      }
+    },
+    "Tonos vecinos en el círculo cromático (menos de 45° de diferencia): armonía natural y de bajo contraste." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Neighboring hues on the color wheel (less than 45° apart): a natural, low-contrast harmony."
+          }
+        }
+      }
+    },
     "Topo" : {
       "localizations" : {
         "en" : {
@@ -3645,6 +3827,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Gray taupe"
+          }
+        }
+      }
+    },
+    "Tríada" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Triad"
           }
         }
       }
@@ -3783,6 +3975,7 @@
       }
     },
     "Usado hoy" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -3828,6 +4021,27 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Vanilla"
+          }
+        }
+      }
+    },
+    "Ver análisis de color" : {
+      "comment" : "Nombre de la acción de accesibilidad para abrir el análisis de color de un outfit",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "View color analysis"
+          }
+        }
+      }
+    },
+    "Ver colorimetría" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "View colorimetry"
           }
         }
       }
