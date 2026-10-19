@@ -41,7 +41,7 @@ Al final, devuelve solo un resumen conciso: qué se verificó, si pasó o falló
 
 ## Requisitos del entorno
 
-- Xcode está en `/Applications/Xcode-26.6.0.app` pero `xcode-select` apunta a CommandLineTools: exportar siempre `DEVELOPER_DIR=/Applications/Xcode-26.6.0.app/Contents/Developer`.
+- Xcode está en `/Applications/Xcode-27.1.0.app` pero `xcode-select` apunta a CommandLineTools: exportar siempre `DEVELOPER_DIR=/Applications/Xcode-27.1.0.app/Contents/Developer`.
 - Para taps en el simulador usar `idb` (AppleScript/cliclick no tienen permisos de accesibilidad):
   - `idb-companion` vía Homebrew (`brew install facebook/fb/idb-companion`) — ya instalado.
   - Cliente: `python3 -m pip install --user fb-idb`; añadir al PATH: `export PATH="$PATH:$(python3 -m site --user-base)/bin"`.
@@ -50,7 +50,7 @@ Al final, devuelve solo un resumen conciso: qué se verificó, si pasó o falló
 ## Receta
 
 ```bash
-export DEVELOPER_DIR=/Applications/Xcode-26.6.0.app/Contents/Developer
+export DEVELOPER_DIR=/Applications/Xcode-27.1.0.app/Contents/Developer
 export PATH="$PATH:$(python3 -m site --user-base)/bin"
 SIM=F4E8E923-CB33-4D03-ABFD-01860A8AC96C   # iPhone 17 Pro iOS 26.5; verificar con: xcrun simctl list devices available
 
