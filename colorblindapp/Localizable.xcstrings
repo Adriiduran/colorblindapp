@@ -2330,6 +2330,16 @@
         }
       }
     },
+    "Lámina del test de daltonismo" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Color vision test plate"
+          }
+        }
+      }
+    },
     "Las prendas de este outfit ya no están en tu armario." : {
       "localizations" : {
         "en" : {
@@ -3164,6 +3174,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Remove from favorites"
+          }
+        }
+      }
+    },
+    "Quitar filtro" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Remove filter"
           }
         }
       }

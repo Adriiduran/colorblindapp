@@ -37,6 +37,7 @@ struct TestResultView: View {
     private var conclusiveContent: some View {
         Image(systemName: outcome.visionType == .normal ? "checkmark.circle" : "eye")
             .font(.system(size: 64))
+            .accessibilityHidden(true)
             .foregroundStyle(.tint)
 
         Text(outcome.visionType.displayName)
@@ -59,6 +60,7 @@ struct TestResultView: View {
     private var inconclusiveContent: some View {
         Image(systemName: "questionmark.circle")
             .font(.system(size: 64))
+            .accessibilityHidden(true)
             .foregroundStyle(.orange)
 
         Text("Resultado no concluyente")

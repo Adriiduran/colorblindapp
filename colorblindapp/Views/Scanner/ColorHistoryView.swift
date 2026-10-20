@@ -9,6 +9,7 @@ import SwiftUI
 /// Historial de colores guardados desde el escáner, con favoritos.
 struct ColorHistoryView: View {
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @Environment(\.modelContext) private var modelContext
     @Environment(PurchaseManager.self) private var purchaseManager
     @Query(sort: \SavedColor.scannedAt, order: .reverse) private var colors: [SavedColor]
@@ -88,24 +89,39 @@ struct ColorHistoryView: View {
     private var list: some View {
         List {
             ForEach(visibleColors) { saved in
-                HStack(spacing: 14) {
-                    RoundedRectangle(cornerRadius: 8)
-                        .fill(saved.color)
-                        .strokeBorder(.quaternary, lineWidth: 1)
-                        .frame(width: 44, height: 44)
+                // Con tamaños de accesibilidad todo se apila: en fila el texto
+                // quedaría tan estrecho que se partiría por sílabas.
+                let stacked = dynamicTypeSize.isAccessibilitySize
+                let rowLayout = stacked
+                    ? AnyLayout(VStackLayout(alignment: .leading, spacing: 8))
+                    : AnyLayout(HStackLayout(spacing: 14))
+                let infoLayout = stacked
+                    ? AnyLayout(VStackLayout(alignment: .leading, spacing: 8))
+                    : AnyLayout(HStackLayout(spacing: 14))
+                rowLayout {
+                    infoLayout {
+                        RoundedRectangle(cornerRadius: 8)
+                            .fill(saved.color)
+                            .strokeBorder(.quaternary, lineWidth: 1)
+                            .frame(width: 44, height: 44)
+                            .accessibilityHidden(true)
 
-                    VStack(alignment: .leading, spacing: 2) {
-                        Text(saved.descriptiveName)
-                            .font(.headline)
-                        Text("\(saved.basicName) · \(saved.hexString)")
-                            .font(.subheadline.monospaced())
-                            .foregroundStyle(.secondary)
-                        Text(saved.scannedAt, format: .dateTime.day().month().hour().minute())
-                            .font(.caption)
-                            .foregroundStyle(.tertiary)
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text(saved.descriptiveName)
+                                .font(.headline)
+                            Text("\(saved.basicName) · \(saved.hexString)")
+                                .font(.subheadline.monospaced())
+                                .foregroundStyle(.secondary)
+                            Text(saved.scannedAt, format: .dateTime.day().month().hour().minute())
+                                .font(.caption)
+                                .foregroundStyle(.tertiary)
+                        }
                     }
+                    .accessibilityElement(children: .combine)
 
-                    Spacer()
+                    if !stacked {
+                        Spacer()
+                    }
 
                     Button {
                         saved.isFavorite.toggle()

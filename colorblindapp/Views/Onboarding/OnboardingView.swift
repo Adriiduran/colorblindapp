@@ -26,6 +26,7 @@ private struct WelcomeStepView: View {
 
             Image(systemName: "eye")
                 .font(.system(size: 72))
+                .accessibilityHidden(true)
                 .foregroundStyle(.tint)
 
             Text("Tu asistente para el color")

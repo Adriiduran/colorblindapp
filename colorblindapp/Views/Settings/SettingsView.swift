@@ -161,6 +161,7 @@ struct SettingsView: View {
             HStack(spacing: 16) {
                 Image(systemName: "eye.fill")
                     .font(.system(size: 28))
+                    .accessibilityHidden(true)
                     .foregroundStyle(.white)
                     .frame(width: 56, height: 56)
                     .background(Color.accentColor, in: Circle())

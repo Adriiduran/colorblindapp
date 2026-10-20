@@ -93,6 +93,7 @@ struct ShoppingModeView: View {
             Spacer()
             Image(systemName: "bag.badge.questionmark")
                 .font(.system(size: 56))
+                .accessibilityHidden(true)
                 .foregroundStyle(.tint)
             Text("Comprueba antes de comprar")
                 .font(.title3.bold())

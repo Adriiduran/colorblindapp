@@ -64,6 +64,7 @@ struct AddGarmentView: View {
             Spacer()
             Image(systemName: "tshirt")
                 .font(.system(size: 56))
+                .accessibilityHidden(true)
                 .foregroundStyle(.tint)
             Text("Añade una foto de tu prenda")
                 .font(.title3.bold())

@@ -14,6 +14,7 @@ struct ScannerView: View {
     @State private var showHistory = false
     @State private var showShoppingMode = false
     @State private var justSaved = false
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @Environment(\.modelContext) private var modelContext
     @Environment(PurchaseManager.self) private var purchaseManager
     @Query private var profiles: [UserProfile]
@@ -158,6 +159,7 @@ struct ScannerView: View {
                     .fill(model.color?.color ?? .clear)
                     .strokeBorder(.quaternary, lineWidth: 1)
                     .frame(width: 64, height: 64)
+                    .accessibilityHidden(true)
 
                 VStack(alignment: .leading, spacing: 3) {
                     Text(descriptiveName)
@@ -172,6 +174,9 @@ struct ScannerView: View {
 
                 Spacer()
             }
+            // Un único elemento que VoiceOver relee al cambiar el color.
+            .accessibilityElement(children: .combine)
+            .accessibilityAddTraits(.updatesFrequently)
 
             // La fila del aviso reserva siempre su hueco (si el perfil tiene
             // daltonismo) para que el panel no dé saltos al aparecer.
@@ -185,6 +190,7 @@ struct ScannerView: View {
                 .foregroundStyle(.orange)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .opacity(confusionWarning == nil ? 0 : 1)
+                .accessibilityHidden(confusionWarning == nil)
                 .animation(.easeInOut(duration: 0.25), value: confusionWarning == nil)
             }
 
@@ -199,7 +205,12 @@ struct ScannerView: View {
                     .foregroundStyle(.secondary)
             }
 
-            HStack(spacing: 10) {
+            // Con tamaños de accesibilidad los botones se apilan: en fila
+            // quedarían tan estrechos que el texto se partiría por sílabas.
+            let buttonsLayout = dynamicTypeSize.isAccessibilitySize
+                ? AnyLayout(VStackLayout(spacing: 10))
+                : AnyLayout(HStackLayout(spacing: 10))
+            buttonsLayout {
                 Button {
                     model.isFrozen.toggle()
                 } label: {
@@ -276,6 +287,7 @@ struct ScannerView: View {
             Spacer()
             Image(systemName: "camera.viewfinder")
                 .font(.system(size: 56))
+                .accessibilityHidden(true)
                 .foregroundStyle(.tint)
             Text("El escáner necesita la cámara")
                 .font(.title2.bold())
@@ -305,6 +317,7 @@ struct ScannerView: View {
             Spacer()
             Image(systemName: "video.slash")
                 .font(.system(size: 56))
+                .accessibilityHidden(true)
                 .foregroundStyle(.secondary)
             Text("Sin acceso a la cámara")
                 .font(.title2.bold())

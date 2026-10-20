@@ -55,6 +55,8 @@ struct IshiharaPlateView: View {
             }
         }
         .aspectRatio(1, contentMode: .fit)
+        .accessibilityElement()
+        .accessibilityLabel("Lámina del test de daltonismo")
     }
 }
 

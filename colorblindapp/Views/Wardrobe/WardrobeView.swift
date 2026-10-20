@@ -19,7 +19,13 @@ struct WardrobeView: View {
     @State private var selectedColorName: String?
     @State private var garmentPendingDeletion: Garment?
 
-    private let columns = [GridItem(.adaptive(minimum: 150), spacing: 12)]
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
+
+    /// Con tamaños de accesibilidad las tarjetas ocupan todo el ancho para
+    /// que el nombre no se parta por sílabas.
+    private var columns: [GridItem] {
+        [GridItem(.adaptive(minimum: dynamicTypeSize.isAccessibilitySize ? 300 : 150), spacing: 12)]
+    }
 
     /// Se alcanzó el límite gratuito de prendas y el usuario no es premium.
     private var reachedFreeLimit: Bool {
@@ -218,6 +224,7 @@ struct WardrobeView: View {
             .background(Color(.secondarySystemFill), in: Capsule())
         }
         .buttonStyle(.plain)
+        .accessibilityHint("Quitar filtro")
     }
 
     // MARK: - Contenido
@@ -313,6 +320,7 @@ struct WardrobeView: View {
 /// Tarjeta de prenda: foto recortada, color y categoría.
 struct GarmentCard: View {
     let garment: Garment
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
 
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
@@ -346,13 +354,15 @@ struct GarmentCard: View {
                 VStack(alignment: .leading, spacing: 0) {
                     Text(garment.descriptiveName)
                         .font(.subheadline.weight(.medium))
-                        .lineLimit(1)
+                        .lineLimit(dynamicTypeSize.isAccessibilitySize ? nil : 1)
                     Text(garment.category.displayName)
                         .font(.caption)
                         .foregroundStyle(.secondary)
                 }
             }
         }
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel("\(garment.category.displayName) \(garment.descriptiveName)")
     }
 }
 

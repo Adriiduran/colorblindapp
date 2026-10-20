@@ -418,6 +418,8 @@ struct GarmentThumbnail: View {
         .padding(6)
         .frame(width: side, height: side)
         .background(Color(.tertiarySystemFill), in: RoundedRectangle(cornerRadius: 12))
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel("\(garment.category.displayName) \(garment.descriptiveName)")
     }
 }
 

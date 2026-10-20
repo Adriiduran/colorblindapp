@@ -38,9 +38,18 @@ struct ColorVisionTestView: View {
 
     private var plateScreen: some View {
         let plate = ColorVisionTest.plates[plateIndex]
-        return VStack(spacing: 16) {
+        // ScrollView: con Dynamic Type grande el contenido no cabe en pantalla
+        // y, sin scroll, SwiftUI comprimiría (y truncaría) los textos.
+        return ScrollView {
+            plateContent(for: plate)
+        }
+    }
+
+    private func plateContent(for plate: TestPlate) -> some View {
+        VStack(spacing: 16) {
             ProgressView(value: Double(plateIndex), total: Double(ColorVisionTest.plates.count))
                 .padding(.horizontal)
+                .accessibilityHidden(true)
 
             Text("Lámina \(plateIndex + 1) de \(ColorVisionTest.plates.count)")
                 .font(.subheadline)
@@ -77,6 +86,8 @@ struct ColorVisionTestView: View {
             } label: {
                 Text("No veo ningún número")
                     .singleLineFitted()
+                    .multilineTextAlignment(.center)
+                    .fixedSize(horizontal: false, vertical: true)
                     .frame(maxWidth: .infinity, minHeight: 44)
             }
             .buttonStyle(.bordered)

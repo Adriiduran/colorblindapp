@@ -71,6 +71,7 @@ struct PaywallView: View {
         VStack(spacing: 12) {
             Image(systemName: "sparkles")
                 .font(.system(size: 48))
+                .accessibilityHidden(true)
                 .foregroundStyle(.tint)
 
             Text("Hazte premium")

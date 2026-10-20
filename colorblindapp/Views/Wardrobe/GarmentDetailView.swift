@@ -49,6 +49,7 @@ struct GarmentDetailView: View {
                 } else {
                     Image(systemName: garment.category.systemImage)
                         .font(.system(size: 56))
+                        .accessibilityHidden(true)
                         .foregroundStyle(.secondary)
                 }
                 Spacer()
