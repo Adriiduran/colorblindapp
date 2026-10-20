@@ -10,8 +10,9 @@ El plan de desarrollo (fases, hitos, backlog) vive en Notion, no en el repo — 
 
 ## Build y verificación
 
-- No hay target de tests unitarios; la verificación es manual en el simulador. Usar el skill del proyecto **`verify`** (`.claude/skills/verify/SKILL.md`), que contiene la receta completa (build, install, launch, taps con `idb`, capturas) y los gotchas del entorno.
+- Hay un target de tests unitarios (`colorblindappTests/`, Swift Testing) para los motores puros (`LinearRGB`, `CVDSimulator`, `ColorVisionTest`, `ColorNamer`); la UI se verifica a mano en el simulador. Usar el skill del proyecto **`verify`** (`.claude/skills/verify/SKILL.md`), que contiene la receta completa (build, install, launch, taps con `idb`, capturas) y los gotchas del entorno.
 - Crítico: `xcode-select` apunta a CommandLineTools; exportar siempre `DEVELOPER_DIR=/Applications/Xcode-27.1.0.app/Contents/Developer` antes de cualquier `xcodebuild`/`simctl`.
+- Tests unitarios (mismo `DEVELOPER_DIR`): `xcodebuild test -project colorblindapp.xcodeproj -scheme colorblindapp -destination 'id=<sim-udid>' -derivedDataPath <scratch>/dd`.
 - Build rápido:
   ```bash
   env DEVELOPER_DIR=/Applications/Xcode-27.1.0.app/Contents/Developer \

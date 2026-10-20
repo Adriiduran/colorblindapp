@@ -32,6 +32,17 @@
          identifier = "../../../Configuration.storekit">
       </StoreKitConfigurationFileReference>
       <Testables>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "5371A0013003FB9900E771E8"
+               BuildableName = "colorblindappTests.xctest"
+               BlueprintName = "colorblindappTests"
+               ReferencedContainer = "container:colorblindapp.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
